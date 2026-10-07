@@ -1,0 +1,12 @@
+{
+  "offline": true,
+  "warningsGateDownload": true,
+  "tooWideSlotsBlocked": true,
+  "linkedJunctionControl": true,
+  "fullPanelWorker": true,
+  "svgAndPrintRegression": true,
+  "legacyPreset": true,
+  "v2PresetRoundtrip": true,
+  "cancelBuild": true,
+  "jsErrors": []
+}

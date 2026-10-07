@@ -1,0 +1,1111 @@
+{
+  "errors": [],
+  "results": [
+    {
+      "app": "Sashiko Pattern Studio",
+      "version": "1.1",
+      "units": "mm",
+      "description": "Flat stencil with rounded through-slots. No bevel or floor.",
+      "createdAt": "2026-10-07T13:50:19.774Z",
+      "settings": {
+        "pattern": {
+          "pattern": "interlaced",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 4,
+          "rows": 6,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "panel"
+        },
+        "stencil": {
+          "scope": "repeat",
+          "thickness": 1.4,
+          "slotWidth": 0.9,
+          "minWeb": 0.9,
+          "showWarnings": true
+        }
+      },
+      "W": 48,
+      "H": 27.541,
+      "thickness": 1.4,
+      "slotWidth": 0.9,
+      "slotCount": 57,
+      "spacing": {
+        "minWeb": 0.3539054252197895,
+        "minWebExact": true,
+        "thinPairs": 24,
+        "collisions": 0,
+        "edgeMin": 0.4369000000000014,
+        "edgeCuts": 6,
+        "marks": [
+          [
+            [
+              3.6167,
+              10.4159
+            ],
+            [
+              3.8810739263516854,
+              10.04873892740971
+            ]
+          ],
+          [
+            [
+              4.4577,
+              0.4588
+            ],
+            [
+              4.4577,
+              0
+            ]
+          ],
+          [
+            [
+              5.0766,
+              27.1041
+            ],
+            [
+              5.0766,
+              27.541
+            ]
+          ],
+          [
+            [
+              4.5408,
+              9.9103
+            ],
+            [
+              4.8837,
+              10.1312
+            ]
+          ],
+          [
+            [
+              4.8555,
+              0.7253
+            ],
+            [
+              5.2305,
+              0.5215
+            ]
+          ],
+          [
+            [
+              5.2702,
+              27.0532
+            ],
+            [
+              5.433164877766771,
+              27.435651751113404
+            ]
+          ],
+          [
+            [
+              10.8887,
+              20.2911
+            ],
+            [
+              10.363735562222612,
+              20.27285396690943
+            ]
+          ],
+          [
+            [
+              11.3589,
+              19.4931
+            ],
+            [
+              11.3442,
+              19.8467
+            ]
+          ],
+          [
+            [
+              12.6558,
+              6.0762
+            ],
+            [
+              12.6411,
+              5.7226
+            ]
+          ],
+          [
+            [
+              13.1113,
+              6.5206
+            ],
+            [
+              13.636264437777388,
+              6.502353966909431
+            ]
+          ],
+          [
+            [
+              18.7298,
+              13.2827
+            ],
+            [
+              18.566835122233233,
+              13.665151751113406
+            ]
+          ],
+          [
+            [
+              18.7695,
+              14.292
+            ],
+            [
+              19.1445,
+              14.4958
+            ]
+          ],
+          [
+            [
+              19.1163,
+              23.9017
+            ],
+            [
+              19.4592,
+              23.6808
+            ]
+          ],
+          [
+            [
+              20.3833,
+              24.1864
+            ],
+            [
+              20.11892607364831,
+              23.819238927409714
+            ]
+          ],
+          [
+            [
+              27.6167,
+              24.1864
+            ],
+            [
+              27.88107392635169,
+              23.819238927409714
+            ]
+          ],
+          [
+            [
+              28.5408,
+              23.6808
+            ],
+            [
+              28.8837,
+              23.9017
+            ]
+          ],
+          [
+            [
+              28.8555,
+              14.4958
+            ],
+            [
+              29.2305,
+              14.292
+            ]
+          ],
+          [
+            [
+              29.2702,
+              13.2827
+            ],
+            [
+              29.433164877766767,
+              13.665151751113406
+            ]
+          ],
+          [
+            [
+              34.8887,
+              6.5206
+            ],
+            [
+              34.36373556222261,
+              6.50235396690945
+            ]
+          ],
+          [
+            [
+              35.3589,
+              5.7226
+            ],
+            [
+              35.3442,
+              6.0762
+            ]
+          ],
+          [
+            [
+              36.6558,
+              19.8467
+            ],
+            [
+              36.6411,
+              19.4931
+            ]
+          ],
+          [
+            [
+              37.1113,
+              20.2911
+            ],
+            [
+              37.63626443777739,
+              20.272853966909448
+            ]
+          ],
+          [
+            [
+              42.7298,
+              27.0532
+            ],
+            [
+              42.56683512223323,
+              27.435651751113404
+            ]
+          ],
+          [
+            [
+              42.9234,
+              27.1041
+            ],
+            [
+              42.9234,
+              27.541
+            ]
+          ],
+          [
+            [
+              42.7695,
+              0.5215
+            ],
+            [
+              43.1445,
+              0.7253
+            ]
+          ],
+          [
+            [
+              43.5423,
+              0.4588
+            ],
+            [
+              43.5423,
+              0
+            ]
+          ],
+          [
+            [
+              43.1163,
+              10.1312
+            ],
+            [
+              43.4592,
+              9.9103
+            ]
+          ],
+          [
+            [
+              44.3833,
+              10.4159
+            ],
+            [
+              44.11892607364832,
+              10.048738927409708
+            ]
+          ]
+        ]
+      },
+      "warnings": [
+        "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.35 mm.",
+        "A positive rim near an outer edge is only 0.44 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ],
+      "errors": [],
+      "components": 1,
+      "tolerance": 0.003,
+      "quantization": 0.0001,
+      "geometryVersion": 1,
+      "triangles": 20636,
+      "volume": 1719.6343353428583,
+      "watertight": true,
+      "area": 1228.3102448300008,
+      "cells": 1701,
+      "elapsedMs": 235
+    },
+    {
+      "app": "Sashiko Pattern Studio",
+      "version": "1.1",
+      "units": "mm",
+      "description": "Flat stencil with rounded through-slots. No bevel or floor.",
+      "createdAt": "2026-10-07T13:50:25.877Z",
+      "settings": {
+        "pattern": {
+          "pattern": "grid",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 4,
+          "rows": 6,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "panel"
+        },
+        "stencil": {
+          "scope": "repeat",
+          "thickness": 1.4,
+          "slotWidth": 0.9,
+          "minWeb": 0.9,
+          "showWarnings": true
+        }
+      },
+      "W": 48,
+      "H": 48,
+      "thickness": 1.4,
+      "slotWidth": 0.9,
+      "slotCount": 32,
+      "spacing": {
+        "minWeb": 0.4491542274096933,
+        "minWebExact": true,
+        "thinPairs": 4,
+        "collisions": 0,
+        "edgeMin": 2.253399999999999,
+        "edgeCuts": 4,
+        "marks": [
+          [
+            [
+              23.3306,
+              24.3518
+            ],
+            [
+              23.6482,
+              24.6694
+            ]
+          ],
+          [
+            [
+              23.4018,
+              23.7194
+            ],
+            [
+              23.7194,
+              23.4018
+            ]
+          ],
+          [
+            [
+              24.3518,
+              24.6694
+            ],
+            [
+              24.6694,
+              24.3518
+            ]
+          ],
+          [
+            [
+              24.2806,
+              23.4018
+            ],
+            [
+              24.5982,
+              23.7194
+            ]
+          ]
+        ]
+      },
+      "warnings": [
+        "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm."
+      ],
+      "errors": [],
+      "components": 1,
+      "tolerance": 0.003,
+      "quantization": 0.0001,
+      "geometryVersion": 1,
+      "triangles": 8388,
+      "volume": 3160.114827750397,
+      "watertight": true,
+      "area": 2257.224959680006,
+      "cells": 678,
+      "elapsedMs": 101
+    },
+    {
+      "app": "Sashiko Pattern Studio",
+      "version": "1.1",
+      "units": "mm",
+      "description": "Flat stencil with rounded through-slots. No bevel or floor.",
+      "createdAt": "2026-10-07T13:50:28.042Z",
+      "settings": {
+        "pattern": {
+          "pattern": "diamonds",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 4,
+          "rows": 6,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "panel"
+        },
+        "stencil": {
+          "scope": "repeat",
+          "thickness": 1.4,
+          "slotWidth": 0.9,
+          "minWeb": 0.9,
+          "showWarnings": true
+        }
+      },
+      "W": 48,
+      "H": 48,
+      "thickness": 1.4,
+      "slotWidth": 0.9,
+      "slotCount": 40,
+      "spacing": {
+        "minWeb": 0.4491999999999976,
+        "minWebExact": true,
+        "thinPairs": 4,
+        "collisions": 0,
+        "edgeMin": 0.2246,
+        "edgeCuts": 0,
+        "marks": [
+          [
+            [
+              0.2246,
+              0.6214
+            ],
+            [
+              0,
+              0.6214
+            ]
+          ],
+          [
+            [
+              0.7221,
+              0.2246
+            ],
+            [
+              0.7221,
+              0
+            ]
+          ],
+          [
+            [
+              0.2246,
+              47.2779
+            ],
+            [
+              0,
+              47.2779
+            ]
+          ],
+          [
+            [
+              0.6214,
+              47.7754
+            ],
+            [
+              0.6214,
+              48
+            ]
+          ],
+          [
+            [
+              23.2779,
+              23.7754
+            ],
+            [
+              23.2779,
+              24.2246
+            ]
+          ],
+          [
+            [
+              23.7754,
+              23.3786
+            ],
+            [
+              24.2246,
+              23.3786
+            ]
+          ],
+          [
+            [
+              23.7754,
+              24.7221
+            ],
+            [
+              24.2246,
+              24.7221
+            ]
+          ],
+          [
+            [
+              24.6214,
+              23.7754
+            ],
+            [
+              24.6214,
+              24.2246
+            ]
+          ],
+          [
+            [
+              47.7754,
+              0.7221
+            ],
+            [
+              48,
+              0.7221
+            ]
+          ],
+          [
+            [
+              47.3786,
+              0.2246
+            ],
+            [
+              47.3786,
+              0
+            ]
+          ],
+          [
+            [
+              47.7754,
+              47.3786
+            ],
+            [
+              48,
+              47.3786
+            ]
+          ],
+          [
+            [
+              47.2779,
+              47.7754
+            ],
+            [
+              47.2779,
+              48
+            ]
+          ]
+        ]
+      },
+      "warnings": [
+        "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+        "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ],
+      "errors": [],
+      "components": 1,
+      "tolerance": 0.003,
+      "quantization": 0.0001,
+      "geometryVersion": 1,
+      "triangles": 10816,
+      "volume": 3131.8684370538167,
+      "watertight": true,
+      "area": 2237.0489468799965,
+      "cells": 861,
+      "elapsedMs": 139
+    },
+    {
+      "app": "Sashiko Pattern Studio",
+      "version": "1.1",
+      "units": "mm",
+      "description": "Flat stencil with rounded through-slots. No bevel or floor.",
+      "createdAt": "2026-10-07T13:50:30.985Z",
+      "settings": {
+        "pattern": {
+          "pattern": "circles",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 4,
+          "rows": 6,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "panel"
+        },
+        "stencil": {
+          "scope": "repeat",
+          "thickness": 1.4,
+          "slotWidth": 0.9,
+          "minWeb": 0.9,
+          "showWarnings": true
+        }
+      },
+      "W": 48,
+      "H": 48,
+      "thickness": 1.4,
+      "slotWidth": 0.9,
+      "slotCount": 56,
+      "spacing": {
+        "minWeb": 0.687090043678943,
+        "minWebExact": true,
+        "thinPairs": 8,
+        "collisions": 0,
+        "edgeMin": 0.064,
+        "edgeCuts": 0,
+        "marks": [
+          [
+            [
+              0.064,
+              8.9226
+            ],
+            [
+              0,
+              8.9226
+            ]
+          ],
+          [
+            [
+              0.064,
+              39.0774
+            ],
+            [
+              0,
+              39.0774
+            ]
+          ],
+          [
+            [
+              0.5593,
+              40.2532
+            ],
+            [
+              0.5470203123506138,
+              39.56621969650217
+            ]
+          ],
+          [
+            [
+              0.0886,
+              40.6815
+            ],
+            [
+              0,
+              40.6815
+            ]
+          ],
+          [
+            [
+              0.5593,
+              7.7468
+            ],
+            [
+              0.5470203123505774,
+              8.433780303497826
+            ]
+          ],
+          [
+            [
+              0.0886,
+              7.3185
+            ],
+            [
+              0,
+              7.3185
+            ]
+          ],
+          [
+            [
+              7.3185,
+              47.9114
+            ],
+            [
+              7.3185,
+              48
+            ]
+          ],
+          [
+            [
+              7.3185,
+              0.0886
+            ],
+            [
+              7.3185,
+              0
+            ]
+          ],
+          [
+            [
+              7.7468,
+              0.5593
+            ],
+            [
+              8.433780303497826,
+              0.5470203123505774
+            ]
+          ],
+          [
+            [
+              8.9226,
+              0.064
+            ],
+            [
+              8.9226,
+              0
+            ]
+          ],
+          [
+            [
+              7.7468,
+              47.4407
+            ],
+            [
+              8.433780303497826,
+              47.452979687649425
+            ]
+          ],
+          [
+            [
+              8.9226,
+              47.936
+            ],
+            [
+              8.9226,
+              48
+            ]
+          ],
+          [
+            [
+              39.0774,
+              0.064
+            ],
+            [
+              39.0774,
+              0
+            ]
+          ],
+          [
+            [
+              39.0774,
+              47.936
+            ],
+            [
+              39.0774,
+              48
+            ]
+          ],
+          [
+            [
+              40.2532,
+              47.4407
+            ],
+            [
+              39.56621969650217,
+              47.45297968764939
+            ]
+          ],
+          [
+            [
+              40.6815,
+              47.9114
+            ],
+            [
+              40.6815,
+              48
+            ]
+          ],
+          [
+            [
+              40.2532,
+              0.5593
+            ],
+            [
+              39.56621969650217,
+              0.5470203123506137
+            ]
+          ],
+          [
+            [
+              40.6815,
+              0.0886
+            ],
+            [
+              40.6815,
+              0
+            ]
+          ],
+          [
+            [
+              47.936,
+              39.0774
+            ],
+            [
+              48,
+              39.0774
+            ]
+          ],
+          [
+            [
+              47.936,
+              8.9226
+            ],
+            [
+              48,
+              8.9226
+            ]
+          ],
+          [
+            [
+              47.4407,
+              40.2532
+            ],
+            [
+              47.45297968764939,
+              39.56621969650217
+            ]
+          ],
+          [
+            [
+              47.9114,
+              40.6815
+            ],
+            [
+              48,
+              40.6815
+            ]
+          ],
+          [
+            [
+              47.4407,
+              7.7468
+            ],
+            [
+              47.452979687649425,
+              8.433780303497826
+            ]
+          ],
+          [
+            [
+              47.9114,
+              7.3185
+            ],
+            [
+              48,
+              7.3185
+            ]
+          ]
+        ]
+      },
+      "warnings": [
+        "8 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.69 mm.",
+        "A positive rim near an outer edge is only 0.06 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ],
+      "errors": [],
+      "components": 1,
+      "tolerance": 0.003,
+      "quantization": 0.0001,
+      "geometryVersion": 1,
+      "triangles": 18288,
+      "volume": 3101.2378148724874,
+      "watertight": true,
+      "area": 2215.1699086000085,
+      "cells": 1505,
+      "elapsedMs": 236
+    },
+    {
+      "app": "Sashiko Pattern Studio",
+      "version": "1.1",
+      "units": "mm",
+      "description": "Flat stencil with rounded through-slots. No bevel or floor.",
+      "createdAt": "2026-10-07T13:50:36.447Z",
+      "settings": {
+        "pattern": {
+          "pattern": "chevrons",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 4,
+          "rows": 6,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "panel"
+        },
+        "stencil": {
+          "scope": "repeat",
+          "thickness": 1.4,
+          "slotWidth": 0.9,
+          "minWeb": 0.9,
+          "showWarnings": true
+        }
+      },
+      "W": 48,
+      "H": 24,
+      "thickness": 1.4,
+      "slotWidth": 0.9,
+      "slotCount": 16,
+      "spacing": {
+        "minWeb": 0.7995999999999981,
+        "minWebExact": true,
+        "thinPairs": 1,
+        "collisions": 0,
+        "edgeMin": 0.39979999999999905,
+        "edgeCuts": 0,
+        "marks": [
+          [
+            [
+              0.3998,
+              6.4182
+            ],
+            [
+              0,
+              6.4182
+            ]
+          ],
+          [
+            [
+              23.6002,
+              17.5818
+            ],
+            [
+              24.3998,
+              17.5818
+            ]
+          ],
+          [
+            [
+              47.6002,
+              6.4182
+            ],
+            [
+              48,
+              6.4182
+            ]
+          ]
+        ]
+      },
+      "warnings": [
+        "1 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.80 mm.",
+        "A positive rim near an outer edge is only 0.40 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ],
+      "errors": [],
+      "components": 1,
+      "tolerance": 0.003,
+      "quantization": 0.0001,
+      "geometryVersion": 1,
+      "triangles": 4496,
+      "volume": 1575.6979944449263,
+      "watertight": true,
+      "area": 1125.4985858999999,
+      "cells": 369,
+      "elapsedMs": 159
+    },
+    {
+      "app": "Sashiko Pattern Studio",
+      "version": "1.1",
+      "units": "mm",
+      "description": "Flat stencil with rounded through-slots. No bevel or floor.",
+      "createdAt": "2026-10-07T13:50:39.129Z",
+      "settings": {
+        "pattern": {
+          "pattern": "waves",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 4,
+          "rows": 6,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "panel"
+        },
+        "stencil": {
+          "scope": "repeat",
+          "thickness": 1.4,
+          "slotWidth": 0.9,
+          "minWeb": 0.9,
+          "showWarnings": true
+        }
+      },
+      "W": 48,
+      "H": 19.2,
+      "thickness": 1.4,
+      "slotWidth": 0.9,
+      "slotCount": 16,
+      "spacing": {
+        "minWeb": 1.327905312889439,
+        "minWebExact": true,
+        "thinPairs": 0,
+        "collisions": 0,
+        "edgeMin": 0.4742,
+        "edgeCuts": 0,
+        "marks": [
+          [
+            [
+              0.4742,
+              10.2614
+            ],
+            [
+              0,
+              10.2614
+            ]
+          ],
+          [
+            [
+              47.5258,
+              8.9386
+            ],
+            [
+              48,
+              8.9386
+            ]
+          ]
+        ]
+      },
+      "warnings": [
+        "A positive rim near an outer edge is only 0.47 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ],
+      "errors": [],
+      "components": 1,
+      "tolerance": 0.003,
+      "quantization": 0.0001,
+      "geometryVersion": 1,
+      "triangles": 5184,
+      "volume": 1254.0966286308317,
+      "watertight": true,
+      "area": 895.7832865799988,
+      "cells": 425,
+      "elapsedMs": 540
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+<dialog id="stencil-dialog" aria-labelledby="stencil-title">
+ <div class="stencil-header"><div><div class="kicker">3D-printable marking template</div><h2 id="stencil-title">A stencil, not a relief.</h2><p>Round-ended stitch slots. Open all the way through.</p></div><button id="stencil-close" class="icon-button" aria-label="Close stencil export">&#10005;</button></div>
+ <div class="stencil-layout">
+  <section class="stencil-controls" aria-label="Stencil settings">
+   <div class="control"><div class="control-head"><label for="stencil-scope">Export area</label></div><select id="stencil-scope"><option value="repeat">One seamless repeat</option><option value="panel">Full panel</option></select></div>
+   <div class="dimensions" id="stencil-dimensions"></div>
+   <div class="control"><div class="control-head"><label for="stencil-thickness">Plate thickness</label><div class="number-unit"><input type="number" id="stencil-thickness" min="0.4" max="5" step="0.1" value="1.4" inputmode="decimal"><span>mm</span></div></div><input type="range" id="stencil-thickness-range" aria-label="Plate thickness slider" min="0.4" max="5" step="0.1" value="1.4"></div>
+   <div class="control"><div class="control-head"><label for="stencil-slotWidth">Slot width</label><div class="number-unit"><input type="number" id="stencil-slotWidth" min="0.3" max="3" step="0.05" value="0.9" inputmode="decimal"><span>mm</span></div></div><input type="range" id="stencil-slotWidth-range" aria-label="Slot width slider" min="0.3" max="3" step="0.05" value="0.9"><p class="hint">Separate from the SVG line weight. The fitted stitch lengths and gaps stay in place; widening slots can reduce plastic around junctions.</p></div>
+   <div class="control"><div class="control-head"><label for="stencil-opening">Junction opening</label><div class="number-unit"><input type="number" id="stencil-opening" min="0.2" max="6" step="0.1" value="1" inputmode="decimal"><span>mm</span></div></div><p class="hint">Shared with the stitch map. Increase this to leave more plastic where lines meet.</p></div>
+   <div class="control"><div class="control-head"><label for="stencil-minWeb">Minimum plastic spacing</label><div class="number-unit"><input type="number" id="stencil-minWeb" min="0.2" max="3" step="0.05" value="0.9" inputmode="decimal"><span>mm</span></div></div><input type="range" id="stencil-minWeb-range" aria-label="Minimum plastic spacing slider" min="0.2" max="3" step="0.05" value="0.9"><p class="hint">A warning threshold, not an automatic pattern change. Checks slot-to-slot spacing and positive rims near the plate edge.</p></div>
+   <div class="stencil-fixed"><span>End shape <strong>Rounded</strong></span><span>Cut depth <strong>Through</strong></span><span>Bevel / backing floor <strong>None</strong></span></div>
+   <p class="hint">Outer XY edges stay square and at the exact repeat size. Slots crossing the boundary are intentionally open; the adjacent tile completes them.</p>
+   <button class="quiet-button" id="stencil-defaults">Reset stencil settings</button>
+  </section>
+  <section class="stencil-visual" aria-label="Stencil preview and mesh checks">
+   <div class="stencil-toolbar"><div class="tabs" aria-label="Stencil preview mode"><button data-stencil-view="top" aria-pressed="true">Top view</button><button data-stencil-view="3d" aria-pressed="false">3D mesh</button></div><label class="check"><input type="checkbox" id="stencil-showWarnings" checked>Show thin spots</label></div>
+   <div class="stencil-viewport" id="stencil-viewport"><div id="stencil-top"></div><canvas id="stencil-canvas" hidden tabindex="0" aria-label="3D stencil. Drag or use arrow keys to rotate. Scroll or use plus and minus to zoom. Home resets the view."></canvas><div id="stencil-progress" class="stencil-progress" role="status"><span class="spinner"></span><span id="stencil-progress-text">Preparing stencil...</span></div></div>
+   <div class="stencil-preview-caption" id="stencil-preview-caption">Dark = printed plastic. Openings = no material at any height.</div>
+   <div class="stencil-metrics" id="stencil-metrics"></div>
+   <div class="stencil-checks" id="stencil-checks" aria-live="polite"></div>
+   <p class="hint stencil-smallprint">Spacing is measured on the generated polygon outlines; it is not a complete mechanical or slicer analysis. Check the sliced toolpaths and print a small test first. Dimensions are millimeters.</p>
+  </section>
+ </div>
+ <div class="stencil-footer"><div><label id="stencil-ack-row" class="check" hidden><input id="stencil-ack" type="checkbox">I have reviewed the thin-plastic warnings; export anyway.</label><span id="stencil-ready" role="status">Checking geometry...</span></div><div class="stencil-actions"><button id="stencil-report" class="button" disabled>Save build report</button><button id="stencil-download" class="button primary" disabled>Download STL</button></div></div>
+</dialog>

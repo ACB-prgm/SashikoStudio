@@ -1,0 +1,194 @@
+[
+  {
+    "file": "chevrons-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 6302.791954124521,
+    "dimensions_mm": [
+      96.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "chevrons-repeat",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 1575.697994444925,
+    "dimensions_mm": [
+      48.0,
+      24.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "circles-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12404.95116421896,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "circles-repeat",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3101.2378148724897,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "diamonds-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12527.473725802003,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "diamonds-repeat",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3131.8684370537953,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "grid-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12640.460079184455,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "grid-repeat",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3160.114827750375,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "interlaced-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 6878.537289760702,
+    "dimensions_mm": [
+      96.0,
+      55.082000732421875,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "interlaced-repeat",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 1719.6343353428565,
+    "dimensions_mm": [
+      48.0,
+      27.541000366210938,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "waves-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 5016.386513118777,
+    "dimensions_mm": [
+      96.0,
+      38.400001525878906,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "waves-repeat",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 1254.0966286308283,
+    "dimensions_mm": [
+      48.0,
+      19.200000762939453,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  }
+]
