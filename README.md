@@ -13,6 +13,28 @@ For a static website (including GitHub Pages), put `index.html` at the site's
 entry location. Only that file is required at runtime. The `src/`, `tests/`, and
 `build.py` files are for maintenance; they do not need to run on the host.
 
+## Add or edit patterns
+
+Pattern definitions are modular. Each design lives in its own JavaScript file
+under `src/patterns/`; `build.py` discovers the directory automatically and
+bundles every design into the standalone `index.html`. There is no pattern
+manifest to maintain.
+
+For the exact registration contract, available geometry primitives, tileability
+rules, and examples, see **[PATTERN_FORMAT.md](PATTERN_FORMAT.md)**.
+
+Typical workflow:
+
+```sh
+cp src/patterns/grid.js src/patterns/my-pattern.js
+# edit the new file
+python build.py
+```
+
+Then inspect **One repeat** and **Seam check** in the app before testing SVG and
+STL output. Pattern files define continuous geometry only; stitch fitting and all
+exports remain shared engine behavior.
+
 ## Make a stencil
 
 1. Select and size a design with the normal pattern controls.
@@ -119,7 +141,14 @@ index.html                 The complete runtime app; publish this file
 build.py                   Rebuild index.html from src (Python 3, standard library)
 src/
   template.html            Existing page layout plus integration markers
-  pattern-app.js           Six designs, stitch fitting, SVGs, print, presets
+  pattern-app.js           Shared geometry/stitch engine, SVGs, print, presets
+  patterns/                One JavaScript source file per design; auto-discovered
+    interlaced.js
+    grid.js
+    diamonds.js
+    circles.js
+    chevrons.js
+    waves.js
   stencil-dialog.html      Stencil controls and preview dialog
   stencil.css              Responsive stencil UI
   stencil-ui.js            Settings, sampling, worker, preview, downloads
@@ -130,10 +159,11 @@ tests/
   test_guards.py           Invalid settings, cancellation, preset regression
   test_geometry.js         Mesh generation and invalid-geometry guards
   validate_stl.py          Independent trimesh/Shapely validation
+PATTERN_FORMAT.md           Pattern authoring contract and examples
 validation/                Results from this delivery
 ```
 
-After editing source, run:
+After editing source or adding/removing a file in `src/patterns/`, run:
 
 ```sh
 python build.py
@@ -165,6 +195,7 @@ To repeat the checks, install the optional **development-only** tools:
 ```sh
 python -m pip install playwright trimesh shapely numpy
 python -m playwright install chromium
+python tests/test_build.py
 python tests/test_browser.py
 python tests/test_guards.py
 node tests/test_geometry.js
