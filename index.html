@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Sashiko Pattern Studio</title>
+<style>
+:root{--paper:#f5f3ee;--white:#fffefa;--ink:#222f2e;--muted:#6b7471;--line:#dcded6;--green:#315e51;--green-light:#e8eee7;--accent:#c47b4a;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--sans)}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button:disabled{cursor:wait;opacity:.5}a{color:var(--green)}header{height:87px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 32px;background:var(--white);gap:20px}.brand{display:flex;gap:15px;align-items:center}.brand-icon{width:38px;height:38px;color:var(--green)}h1{font-family:Georgia,serif;font-size:25px;font-weight:normal;letter-spacing:-.7px;line-height:1.15;margin:0}.kicker{font-size:10px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--muted);margin-top:5px}.offline{display:flex;align-items:center;gap:8px;color:var(--green);font-size:11px;white-space:nowrap}.offline:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green)}.workspace{display:grid;grid-template-columns:336px minmax(0,1fr);max-width:1640px;margin:auto;min-height:calc(100vh - 87px)}aside{border-right:1px solid var(--line);background:var(--white);padding:23px 23px 32px}.section{padding:21px 0;border-bottom:1px solid var(--line)}.section:first-child{padding-top:0}.section:last-child{border:0;padding-bottom:0}.section-title{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;font-weight:650;display:flex;align-items:center;gap:10px;margin:0 0 14px}.section-title span{color:#8b938c;font-family:var(--mono);font-size:10px}.patterns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pattern-card{position:relative;text-align:left;background:#fff;border:1px solid var(--line);border-radius:7px;padding:0;overflow:hidden;color:var(--ink);transition:border-color .15s,box-shadow .15s}.pattern-card svg{display:block;width:100%;height:57px;background:#fafbf7;padding:4px 8px}.pattern-card .card-name{font-size:11px;display:block;padding:7px 8px;border-top:1px solid #edf0e8;line-height:1.2}.pattern-card[aria-pressed="true"]{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}.pattern-card[aria-pressed="true"] .card-name{color:var(--green);font-weight:600;background:#f0f4ed}.pattern-card[aria-pressed="true"]:after{content:"";position:absolute;right:8px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--green)}.pattern-note{color:var(--muted);font-size:11px;margin:12px 0 0;min-height:32px}.control{margin-top:15px}.control:first-of-type{margin-top:0}.control-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}.control-head label{font-size:12px;font-weight:500}.number-unit{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted)}input[type=number]{width:65px;padding:5px 6px;text-align:right;background:#fff;border:1px solid var(--line);border-radius:4px;color:var(--ink);font-family:var(--mono);font-size:12px}input[type=range]{display:block;width:100%;accent-color:var(--green);height:15px;margin:5px 0}.range-ends{display:flex;justify-content:space-between;font:9px var(--mono);color:#8c938b}.hint{font-size:11px;color:var(--muted);line-height:1.55;margin:8px 0 0}.ratio-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ratio-preset{padding:5px 9px;border:1px solid var(--line);border-radius:5px;background:transparent;font:11px var(--mono);color:var(--muted)}.ratio-preset.active{background:var(--green-light);border-color:var(--green);color:var(--green)}.ratio-custom{margin-left:auto;display:flex;align-items:center;gap:5px;color:var(--muted)}.ratio-custom input{width:41px;padding:5px 3px}.rhythm{display:flex;justify-content:space-between;gap:8px;margin-top:12px;align-items:center}.rhythm svg{width:135px;height:17px}.rhythm span{font:10px var(--mono);color:var(--muted)}.row{display:flex;gap:12px;align-items:center}.row .control{flex:1;margin-top:12px}.row .control-head{display:block}.row .control-head label{display:block;margin-bottom:5px}.row input{width:100%;text-align:left}.dimensions{font:11px var(--mono);color:var(--green);background:var(--green-light);border-radius:4px;padding:8px 10px;margin-top:11px}.advanced{margin-top:14px}summary{cursor:pointer;font-size:11px;color:var(--muted);user-select:none}details[open]>summary{margin-bottom:12px}.check{display:flex;gap:8px;align-items:center;cursor:pointer;font-size:11px;color:var(--muted);margin-top:10px}.check input{accent-color:var(--green);margin:0;width:14px;height:14px}.quiet-button{border:0;background:none;padding:4px 0;color:var(--muted);font-size:11px;text-decoration:underline;text-underline-offset:3px}.preset-actions{display:flex;gap:15px;align-items:center;flex-wrap:wrap}.canvas-area{min-width:0;padding:28px 32px 22px;display:flex;flex-direction:column}.intro{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;margin-bottom:21px}.intro h2{font:normal 24px/1.2 Georgia,serif;letter-spacing:-.45px;margin:0 0 6px}.intro p{color:var(--muted);font-size:12px;margin:0}.badge{border:1px solid #cbd8cc;background:#edf2e9;color:var(--green);font:10px var(--mono);padding:6px 9px;border-radius:4px;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}.badge svg{width:11px;height:11px}.preview-card{background:var(--white);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 7px 22px #28392c05}.toolbar{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}.tabs{display:flex;gap:2px;background:#f0f1ea;padding:3px;border-radius:6px}.tabs button{border:0;background:transparent;padding:6px 11px;font-size:11px;border-radius:4px;color:var(--muted);white-space:nowrap}.tabs button[aria-pressed=true]{background:#fff;box-shadow:0 1px 3px #21332215;color:var(--ink)}.zoom-group{display:flex;align-items:center;gap:8px;font:10px var(--mono);color:var(--muted)}.zoom-group button{background:none;border:1px solid var(--line);border-radius:4px;width:23px;height:23px;color:var(--ink)}.preview-stage{height:500px;overflow:auto;background-color:#eeeee7;background-image:radial-gradient(#b8bcb452 .7px,transparent .7px);background-size:12px 12px;padding:30px;position:relative}.sheet-wrap{width:max-content;min-width:100%;min-height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:11px}.sheet{background:white;box-shadow:0 3px 18px #24312914;flex-shrink:0;line-height:0}.sheet svg{display:block}.sheet-label{font:10px var(--mono);color:#798078;text-align:center;line-height:1.4}.preview-options{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line);flex-wrap:wrap}.checks{display:flex;gap:15px}.checks .check{margin:0}.mode-select{font-size:11px;padding:4px 7px;border:1px solid var(--line);background:#fff;border-radius:4px;color:var(--ink);max-width:140px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--line);border-radius:7px;overflow:hidden;background:var(--line);margin-top:18px}.stat{background:var(--white);padding:13px 16px}.stat-label{color:var(--muted);font-size:10px;margin-bottom:4px}.stat-value{font:15px var(--mono);letter-spacing:-.5px}.stat-sub{font-size:10px;color:var(--muted);margin-top:4px}.export-bar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px;flex-wrap:wrap}.export-buttons{display:flex;gap:8px;flex-wrap:wrap}.button{background:#fffefa;border:1px solid var(--line);border-radius:6px;padding:10px 14px;color:var(--ink);font-size:11px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}.button.primary{background:var(--green);color:white;border-color:var(--green)}.button svg{width:13px;height:13px}.export-caption{font-size:10px;color:var(--muted);margin-top:10px}.notices{margin-top:15px}.notice{border-left:2px solid #c4905a;background:#faf0e1;padding:9px 12px;font-size:11px;color:#775c3c;margin:0 0 7px}.notes{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.notes summary{font-size:12px;color:var(--ink)}.notes p{font-size:12px;color:var(--muted);max-width:770px;margin:10px 0}.notes code{font:11px var(--mono);background:#eaece4;padding:2px 4px;border-radius:3px}.footer{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#8c9188;margin-top:20px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);border:1px solid var(--line);background:var(--ink);color:white;padding:10px 18px;border-radius:6px;z-index:20;font-size:12px;box-shadow:0 4px 15px #0002;max-width:90vw}.toast[hidden]{display:none}#print-root{display:none}.error{color:#9d463e;background:#fff2ec;padding:12px;font-size:12px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1400px){.preview-stage{height:570px}.canvas-area{padding:30px 42px}.workspace{grid-template-columns:350px minmax(0,1fr)}}
+@media(max-width:1040px){header{padding:0 22px}.workspace{grid-template-columns:300px minmax(0,1fr)}aside{padding:22px 18px}.canvas-area{padding:25px 20px}.intro{display:block}.intro .badge{margin-top:11px}.preview-stage{height:430px;padding:22px}.toolbar{padding:10px}.tabs button{padding:6px 8px}.zoom-group span{display:none}.stats .stat{padding:12px}.stat-value{font-size:13px}.checks{gap:9px}.preview-options{padding:10px}.pattern-card svg{height:53px}}
+@media(max-width:740px){header{height:76px;padding:0 18px}.offline{font-size:0;gap:0}.offline:before{width:7px;height:7px}.brand{gap:11px}h1{font-size:23px}.kicker{font-size:8px;letter-spacing:1.4px}.workspace{display:flex;flex-direction:column}.canvas-area{order:0;padding:21px 14px 17px}.intro{display:flex;align-items:center;margin-bottom:15px}.intro h2{font-size:22px}.intro p{font-size:11px;max-width:205px}.intro .badge{font-size:0;margin:0;padding:7px}.intro .badge svg{width:16px;height:16px}.preview-stage{height:335px;padding:20px}.tabs button{padding:6px 8px;font-size:10px}.zoom-group{gap:4px}.stats{margin-top:12px}.stat{padding:10px!important}.stat-label,.stat-sub{font-size:9px}.stat-value{font-size:12px!important}.checks .check{font-size:10px}.checks{gap:12px}.export-bar{margin-top:14px}.export-buttons{width:100%}.button{flex:1;padding:9px 8px;font-size:10px}.notes{margin-top:16px;padding-top:14px}aside{order:1;border-top:1px solid var(--line);border-right:0;padding:23px 23px}.patterns{grid-template-columns:repeat(3,1fr)}.pattern-note{min-height:0}.section{padding:22px 0}.pattern-card svg{height:62px}.footer{display:none}.sheet-label{font-size:9px}.intro .badge{display:none}.export-caption{font-size:10px}}
+@media print{@page{size:letter;margin:0}html,body{margin:0!important;padding:0!important;background:white!important}body>header,body>.workspace,body>.toast{display:none!important}#print-root{display:block!important}.print-page{position:relative;box-sizing:border-box;padding:10mm;margin:0;break-after:page;page-break-after:always;background:#fff!important;overflow:hidden}.print-page:last-child{break-after:auto;page-break-after:auto}.print-heading{height:13mm;font:9pt Arial,sans-serif;line-height:1.4;color:#000}.print-heading strong{font-weight:700}.print-map{display:block;line-height:0}.print-foot{position:absolute;left:10mm;right:10mm;bottom:8mm;display:flex;align-items:flex-end;justify-content:space-between;font:7pt Arial,sans-serif;color:#000}.print-foot svg{display:block}.print-caption{max-width:115mm;text-align:right;font-size:7pt}.print-page svg{max-width:none!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+/* Stencil workspace */
+#stencil-dialog{width:min(1080px,96vw);max-width:1080px;max-height:94vh;margin:auto;padding:0;border:1px solid var(--line);border-radius:12px;color:var(--ink);background:var(--white);box-shadow:0 24px 90px #14271e40;overflow:auto}
+#stencil-dialog::backdrop{background:#172b246b;backdrop-filter:blur(3px)}
+.stencil-header{padding:24px 27px 19px;display:flex;gap:20px;justify-content:space-between;border-bottom:1px solid var(--line)}.stencil-header .kicker{margin:0 0 7px}.stencil-header h2{font:normal 28px/1.2 Georgia,serif;letter-spacing:-.5px;margin:0}.stencil-header p{margin:7px 0 0;font-size:12px;color:var(--muted)}.icon-button{flex-shrink:0;width:30px;height:30px;background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:6px;line-height:1;font-size:16px}
+.stencil-layout{display:grid;grid-template-columns:270px minmax(0,1fr)}.stencil-controls{padding:22px 23px;border-right:1px solid var(--line)}.stencil-controls select{width:100%;padding:8px;border:1px solid var(--line);border-radius:5px;background:white;color:var(--ink);font-size:12px}.stencil-controls .control{margin-top:22px}.stencil-controls .control:first-child{margin-top:0}.stencil-controls .dimensions{font-size:10px}.stencil-fixed{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:15px;margin-top:21px;font-size:11px;color:var(--muted)}.stencil-fixed span{display:flex;justify-content:space-between;gap:12px}.stencil-fixed strong{color:var(--ink);font-weight:500}.stencil-controls .quiet-button{margin-top:11px}
+.stencil-visual{min-width:0;padding:19px 23px}.stencil-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.stencil-toolbar .check{margin:0}.stencil-viewport{height:350px;background:#efefe8;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.stencil-viewport #stencil-top{width:100%;height:100%;padding:28px;display:flex;align-items:center;justify-content:center;overflow:auto}.stencil-viewport svg{display:block;max-width:100%;max-height:100%;width:100%;height:100%;filter:drop-shadow(0 2px 4px #24312918)}#stencil-canvas{width:100%;height:100%;touch-action:none;cursor:grab}#stencil-canvas:active{cursor:grabbing}.stencil-progress{position:absolute;inset:0;background:#efefe8ee;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;text-align:center;color:var(--muted);font-size:12px}.spinner{width:23px;height:23px;border-radius:50%;border:2px solid #ccd6cb;border-top-color:var(--green);animation:spin .9s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.stencil-preview-caption{font-size:10px;color:var(--muted);margin-top:8px}.stencil-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:17px}.stencil-metric{padding:9px 10px;border:1px solid var(--line);border-radius:5px}.stencil-metric span{display:block;color:var(--muted);font-size:9px}.stencil-metric strong{display:block;font:12px var(--mono);margin-top:4px}.stencil-checks{margin-top:13px}.stencil-checks p{font-size:11px;line-height:1.6;margin:7px 0;padding:8px 10px;border-radius:3px}.stencil-ok{background:var(--green-light);color:var(--green)}.stencil-warning{background:#faf0e1;color:#775c3c;border-left:2px solid #c4905a}.stencil-error{background:#f8e9e4;color:#903c32;border-left:2px solid #b75b4d}.stencil-smallprint{font-size:10px}.stencil-footer{position:sticky;bottom:0;z-index:3;padding:17px 25px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px;background:#f6f7f1}.stencil-footer .check{margin:0 0 7px;color:#775c3c;font-size:11px}.stencil-footer #stencil-ready{font-size:10px;color:var(--muted)}.stencil-actions{display:flex;gap:8px;flex-shrink:0}#stencil-dialog [hidden]{display:none!important}.stencil-footer button:disabled{cursor:not-allowed}.stencil-launch{border-color:#9baea2!important;color:var(--green)!important;background:#f0f5ed!important}.stencil-viewport:has(.stencil-progress:not([hidden])) #stencil-top{opacity:.3}
+@media(max-width:800px){.stencil-layout{grid-template-columns:235px minmax(0,1fr)}.stencil-controls{padding:20px 17px}.stencil-visual{padding:18px 15px}.stencil-viewport{height:280px}.stencil-metric strong{font-size:10px}.stencil-metric{padding:8px 7px}.stencil-footer{padding:15px 18px}.stencil-actions .button{padding:9px 10px}}
+@media(max-width:600px){#stencil-dialog{width:96vw;max-height:94vh}.stencil-header{padding:18px}.stencil-header h2{font-size:25px}.stencil-layout{display:flex;flex-direction:column}.stencil-visual{order:0;padding:15px}.stencil-controls{order:1;border-right:0;border-top:1px solid var(--line);padding:18px 22px}.stencil-viewport{height:265px}.stencil-controls .control{margin-top:16px}.stencil-fixed{margin-top:15px}.stencil-footer{position:sticky;bottom:0;display:block;z-index:2;padding:12px 15px}.stencil-actions{margin-top:10px}.stencil-metric strong{font-size:12px}.stencil-footer .button{font-size:11px}.stencil-smallprint{font-size:10px}.stencil-fixed{grid-template-columns:1fr;gap:4px}}
+@media(prefers-reduced-motion:reduce){.spinner{animation:none}}
+@media print{#stencil-dialog{display:none!important}}
+
+</style>
+<style id="print-size"></style>
+</head>
+<body>
+<header>
+ <div class="brand"><svg class="brand-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"><path d="M3 12Q20 30 37 12M3 28Q20 10 37 28M12 3Q30 20 12 37M28 3Q10 20 28 37"/></svg><div><h1>Sashiko Pattern Studio</h1><div class="kicker">Geometry / Rhythm / Repeat</div></div></div>
+ <div class="offline">Local &amp; offline. No uploads.</div>
+</header>
+<main class="workspace">
+ <aside aria-label="Pattern settings">
+  <section class="section"><h2 class="section-title"><span>01</span> Choose a pattern</h2><div class="patterns" id="pattern-list"></div><p id="pattern-note" class="pattern-note"></p></section>
+  <section class="section"><h2 class="section-title"><span>02</span> Set the stitch rhythm</h2>
+   <div class="control"><div class="control-head"><label for="stitch">Target stitch length</label><div class="number-unit"><input id="stitch" type="number" min="0.5" max="10" step="0.1" value="2" inputmode="decimal"><span>mm</span></div></div><input id="stitch-range" aria-label="Target stitch length slider" type="range" min="0.5" max="10" step="0.1" value="2"><div class="range-ends"><span>0.5 mm</span><span>10 mm</span></div></div>
+   <div class="control"><div class="control-head"><label>Stitch : gap</label></div><div class="ratio-row"><button class="ratio-preset active" data-ratio="3,2">3 : 2</button><button class="ratio-preset" data-ratio="2,1">2 : 1</button><button class="ratio-preset" data-ratio="1,1">1 : 1</button><div class="ratio-custom"><input id="ratioA" aria-label="Stitch ratio part" type="number" min="1" max="10" step="0.1" value="3"><span>:</span><input id="ratioB" aria-label="Gap ratio part" type="number" min="1" max="10" step="0.1" value="2"></div></div><div class="rhythm"><svg id="rhythm" viewBox="0 0 140 15" aria-label="Stitch rhythm sample"></svg><span id="target-gap"></span></div></div>
+   <div class="control"><div class="control-head"><label for="opening">Junction opening</label><div class="number-unit"><input id="opening" type="number" min="0.2" max="6" step="0.1" value="1" inputmode="decimal"><span>mm</span></div></div><input id="opening-range" aria-label="Junction opening slider" type="range" min="0.2" max="6" step="0.1" value="1"><p class="hint">A minimum clear opening at intersections and corners. Very close angles may need a little more space.</p></div>
+  </section>
+  <section class="section"><h2 class="section-title"><span>03</span> Size the repeat</h2>
+   <div class="control"><div class="control-head"><label for="tileWidth">Repeat width</label><div class="number-unit"><input id="tileWidth" type="number" min="12" max="120" step="0.5" value="48" inputmode="decimal"><span>mm</span></div></div><input id="tileWidth-range" aria-label="Repeat width slider" type="range" min="12" max="120" step="0.5" value="48"><p class="hint">Changes the motif size, not the requested stitch length. Repeat height follows the pattern's geometry.</p></div>
+   <div class="row"><div class="control"><div class="control-head"><label for="columns">Columns</label><input id="columns" type="number" min="1" max="20" step="1" value="4"></div></div><div class="control"><div class="control-head"><label for="rows">Rows</label><input id="rows" type="number" min="1" max="20" step="1" value="6"></div></div></div><div class="dimensions" id="panel-dimensions"></div>
+   <details class="advanced"><summary>Line weight &amp; export settings</summary><div class="control"><div class="control-head"><label for="weight">Line weight</label><div class="number-unit"><input id="weight" type="number" min="0.15" max="0.9" step="0.05" value="0.35"><span>mm</span></div></div></div><label class="check"><input id="transparent" type="checkbox">Transparent SVG background</label><div class="control"><div class="control-head"><label for="paper">Print paper</label><select id="paper" class="mode-select"><option value="letter">US Letter</option><option value="a4">A4</option></select></div><p class="hint">Large panels print across pages with 5 mm overlap. Use 100% scale and check the 50 mm ruler.</p></div></details>
+  </section>
+  <section class="section"><div class="preset-actions"><button id="save-preset" class="quiet-button">Save settings</button><button id="load-preset" class="quiet-button">Load settings</button><button id="reset" class="quiet-button">Reset</button></div><input id="preset-file" type="file" accept=".json,application/json" hidden><p class="hint">3:2 is the starting style here, not a universal sashiko rule.</p></section>
+ </aside>
+ <section class="canvas-area" aria-label="Preview and export">
+  <div class="intro"><div><h2 id="pattern-title">Interlaced curves</h2><p>Complete repeats. Intentional gaps. No border.</p></div><div class="badge" title="Geometry and stitch cadence repeat on both axes"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6a6 6 0 0 1 10-3l2 2M14 1v4h-4M14 10a6 6 0 0 1-10 3l-2-2M2 15v-4h4"/></svg> Seamless X + Y</div></div>
+  <div class="preview-card">
+   <div class="toolbar"><div class="tabs" aria-label="Preview layout"><button data-view="panel" aria-pressed="true">Fabric preview</button><button data-view="tile" aria-pressed="false">One repeat</button><button data-view="seams" aria-pressed="false">Seam check</button></div><div class="zoom-group"><button id="zoom-out" aria-label="Zoom out">&#8722;</button><span id="zoom-label">Fit</span><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-fit" aria-label="Fit preview" title="Fit preview">&#8596;</button></div></div>
+   <div class="preview-stage" id="preview-stage"><div class="sheet-wrap"><div class="sheet" id="sheet"></div><div class="sheet-label" id="sheet-label"></div></div></div>
+   <div class="preview-options"><div class="checks"><label class="check"><input id="seams" type="checkbox">Tile seams</label><label class="check"><input id="nodes" type="checkbox">Junctions</label></div><select id="display" class="mode-select" aria-label="Drawing style"><option value="stitches">Stitch map</option><option value="geometry">Solid geometry</option><option value="overlay">Geometry + stitches</option></select></div>
+  </div>
+  <div class="stats" aria-live="polite"><div class="stat"><div class="stat-label">ACTUAL STITCH LENGTH</div><div class="stat-value" id="actual-length">&mdash;</div><div class="stat-sub" id="fit-note">Fitted between junctions</div></div><div class="stat"><div class="stat-label">REPEAT SIZE</div><div class="stat-value" id="tile-dimensions">&mdash;</div><div class="stat-sub">Edge-to-edge, no padding</div></div><div class="stat"><div class="stat-label">STITCHES / REPEAT</div><div class="stat-value" id="stitch-count">&mdash;</div><div class="stat-sub" id="gap-range">&mdash;</div></div></div>
+  <div class="notices" id="notices" role="status"></div>
+  <div class="export-bar"><div class="export-buttons"><button class="button primary" id="export-tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1v9m-3-3 3 3 3-3M2 11v3h12v-3"/></svg>Repeat SVG</button><button class="button" id="export-panel">Panel SVG</button><button class="button" id="print-panel">Print panel</button><button class="button stencil-launch" id="export-stencil">Stencil / STL</button></div></div><div class="export-caption" id="export-caption">Black on white. True millimeter dimensions. Preview guides never export.</div>
+  <details class="notes"><summary>How the rhythm and repeats work</summary><p><strong>Geometry first.</strong> Each pattern is a periodic network of complete lines and curves. The interlaced design is a geometric reconstruction of your reference, not a crop of the old image. Its rectangular repeat contains two staggered rows.</p><p><strong>Stitches second.</strong> The engine finds shared junctions, reserves clear space, and fits a whole number of stitches along each interval. Interior stitch-to-gap ratios are preserved; stitch length can change slightly from interval to interval. Junction gaps are intentional exceptions. The actual range above is the one to use.</p><p><strong>Edges are not stopping points.</strong> Full stitched curves are translated across the boundaries before the output is clipped. Stitch spacing is never restarted merely because it reaches an edge. Wave rows fit a whole number of stitch-and-gap periods to one wavelength.</p><p><strong>The tile's box is part of the repeat.</strong> Repeat the exported SVG at its exact document width and height, with no spacing, mirroring, or "crop to artwork." Some curves and stitches should be cut by the edge: the next tile completes them. Cropping the SVG tightly to its visible black marks would break the repeat.</p><p><strong>Front-side design, not an automatic sewing route.</strong> This app does not choose stitch order, optimize back-side carries, or estimate skein length. A gap at a junction does not mean you need to cut the thread. Plan how to traverse the continuous geometry before stitching.</p><p><strong>Print scale.</strong> Use 100% / actual size, turn off browser headers and footers, and measure the 50 mm ruler. PDF saving is available through your browser's print dialog. SVGs retain millimeter dimensions, but importing applications can rescale them.</p><p><strong>STL stencil export.</strong> The stencil tool turns each stitch into a rounded through-slot, then extrudes the remaining plastic as a flat plate. Slot width is separate from SVG line weight. Minimum plastic spacing is checked, not silently repaired. Thin areas require acknowledgement; touching slots, detached pieces, or failed mesh checks block export. There is no floor or Z bevel. View both sides in your slicer and test a small print before making a large template.</p><p><strong>About the style.</strong> These are adjustable design choices, not universal sashiko requirements. See <a href="https://upcyclestitches.com/sashiko-rules/" target="_blank" rel="noopener noreferrer">Atsushi Futatsuya's discussion of sashiko rules</a>. Implementation references: <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/pattern" target="_blank" rel="noopener noreferrer">SVG repeat units</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@page" target="_blank" rel="noopener noreferrer">print pages</a>. These optional links are the only external resources; the app itself makes no network requests.</p></details>
+  <div class="footer"><span>Made of lines, not pixels.</span><span>v1.1 / SVG + STL / offline</span></div>
+ </section>
+</main>
+<dialog id="stencil-dialog" aria-labelledby="stencil-title">
+ <div class="stencil-header"><div><div class="kicker">3D-printable marking template</div><h2 id="stencil-title">A stencil, not a relief.</h2><p>Round-ended stitch slots. Open all the way through.</p></div><button id="stencil-close" class="icon-button" aria-label="Close stencil export">&#10005;</button></div>
+ <div class="stencil-layout">
+  <section class="stencil-controls" aria-label="Stencil settings">
+   <div class="control"><div class="control-head"><label for="stencil-scope">Export area</label></div><select id="stencil-scope"><option value="repeat">One seamless repeat</option><option value="panel">Full panel</option></select></div>
+   <div class="dimensions" id="stencil-dimensions"></div>
+   <div class="control"><div class="control-head"><label for="stencil-thickness">Plate thickness</label><div class="number-unit"><input type="number" id="stencil-thickness" min="0.4" max="5" step="0.1" value="1.4" inputmode="decimal"><span>mm</span></div></div><input type="range" id="stencil-thickness-range" aria-label="Plate thickness slider" min="0.4" max="5" step="0.1" value="1.4"></div>
+   <div class="control"><div class="control-head"><label for="stencil-slotWidth">Slot width</label><div class="number-unit"><input type="number" id="stencil-slotWidth" min="0.3" max="3" step="0.05" value="0.9" inputmode="decimal"><span>mm</span></div></div><input type="range" id="stencil-slotWidth-range" aria-label="Slot width slider" min="0.3" max="3" step="0.05" value="0.9"><p class="hint">Separate from the SVG line weight. The fitted stitch lengths and gaps stay in place; widening slots can reduce plastic around junctions.</p></div>
+   <div class="control"><div class="control-head"><label for="stencil-opening">Junction opening</label><div class="number-unit"><input type="number" id="stencil-opening" min="0.2" max="6" step="0.1" value="1" inputmode="decimal"><span>mm</span></div></div><p class="hint">Shared with the stitch map. Increase this to leave more plastic where lines meet.</p></div>
+   <div class="control"><div class="control-head"><label for="stencil-minWeb">Minimum plastic spacing</label><div class="number-unit"><input type="number" id="stencil-minWeb" min="0.2" max="3" step="0.05" value="0.9" inputmode="decimal"><span>mm</span></div></div><input type="range" id="stencil-minWeb-range" aria-label="Minimum plastic spacing slider" min="0.2" max="3" step="0.05" value="0.9"><p class="hint">A warning threshold, not an automatic pattern change. Checks slot-to-slot spacing and positive rims near the plate edge.</p></div>
+   <div class="stencil-fixed"><span>End shape <strong>Rounded</strong></span><span>Cut depth <strong>Through</strong></span><span>Bevel / backing floor <strong>None</strong></span></div>
+   <p class="hint">Outer XY edges stay square and at the exact repeat size. Slots crossing the boundary are intentionally open; the adjacent tile completes them.</p>
+   <button class="quiet-button" id="stencil-defaults">Reset stencil settings</button>
+  </section>
+  <section class="stencil-visual" aria-label="Stencil preview and mesh checks">
+   <div class="stencil-toolbar"><div class="tabs" aria-label="Stencil preview mode"><button data-stencil-view="top" aria-pressed="true">Top view</button><button data-stencil-view="3d" aria-pressed="false">3D mesh</button></div><label class="check"><input type="checkbox" id="stencil-showWarnings" checked>Show thin spots</label></div>
+   <div class="stencil-viewport" id="stencil-viewport"><div id="stencil-top"></div><canvas id="stencil-canvas" hidden tabindex="0" aria-label="3D stencil. Drag or use arrow keys to rotate. Scroll or use plus and minus to zoom. Home resets the view."></canvas><div id="stencil-progress" class="stencil-progress" role="status"><span class="spinner"></span><span id="stencil-progress-text">Preparing stencil...</span></div></div>
+   <div class="stencil-preview-caption" id="stencil-preview-caption">Dark = printed plastic. Openings = no material at any height.</div>
+   <div class="stencil-metrics" id="stencil-metrics"></div>
+   <div class="stencil-checks" id="stencil-checks" aria-live="polite"></div>
+   <p class="hint stencil-smallprint">Spacing is measured on the generated polygon outlines; it is not a complete mechanical or slicer analysis. Check the sliced toolpaths and print a small test first. Dimensions are millimeters.</p>
+  </section>
+ </div>
+ <div class="stencil-footer"><div><label id="stencil-ack-row" class="check" hidden><input id="stencil-ack" type="checkbox">I have reviewed the thin-plastic warnings; export anyway.</label><span id="stencil-ready" role="status">Checking geometry...</span></div><div class="stencil-actions"><button id="stencil-report" class="button" disabled>Save build report</button><button id="stencil-download" class="button primary" disabled>Download STL</button></div></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div><div id="print-root"></div>
+<noscript><div class="error">This app needs JavaScript enabled. All computation stays in your browser.</div></noscript>
+<script id="pattern-app-source">
+
+'use strict';
+/**
+ * Sashiko Pattern Studio - dependency-free, local-first SVG and stencil generator.
+ * Units: millimeters, including the SVG viewBox. No raster image is embedded.
+ * Architecture: registry -> periodic geometry graph -> junction clearances ->
+ * arc-length stitch fitting -> complete paths -> periodic copies -> clipping.
+ * IMPORTANT: never dash a cropped tile. Cut only after periodic replication.
+ */
+(() => {
+const VERSION = 2;
+const TAU = Math.PI * 2;
+const DEFAULTS = Object.freeze({pattern:'interlaced',stitch:2,ratioA:3,ratioB:2,opening:1,tileWidth:48,columns:4,rows:6,weight:0.35,transparent:false,paper:'letter',display:'stitches',seams:false,nodes:false,view:'panel'});
+const LIMITS = {stitch:[0.5,10],ratioA:[1,10],ratioB:[1,10],opening:[0.2,6],tileWidth:[12,120],columns:[1,20],rows:[1,20],weight:[0.15,0.9]};
+const $ = id => document.getElementById(id);
+const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+const hypot = (a,b) => Math.hypot(a[0]-b[0],a[1]-b[1]);
+const lerp = (a,b,t) => [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
+const mod = (a,n) => ((a%n)+n)%n;
+const fmt = n => (Math.abs(n)<0.0000001?0:n).toFixed(5).replace(/\.?0+$/,'');
+const mm = n => n.toFixed(2).replace(/\.?0+$/,'');
+const point = p => `${fmt(p[0])} ${fmt(p[1])}`;
+const xml = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+const unit = v => {const l=Math.hypot(...v);return l>1e-12?v.map(x=>x/l):[1,0];};
+let uid=0;
+
+// -- Geometric primitives. Curved stitch fragments remain genuine SVG curves. --
+function splitCubic(ps,t){const a=lerp(ps[0],ps[1],t),b=lerp(ps[1],ps[2],t),c=lerp(ps[2],ps[3],t),d=lerp(a,b,t),e=lerp(b,c,t),f=lerp(d,e,t);return [[ps[0],a,d,f],[f,e,c,ps[3]]];}
+function cubicPoint(ps,t){const q=1-t;return [0,1].map(i=>q*q*q*ps[0][i]+3*q*q*t*ps[1][i]+3*q*t*t*ps[2][i]+t*t*t*ps[3][i]);}
+function cubicSlice(ps,a,b){let out=ps;if(b<1)out=splitCubic(out,b)[0];if(a>0)out=splitCubic(out,a/b)[1];return out;}
+function line(p0,p1){const L=hypot(p0,p1);return {kind:'line',p0,p1,L,bounds:[Math.min(p0[0],p1[0]),Math.min(p0[1],p1[1]),Math.max(p0[0],p1[0]),Math.max(p0[1],p1[1])],at:s=>lerp(p0,p1,clamp(s/L,0,1)),tangent:()=>unit([p1[0]-p0[0],p1[1]-p0[1]]),slice(a,b){return `M ${point(this.at(a))} L ${point(this.at(b))}`;}};}
+function cubic(ps){
+ // A 512-step arc-length table gives sub-0.01 mm accuracy at the allowed sizes.
+ const steps=512,ls=new Float64Array(steps+1);let prev=ps[0];
+ for(let i=1;i<=steps;i++){const p=cubicPoint(ps,i/steps);ls[i]=ls[i-1]+hypot(p,prev);prev=p;}
+ const L=ls[steps];
+ function tAt(s){s=clamp(s,0,L);let lo=0,hi=steps;while(hi-lo>1){const mid=(lo+hi)>>1;if(ls[mid]<=s)lo=mid;else hi=mid;}return (lo+(s-ls[lo])/(ls[hi]-ls[lo]||1))/steps;}
+ return {kind:'cubic',p0:ps[0],p1:ps[3],L,ps,bounds:[Math.min(...ps.map(p=>p[0])),Math.min(...ps.map(p=>p[1])),Math.max(...ps.map(p=>p[0])),Math.max(...ps.map(p=>p[1]))],at:s=>cubicPoint(ps,tAt(s)),tangent(end){const a=end?ps[2]:ps[0],b=end?ps[3]:ps[1];return unit([b[0]-a[0],b[1]-a[1]]);},slice(a,b){const sub=cubicSlice(ps,tAt(a),tAt(b));return `M ${point(sub[0])} C ${point(sub[1])} ${point(sub[2])} ${point(sub[3])}`;}};
+}
+function arc(c,r,a0,a1){const L=Math.abs(a1-a0)*r,dir=Math.sign(a1-a0),at=s=>{const a=a0+dir*clamp(s,0,L)/r;return [c[0]+r*Math.cos(a),c[1]+r*Math.sin(a)];};return {kind:'arc',p0:at(0),p1:at(L),L,c,r,a0,a1,bounds:[c[0]-r,c[1]-r,c[0]+r,c[1]+r],at,tangent(end){const a=end?a1:a0;return [-Math.sin(a)*dir,Math.cos(a)*dir];},slice(a,b){return `M ${point(at(a))} A ${fmt(r)} ${fmt(r)} 0 ${b-a>Math.PI*r?1:0} ${dir>0?1:0} ${point(at(b))}`;}};}
+function path(parts,options={}){
+ const lengths=[0];for(const p of parts)lengths.push(lengths.at(-1)+p.L);
+ const L=lengths.at(-1);
+ return {parts,L,p0:parts[0].p0,p1:parts.at(-1).p1,periodic:!!options.periodic,route:options.route||'',bounds:[Math.min(...parts.map(p=>p.bounds[0])),Math.min(...parts.map(p=>p.bounds[1])),Math.max(...parts.map(p=>p.bounds[2])),Math.max(...parts.map(p=>p.bounds[3]))],tangent(end){return end?parts.at(-1).tangent(true):parts[0].tangent(false);},at(s){s=clamp(s,0,L);let i=0;while(i<parts.length-1&&lengths[i+1]<s)i++;return parts[i].at(s-lengths[i]);},slice(a,b){a=clamp(a,0,L);b=clamp(b,0,L);let d='';for(let i=0;i<parts.length;i++){const x=Math.max(a,lengths[i]),y=Math.min(b,lengths[i+1]);if(y-x<1e-8)continue;let seg=parts[i].slice(x-lengths[i],y-lengths[i]);if(d)seg=seg.replace(/^M\s+[-\d.]+\s+[-\d.]+\s+/,'');d+=(d?' ':'')+seg;}return d;}};
+}
+const edge = (primitive,route='') => path([primitive],{route});
+
+// Pattern definitions are separate source files under src/patterns/.
+// build.py discovers them and replaces the marker below before bundling.
+const PATTERNS = Object.create(null);
+function registerPattern(def) {
+ const id=def&&def.id;
+ if(!def||typeof def!=='object'||Array.isArray(def))throw new TypeError('Pattern definition must be an object.');
+ if(typeof id!=='string'||!/^[a-z0-9][a-z0-9-]*$/.test(id))throw new Error('Pattern id must use lowercase letters, numbers, and hyphens.');
+ if(Object.hasOwn(PATTERNS,id))throw new Error(`Duplicate pattern id: ${id}`);
+ if(typeof def.name!=='string'||!def.name.trim())throw new Error(`Pattern ${id} needs a name.`);
+ if(typeof def.note!=='string')throw new Error(`Pattern ${id} needs a note string.`);
+ if(!Number.isFinite(def.aspect)||def.aspect<=0)throw new Error(`Pattern ${id} needs a positive aspect ratio.`);
+ if(typeof def.build!=='function')throw new Error(`Pattern ${id} needs a build(W) function.`);
+ const order=Number.isFinite(def.order)?def.order:1000;
+ PATTERNS[id]=Object.freeze({...def,id,order});
+}
+
+// BEGIN BUNDLED PATTERN: src/patterns/chevrons.js
+registerPattern({
+  id: 'chevrons',
+  order: 50,
+  name: 'Chevron rows',
+  note: 'Parallel zigzags. Stitches stop short of each peak and valley.',
+  aspect: 0.5,
+  build(W) {
+    const H = W / 2, a = [0, H / 4], b = [W / 2, H * 3 / 4], c = [W, H / 4];
+    return {W, H, edges: [edge(line(a, b), 'zigzag'), edge(line(b, c), 'zigzag')]};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/chevrons.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/circles.js
+registerPattern({
+  id: 'circles',
+  order: 40,
+  name: 'Linked circles',
+  note: 'Overlapping circular rows, split only at their true intersections.',
+  aspect: 1,
+  build(W) {
+    const r = 0.6 * W, b = Math.acos(W / (2 * r)), angles = [];
+    for (let i = 0; i < 4; i++) angles.push(mod(i * Math.PI / 2 - b, TAU), mod(i * Math.PI / 2 + b, TAU));
+    angles.sort((a, b) => a - b);
+    return {W, H: W, edges: angles.map((a, i) => edge(arc([W / 2, W / 2], r, a, i === angles.length - 1 ? angles[0] + TAU : angles[i + 1]), 'circle'))};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/circles.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/diamonds.js
+registerPattern({
+  id: 'diamonds',
+  order: 30,
+  name: 'Diamond lattice',
+  note: 'Two diagonal families. Each crossing gets its own breathing room.',
+  aspect: 1,
+  build(W) {
+    const p = [W / 2, W / 2];
+    return {W, H: W, edges: [[0, 0], [W, 0], [W, W], [0, W]].map((q, i) => edge(line(p, q), `diagonal-${i % 2}`))};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/diamonds.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/grid.js
+registerPattern({
+  id: 'grid',
+  order: 20,
+  name: 'Square lattice',
+  note: 'Straight rows and columns, with open spaces at every crossing.',
+  aspect: 1,
+  build(W) {
+    return {W, H: W, edges: [
+      edge(line([W / 2, W / 2], [W * 1.5, W / 2]), 'horizontal'),
+      edge(line([W / 2, W / 2], [W / 2, W * 1.5]), 'vertical')
+    ]};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/grid.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/interlaced.js
+registerPattern({
+  id: 'interlaced',
+  order: 10,
+  name: 'Interlaced curves',
+  note: 'Your reference, rebuilt as curves. Two staggered rows form one complete rectangular repeat.',
+  aspect: 70 / 122,
+  build(W) {
+    const k = W / 122, H = 70 * k, E = [];
+    const P = (p, ox = 0, oy = 0, mirror = false) => [(ox + (mirror ? 122 - p[0] : p[0])) * k, (oy + p[1]) * k];
+    // Hermite control points preserve smooth tangents through the T junctions.
+    const knots = [[12, 0], [34, 15], [49, 35], [50, 62]];
+    const tangents = [[25, 7], [20, 17.5], [8, 23.5], [-6, 28]];
+    for (let row = 0; row < 2; row++) {
+      const ox = row * 61, oy = row * 35;
+      for (const mirror of [false, true]) {
+        for (let i = 0; i < 3; i++) {
+          const a = knots[i], b = knots[i + 1], ta = tangents[i], tb = tangents[i + 1];
+          E.push(edge(cubic([
+            P(a, ox, oy, mirror),
+            P([a[0] + ta[0] / 3, a[1] + ta[1] / 3], ox, oy, mirror),
+            P([b[0] - tb[0] / 3, b[1] - tb[1] / 3], ox, oy, mirror),
+            P(b, ox, oy, mirror)
+          ]), `row-${row}-${mirror ? 'right' : 'left'}`));
+        }
+      }
+      const cy = 12.875, r = Math.hypot(34, 50 - cy);
+      const pts = [[27, 50], [50, 62], [72, 62], [95, 50]];
+      const angles = pts.map(p => Math.atan2(p[1] - cy, p[0] - 61));
+      for (let j = 0; j < 3; j++) E.push(edge(arc(P([61, cy], ox, oy), r * k, angles[j], angles[j + 1]), `row-${row}-cup`));
+    }
+    return {W, H, edges: E};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/interlaced.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/waves.js
+registerPattern({
+  id: 'waves',
+  order: 60,
+  name: 'Wave rows',
+  note: 'Smooth, continuous waves. A whole number of stitch periods fits each wavelength.',
+  aspect: 0.4,
+  build(W) {
+    const H = W * 0.4, A = H * 0.27, parts = [], n = 8;
+    for (let i = 0; i < n; i++) {
+      const x0 = W * i / n, x1 = W * (i + 1) / n, dx = x1 - x0;
+      const y0 = H / 2 + A * Math.sin(TAU * x0 / W), y1 = H / 2 + A * Math.sin(TAU * x1 / W);
+      const d0 = A * TAU / W * Math.cos(TAU * x0 / W), d1 = A * TAU / W * Math.cos(TAU * x1 / W);
+      parts.push(cubic([[x0, y0], [x0 + dx / 3, y0 + d0 * dx / 3], [x1 - dx / 3, y1 - d1 * dx / 3], [x1, y1]]));
+    }
+    return {W, H, edges: [path(parts, {periodic: true, route: 'wave'})]};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/waves.js
+
+if(!Object.hasOwn(PATTERNS,DEFAULTS.pattern))throw new Error(`Default pattern '${DEFAULTS.pattern}' is not registered.`);
+Object.freeze(PATTERNS);
+
+function validate(raw){
+ const out={...DEFAULTS};if(!raw||typeof raw!=='object'||Array.isArray(raw))return out;
+ for(const [key,[lo,hi]] of Object.entries(LIMITS)){if(typeof raw[key]==='number'&&Number.isFinite(raw[key]))out[key]=clamp(raw[key],lo,hi);}
+ out.columns=Math.round(out.columns);out.rows=Math.round(out.rows);
+ if(Object.hasOwn(PATTERNS,raw.pattern))out.pattern=raw.pattern;
+ for(const key of ['transparent','seams','nodes'])if(typeof raw[key]==='boolean')out[key]=raw[key];
+ if(['letter','a4'].includes(raw.paper))out.paper=raw.paper;
+ if(['stitches','geometry','overlay'].includes(raw.display))out.display=raw.display;
+ if(['panel','tile','seams'].includes(raw.view))out.view=raw.view;
+ return out;
+}
+function nodeKey(p,W,H){let x=mod(p[0],W),y=mod(p[1],H);if(W-x<1e-5||x<1e-5)x=0;if(H-y<1e-5||y<1e-5)y=0;return `${x.toFixed(4)},${y.toFixed(4)}`;}
+
+/** Fit dashes to geometry, not the viewport. No junction is discovered from pixels. */
+function buildModel(raw){
+ const s=validate(raw),geo=PATTERNS[s.pattern].build(s.tileWidth),{W,H,edges}=geo,nodes=new Map();
+ edges.forEach((e,ei)=>{e.id=ei;if(e.periodic)return;[e.p0,e.p1].forEach((p,end)=>{const key=nodeKey(p,W,H),v=e.tangent(!!end).map(x=>end?-x:x);if(!nodes.has(key))nodes.set(key,{key,p:[mod(p[0],W),mod(p[1],H)],arms:[],clearance:0});nodes.get(key).arms.push({ei,end,v});});});
+ for(const n of nodes.values()){
+  let angle=Math.PI;for(let i=0;i<n.arms.length;i++)for(let j=i+1;j<n.arms.length;j++){const a=n.arms[i].v,b=n.arms[j].v,dot=clamp(a[0]*b[0]+a[1]*b[1],-1,1);angle=Math.min(angle,Math.acos(dot));}
+  // Rounded caps are inset later. This also separates arms at acute angles.
+  const separation=Math.min(.2,s.opening/3),angleClearance=(s.weight+separation)/(2*Math.sin(Math.max(.08,angle)/2))-s.weight/2;
+  n.clearance=Math.max(s.opening/2,angleClearance);
+  for(const a of n.arms)edges[a.ei][a.end?'endClear':'startClear']=n.clearance;
+ }
+ const q=s.ratioA/s.ratioB,targetGap=s.stitch/q,dashes=[],lengths=[],gaps=[],fits=[],warnings=[];let skipped=0,omitted=0;
+ for(const e of edges){
+  let n,a,g,start;
+  if(e.periodic){
+   const estimate=e.L/(s.stitch+targetGap),candidates=[Math.max(1,Math.floor(estimate)),Math.max(1,Math.ceil(estimate))];
+   n=candidates.reduce((best,x)=>Math.abs(Math.log(e.L/(x*(1+1/q))/s.stitch))<Math.abs(Math.log(e.L/(best*(1+1/q))/s.stitch))?x:best,candidates[0]);
+   a=e.L/(n*(1+1/q));g=a/q;start=g/2;
+  }else{
+   const c0=e.startClear||0,c1=e.endClear||0,D=e.L-c0-c1;
+   if(D<=s.weight+.05){skipped++;continue;}
+   const estimate=(D+targetGap)/(s.stitch+targetGap),lo=Math.max(1,Math.floor(estimate)),hi=Math.max(1,Math.ceil(estimate));
+   const fit=x=>D/(x+(x-1)/q);
+   n=Math.abs(Math.log(fit(lo)/s.stitch))<=Math.abs(Math.log(fit(hi)/s.stitch))?lo:hi;
+   a=fit(n);g=a/q;start=c0;
+  }
+  if(!Number.isFinite(a)||a<=0)throw new Error('Unable to fit stitches to this geometry.');
+  fits.push({edge:e.id,n,a,g,start});
+  for(let j=0;j<n;j++){
+   const from=start+j*(a+g),to=from+a;
+   // Insets keep round caps from eating the requested gaps. No white masks.
+   const inset=s.weight/2;
+   if(a<=s.weight+.02){omitted++;continue;}
+   const fromInk=from+inset,toInk=to-inset;
+   dashes.push({edge:e.id,from,to,fromInk,toInk,length:a,d:e.slice(fromInk,toInk)});lengths.push(a);
+  }
+  if(n>1||e.periodic)gaps.push(g);
+ }
+ const min=lengths.length?Math.min(...lengths):0,max=lengths.length?Math.max(...lengths):0,maxDeviation=lengths.length?Math.max(Math.abs(min/s.stitch-1),Math.abs(max/s.stitch-1)):0;
+ if(skipped||omitted)warnings.push(`${skipped?skipped+' curve interval'+(skipped===1?' is':'s are')+' too short for the current opening':''}${skipped&&omitted?'; ':''}${omitted?omitted+' stitch'+(omitted===1?' is':'es are')+' shorter than the line weight':''}. Increase repeat size, reduce the opening, or reduce line weight.`);
+ if(maxDeviation>.25)warnings.push(`Fitting changes some stitches by up to ${Math.round(maxDeviation*100)}% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative.`);
+ if(q<=1)warnings.push(`The selected ${mm(s.ratioA)}:${mm(s.ratioB)} ratio makes stitches ${q===1?'equal to':'shorter than'} interior gaps. Choose 3:2 for the longer-stitch style.`);
+ const bounds=[Math.min(...edges.map(e=>e.bounds[0])),Math.min(...edges.map(e=>e.bounds[1])),Math.max(...edges.map(e=>e.bounds[2])),Math.max(...edges.map(e=>e.bounds[3]))];
+ return {s,W,H,edges,nodes:[...nodes.values()],dashes,lengths,gaps,fits,min,max,maxDeviation,warnings,skipped,omitted,bounds};
+}
+
+// -- Rendering. A single global clip means no per-tile anti-aliased hairlines. --
+function copies(bounds,W,H,rect,pad=0){
+ const [x,y,w,h]=rect;
+ const x0=Math.ceil((x-bounds[2]-pad)/W),x1=Math.floor((x+w-bounds[0]+pad)/W),y0=Math.ceil((y-bounds[3]-pad)/H),y1=Math.floor((y+h-bounds[1]+pad)/H),out=[];
+ for(let j=y0;j<=y1;j++)for(let i=x0;i<=x1;i++)out.push([i*W,j*H]);return out;
+}
+function sourceMarkup(m,id,mode){
+ const geometry=m.edges.map(e=>`<path d="${e.slice(0,e.L)}" data-route="${xml(e.route)}"/>`).join('');
+ const stitched=m.dashes.map(d=>`<path d="${d.d}"/>`).join('');
+ let body='';if(mode==='geometry'||mode==='overlay')body+=`<g fill="none" stroke="${mode==='overlay'?'#c9cfc5':'#000'}" stroke-width="${fmt(mode==='overlay'?Math.min(.22,m.s.weight*.6):m.s.weight)}" stroke-linecap="round" stroke-linejoin="round">${geometry}</g>`;
+ if(mode!=='geometry')body+=`<g fill="none" stroke="#000" stroke-width="${fmt(m.s.weight)}" stroke-linecap="round" stroke-linejoin="round">${stitched}</g>`;
+ return `<g id="${id}">${body}</g>`;
+}
+function svgFor(m,cols=1,rows=1,options={}){
+ const id=`sashiko-${++uid}`,fullW=m.W*cols,fullH=m.H*rows,rect=options.rect||[0,0,fullW,fullH],[x,y,w,h]=rect,mode=options.mode||'stitches',pad=m.s.weight;
+ const defs=`<defs>${sourceMarkup(m,id+'-source',mode)}<clipPath id="${id}-clip"><rect x="${fmt(x)}" y="${fmt(y)}" width="${fmt(w)}" height="${fmt(h)}"/></clipPath></defs>`;
+ const uses=copies(m.bounds,m.W,m.H,rect,pad).map(([tx,ty])=>`<use href="#${id}-source" xlink:href="#${id}-source" transform="translate(${fmt(tx)} ${fmt(ty)})"/>`).join('');
+ let guide='';
+ if(options.nodes){const circles=m.nodes.map(n=>`<circle cx="${fmt(n.p[0])}" cy="${fmt(n.p[1])}" r="${fmt(n.clearance)}"/>`).join(''),nId=id+'-nodes';guide+=`<defs><g id="${nId}" fill="#e9ad5d" fill-opacity=".15" stroke="#bd8749" stroke-width=".1">${circles}</g></defs>`+copies([0,0,m.W,m.H],m.W,m.H,rect,4).map(([tx,ty])=>`<use href="#${nId}" transform="translate(${fmt(tx)} ${fmt(ty)})"/>`).join('');}
+ if(options.seams){let d='';for(let i=0;i<=cols;i++)d+=`M${fmt(i*m.W)} 0V${fmt(fullH)} `;for(let j=0;j<=rows;j++)d+=`M0 ${fmt(j*m.H)}H${fmt(fullW)} `;guide+=`<path d="${d}" fill="none" stroke="#749b8c" stroke-width=".18" stroke-dasharray="1.2 1"/>`;}
+ const meta=xml(JSON.stringify({app:'Sashiko Pattern Studio',version:VERSION,units:'mm',tileWidth:m.W,tileHeight:m.H,columns:cols,rows,mode,settings:m.s,actualStitchRange:[m.min,m.max],junctionGaps:'deliberate exceptions to interior stitch:gap ratio'}));
+ return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${fmt(w)}mm" height="${fmt(h)}mm" viewBox="${fmt(x)} ${fmt(y)} ${fmt(w)} ${fmt(h)}" role="img" aria-label="${xml(PATTERNS[m.s.pattern].name)} ${mode==='geometry'?'geometry':'stitch pattern'}"><title>${xml(PATTERNS[m.s.pattern].name)} - ${cols} by ${rows} repeats</title><desc>Periodic on both axes. Preserve the exact document size when tiling. No border or watermark.</desc><metadata>${meta}</metadata>${defs}${options.transparent?'':`<rect x="${fmt(x)}" y="${fmt(y)}" width="${fmt(w)}" height="${fmt(h)}" fill="#fff"/>`}<g clip-path="url(#${id}-clip)">${uses}${guide}</g></svg>`;
+}
+
+// -- Application state, accessible controls and responsive preview. --
+let state={...DEFAULTS};try{const saved=JSON.parse(localStorage.getItem('sashiko-studio-v1')||'null');if(saved)state=validate(saved);}catch(_){/* Private/file contexts may disallow storage. */}
+let model=null,zoom=1,renderTimer=null,toastTimer=null;
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4200);}
+function persist(){try{localStorage.setItem('sashiko-studio-v1',JSON.stringify(state));}catch(_){/* JSON save/load is always available as a fallback. */}}
+function syncControls(){
+ for(const key of Object.keys(LIMITS)){if($(key))$(key).value=state[key];if($(key+'-range'))$(key+'-range').value=state[key];}
+ for(const key of ['transparent','seams','nodes'])$(key).checked=state[key];
+ for(const key of ['paper','display'])$(key).value=state[key];
+ document.querySelectorAll('[data-pattern]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pattern===state.pattern)));
+ document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===state.view)));
+ document.querySelectorAll('[data-ratio]').forEach(b=>{const [a,c]=b.dataset.ratio.split(',').map(Number);b.classList.toggle('active',Math.abs(a/c-state.ratioA/state.ratioB)<1e-6);});
+}
+function dimensionsForView(){return state.view==='tile'?[1,1]:state.view==='seams'?[3,3]:[state.columns,state.rows];}
+function drawPreview(){if(!model)return;const [cols,rows]=dimensionsForView();$('sheet').innerHTML=svgFor(model,cols,rows,{mode:state.display,seams:state.seams||state.view==='seams',nodes:state.nodes,transparent:false});sizePreview();$('sheet-label').textContent=`${cols} x ${rows} repeat${cols*rows===1?'':'s'}  /  ${mm(cols*model.W)} x ${mm(rows*model.H)} mm${state.view==='seams'?'  /  seams are preview guides only':''}`;}
+function sizePreview(){if(!model)return;const [cols,rows]=dimensionsForView(),stage=$('preview-stage'),svg=$('sheet').querySelector('svg');if(!svg)return;const availW=Math.max(150,stage.clientWidth-60),availH=Math.max(180,stage.clientHeight-77),scale=Math.min(availW/(cols*model.W),availH/(rows*model.H))*zoom;svg.style.width=`${cols*model.W*scale}px`;svg.style.height=`${rows*model.H*scale}px`;$('zoom-label').textContent=zoom===1?'Fit':`${Math.round(zoom*100)}%`;}
+function render(){
+ try{model=buildModel(state);state=model.s;const p=PATTERNS[state.pattern];$('pattern-title').textContent=p.name;$('pattern-note').textContent=p.note;
+ $('target-gap').textContent=`${mm(state.stitch/(state.ratioA/state.ratioB))} mm target gap`;
+ const q=state.ratioA/state.ratioB,period=25,a=period*q/(1+q);$('rhythm').innerHTML=`<path d="M2 7.5H139" stroke="#315e51" stroke-width="2" stroke-dasharray="${a} ${period-a}" fill="none"/>`;
+ $('tile-dimensions').textContent=`${mm(model.W)} x ${mm(model.H)} mm`;$('panel-dimensions').textContent=`Panel: ${mm(model.W*state.columns)} x ${mm(model.H*state.rows)} mm`;
+ $('actual-length').textContent=model.lengths.length?(model.max-model.min<.015?`${mm(model.min)} mm`:`${mm(model.min)}-${mm(model.max)} mm`):'No stitches';
+ $('fit-note').textContent=`Target ${mm(state.stitch)} mm / up to ${Math.round(model.maxDeviation*100)}% fit adjustment`;
+ $('stitch-count').textContent=model.dashes.length.toLocaleString();$('gap-range').textContent=model.gaps.length?`Interior gaps ${mm(Math.min(...model.gaps))}-${mm(Math.max(...model.gaps))} mm`:'No interior gaps on these intervals';
+ $('notices').replaceChildren();for(const text of model.warnings){const p=document.createElement('p');p.className='notice';p.textContent=text;$('notices').append(p);}
+ $('export-caption').textContent=`${state.display==='geometry'?'Solid guides':'Stitch map'} exported in black${state.transparent?' on transparent':' on white'}. True millimeter dimensions. Preview guides never export.`;
+ syncControls();drawPreview();persist();window.dispatchEvent(new CustomEvent("sashiko-pattern-change"));
+ }catch(error){console.error(error);$('notices').innerHTML='';const p=document.createElement('p');p.className='error';p.textContent='Could not build this pattern. '+error.message;$('notices').append(p);model=null;}
+}
+function scheduleRender(){clearTimeout(renderTimer);renderTimer=setTimeout(render,70);}
+function flush(){clearTimeout(renderTimer);render();if(!model)throw new Error('The pattern is not ready. Reset the settings and try again.');}
+function makeCards(){for(const [key,p] of Object.entries(PATTERNS).sort((a,b)=>a[1].order-b[1].order||a[0].localeCompare(b[0]))){const b=document.createElement('button');b.type='button';b.className='pattern-card';b.dataset.pattern=key;b.setAttribute('aria-pressed',String(state.pattern===key));const m=buildModel({...DEFAULTS,pattern:key,tileWidth:24,stitch:1.2,opening:.65,weight:.2});b.innerHTML=svgFor(m,2,key==='interlaced'?2:1,{mode:'stitches'})+`<span class="card-name">${xml(p.name)}</span>`;b.addEventListener('click',()=>{state.pattern=key;zoom=1;render();});$('pattern-list').append(b);}}
+function download(text,name,type){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
+function exportSVG(tile){try{flush();const mode=state.display==='geometry'?'geometry':'stitches',cols=tile?1:state.columns,rows=tile?1:state.rows,svg=svgFor(model,cols,rows,{mode,transparent:state.transparent});download('<?xml version="1.0" encoding="UTF-8"?>\n'+svg,`sashiko-${state.pattern}-${tile?'repeat':'panel'}-${mm(cols*model.W)}x${mm(rows*model.H)}mm-${mode}.svg`,'image/svg+xml;charset=utf-8');toast(`${tile?'Repeat':'Panel'} SVG saved. Preserve its exact width and height when tiling.`);}catch(e){toast(e.message);}}
+
+/** Generate exact-scale printable crops, with 5 mm overlap between pages. */
+function buildPrint(m){
+ const s=m.s,mode=s.display==='geometry'?'geometry':'stitches',[paperW,paperH]=s.paper==='a4'?[210,297]:[215.9,279.4],cropW=paperW-20,cropH=paperH-40,overlap=5,W=m.W*s.columns,H=m.H*s.rows;
+ const nx=W<=cropW?1:1+Math.ceil((W-cropW)/(cropW-overlap)),ny=H<=cropH?1:1+Math.ceil((H-cropH)/(cropH-overlap));
+ if(nx*ny>64)throw new Error(`This panel needs ${nx*ny} pages. Reduce panel size to 64 pages or fewer, or export SVG instead.`);
+ const pages=[];
+ for(let iy=0;iy<ny;iy++)for(let ix=0;ix<nx;ix++){
+  const x=ix*(cropW-overlap),y=iy*(cropH-overlap),w=Math.min(cropW,W-x),h=Math.min(cropH,H-y),num=iy*nx+ix+1;
+  const drawing=svgFor(m,s.columns,s.rows,{mode,rect:[x,y,w,h],transparent:false});
+  const ruler='<svg xmlns="http://www.w3.org/2000/svg" width="52mm" height="7mm" viewBox="0 0 52 7"><path d="M1 2V5M1 3.5H51M51 2V5" fill="none" stroke="black" stroke-width=".18"/><text x="26" y="1.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="2">50 mm calibration</text></svg>';
+  pages.push(`<section class="print-page" style="width:${paperW}mm;height:${paperH}mm"><div class="print-heading"><strong>${xml(PATTERNS[s.pattern].name)}</strong> / ${mm(W)} x ${mm(H)} mm panel<br>Page ${num} of ${nx*ny} / row ${iy+1}, column ${ix+1} / origin ${mm(x)}, ${mm(y)} mm</div><div class="print-map">${drawing}</div><div class="print-foot">${ruler}<div class="print-caption">Print at 100% / actual size. Disable headers and footers.<br>${nx*ny>1?'Adjacent pages overlap by 5 mm. Align matching stitches.':'Measure the ruler before transferring to fabric.'}<br>${mode==='geometry'?'Solid guide geometry':`Target ${mm(s.stitch)} mm / actual ${mm(m.min)}-${mm(m.max)} mm / ${mm(s.ratioA)}:${mm(s.ratioB)} interior ratio`}</div></div></section>`);
+ }
+ return {html:pages.join(''),count:pages.length,paperW,paperH,nx,ny,cropW,cropH,overlap};
+}
+
+for(const [key,[lo,hi]] of Object.entries(LIMITS)){
+ const el=$(key);el.addEventListener('input',()=>{const value=el.valueAsNumber;if(!Number.isFinite(value)||value<lo||value>hi)return;state[key]=['rows','columns'].includes(key)?Math.round(value):value;if($(key+'-range'))$(key+'-range').value=state[key];scheduleRender();});
+ el.addEventListener('change',()=>{const value=el.valueAsNumber;state[key]=Number.isFinite(value)?clamp(value,lo,hi):DEFAULTS[key];if(['rows','columns'].includes(key))state[key]=Math.round(state[key]);render();});
+ const range=$(key+'-range');if(range)range.addEventListener('input',()=>{state[key]=Number(range.value);el.value=state[key];scheduleRender();});
+}
+document.querySelectorAll('[data-ratio]').forEach(b=>b.addEventListener('click',()=>{[state.ratioA,state.ratioB]=b.dataset.ratio.split(',').map(Number);render();}));
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{state.view=b.dataset.view;zoom=1;syncControls();drawPreview();persist();window.dispatchEvent(new CustomEvent("sashiko-pattern-change"));}));
+for(const key of ['transparent','seams','nodes'])$(key).addEventListener('change',()=>{state[key]=$(key).checked;render();});
+for(const key of ['display','paper'])$(key).addEventListener('change',()=>{state[key]=$(key).value;render();});
+$('zoom-in').addEventListener('click',()=>{zoom=Math.min(6,zoom*1.4);sizePreview();});$('zoom-out').addEventListener('click',()=>{zoom=Math.max(.5,zoom/1.4);sizePreview();});$('zoom-fit').addEventListener('click',()=>{zoom=1;sizePreview();});
+$('export-tile').addEventListener('click',()=>exportSVG(true));$('export-panel').addEventListener('click',()=>exportSVG(false));
+$('save-preset').addEventListener('click',()=>{flush();download(JSON.stringify({app:'Sashiko Pattern Studio',version:VERSION,settings:state,stencil:window.SashikoStencil?.getSettings()},null,2),'sashiko-settings.json','application/json');toast('Settings saved. Load this JSON file to restore the design.');});
+$('load-preset').addEventListener('click',()=>$('preset-file').click());
+$('preset-file').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>100000)throw new Error('Settings files must be smaller than 100 KB.');const parsed=JSON.parse(await file.text());if(parsed.app!=='Sashiko Pattern Studio'||![1,2].includes(parsed.version)||!parsed.settings)throw new Error('This is not a supported Sashiko Pattern Studio settings file.');state=validate(parsed.settings);if(window.SashikoStencil)window.SashikoStencil.setSettings(parsed.stencil||{});zoom=1;render();toast('Settings loaded.');}catch(e){toast('Could not load settings: '+e.message);}finally{event.target.value='';}});
+$('reset').addEventListener('click',()=>{state={...DEFAULTS};window.SashikoStencil?.setSettings({});zoom=1;render();toast('Default design restored.');});
+$('print-panel').addEventListener('click',()=>{try{flush();const pages=buildPrint(model);$('print-root').innerHTML=pages.html;$('print-size').textContent=`@media print{@page{size:${pages.paperW}mm ${pages.paperH}mm;margin:0}}`;setTimeout(()=>window.print(),120);}catch(e){toast(e.message);}});
+window.addEventListener('resize',sizePreview);
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(sizePreview).observe($('preview-stage'));
+// A small read-only testing/extension surface. All exported files remain standalone.
+window.SashikoStudio=Object.freeze({version:VERSION,defaults:DEFAULTS,patterns:PATTERNS,validate,buildModel,svgFor,buildPrint,getState:()=>({...state}),getModel:()=>model,setState:raw=>{state=validate({...state,...raw});render();}});
+makeCards();syncControls();render();
+})();
+
+</script>
+<script id="stencil-engine-source">
+/* Sashiko Pattern Studio: dependency-free stencil geometry. Units are mm.
+ * Input: disjoint, rounded slot rings on a periodic lattice.
+ * Algorithm: subtract holes by a horizontal sweep; merge unchanged material
+ * intervals into trapezoids; split ALL shared horizontal edges identically;
+ * triangulate each convex cell, then extrude its boundary. This avoids the
+ * non-conforming hole bridges/T-junctions possible with a rendering-only
+ * triangulator. Overlapping slots are diagnosed, never silently merged.
+ */
+(function(root) {
+'use strict';
+const GRID=10000, EPS=1/GRID, TOL=.003, MAX_SLOTS=10000, MAX_VERTICES=400000;
+const snap=n=>Math.round(n*GRID)/GRID;
+const key=p=>`${Math.round(p[0]*GRID)},${Math.round(p[1]*GRID)}`;
+const area=p=>p.reduce((s,a,i)=>{const b=p[(i+1)%p.length];return s+a[0]*b[1]-b[0]*a[1];},0)/2;
+const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+const bounds=p=>p.reduce((b,a)=>[Math.min(b[0],a[0]),Math.min(b[1],a[1]),Math.max(b[2],a[0]),Math.max(b[3],a[1])],[Infinity,Infinity,-Infinity,-Infinity]);
+const cross=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+function clean(p) {const out=[];for(const a of p){const b=a.map(snap);if(!out.length||key(b)!==key(out.at(-1)))out.push(b);}if(out.length>1&&key(out[0])===key(out.at(-1)))out.pop();return out;}
+function unit(a,b) {const d=dist(a,b);if(d<1e-10)return [1,0];return [(b[0]-a[0])/d,(b[1]-a[1])/d];}
+function roundedSlot(points,width) {
+ const r=width/2,p=points.filter((a,i)=>!i||dist(a,points[i-1])>1e-8);
+ if(p.length<2)throw new Error('A stitch is too short for this slot width.');
+ const ts=[];for(let i=0;i<p.length-1;i++)ts.push(unit(p[i],p[i+1]));
+ const left=[],right=[];
+ for(let i=0;i<p.length;i++){
+  const u=ts[Math.max(0,i-1)],v=ts[Math.min(ts.length-1,i)],t=unit([0,0],[u[0]+v[0],u[1]+v[1]]),factor=1/Math.max(.7,t[0]*v[0]+t[1]*v[1]);
+  left.push([p[i][0]-t[1]*r*factor,p[i][1]+t[0]*r*factor]);
+  right.push([p[i][0]+t[1]*r*factor,p[i][1]-t[0]*r*factor]);
+ }
+ const out=[...left],n=Math.max(10,Math.ceil(Math.PI/(2*Math.acos(Math.max(-1,1-TOL/r)))));
+ const cap=(c,t,atEnd)=>{const a=Math.atan2(t[1],t[0])+(atEnd?Math.PI/2:-Math.PI/2);for(let i=1;i<n;i++){const angle=a-Math.PI*i/n;out.push([c[0]+r*Math.cos(angle),c[1]+r*Math.sin(angle)]);}};
+ cap(p.at(-1),ts.at(-1),true);out.push(...right.reverse());cap(p[0],ts[0],false);
+ return clean(out);
+}
+function clipRing(ring,W,H) {
+ let out=ring;
+ for(const [axis,val,sign] of [[0,0,1],[0,W,-1],[1,0,1],[1,H,-1]]){
+  const input=out;out=[];if(!input.length)break;
+  for(let i=0;i<input.length;i++){
+   const a=input[i],b=input[(i+1)%input.length],ina=sign*(a[axis]-val)>=0,inb=sign*(b[axis]-val)>=0;
+   if(ina)out.push(a);
+   if(ina!==inb){const t=(val-a[axis])/(b[axis]-a[axis]),p=[a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])];p[axis]=val;out.push(p);}
+  }
+ }
+ return clean(out);
+}
+function inside(p,ring) {let hit=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])hit=!hit;}return hit;}
+function pointSegment(p,a,b) {const dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/(dx*dx+dy*dy||1))),q=[a[0]+t*dx,a[1]+t*dy];return {d:dist(p,q),p,q};}
+function segmentDistance(a,b,c,d) {
+ const ab=[b[0]-a[0],b[1]-a[1]],cd=[d[0]-c[0],d[1]-c[1]],det=ab[0]*cd[1]-ab[1]*cd[0];
+ if(Math.abs(det)>1e-14){const ca=[c[0]-a[0],c[1]-a[1]],t=(ca[0]*cd[1]-ca[1]*cd[0])/det,u=(ca[0]*ab[1]-ca[1]*ab[0])/det;if(t>=0&&t<=1&&u>=0&&u<=1){const p=[a[0]+t*ab[0],a[1]+t*ab[1]];return {d:0,p,q:p};}}
+ let best=pointSegment(a,c,d);
+ for(const v of [pointSegment(b,c,d),pointSegment(c,a,b),pointSegment(d,a,b)])if(v.d<best.d)best=v;
+ return best;
+}
+function ringDistance(a,b,limit) {
+ if(inside(a[0],b)||inside(b[0],a))return {d:0,p:a[0],q:a[0]};
+ let best={d:limit,p:null,q:null};
+ for(let i=0;i<a.length;i++)for(let j=0;j<b.length;j++){
+  const p=a[i],q=a[(i+1)%a.length],r=b[j],s=b[(j+1)%b.length];
+  if(Math.max(Math.min(p[0],q[0])-Math.max(r[0],s[0]),Math.min(r[0],s[0])-Math.max(p[0],q[0]),Math.min(p[1],q[1])-Math.max(r[1],s[1]),Math.min(r[1],s[1])-Math.max(p[1],q[1]))>best.d)continue;
+  const v=segmentDistance(p,q,r,s);if(v.d<best.d){best=v;if(v.d<1e-9)return best;}
+ }
+ return best;
+}
+function selfCrosses(ring) {for(let i=0;i<ring.length;i++)for(let j=i+2;j<ring.length;j++){if(i===0&&j===ring.length-1)continue;if(segmentDistance(ring[i],ring[(i+1)%ring.length],ring[j],ring[(j+1)%ring.length]).d<1e-8)return true;}return false;}
+function prepareSlots(input) {
+ const W=snap(input.tileW),H=snap(input.tileH),fullW=snap(W*input.columns),fullH=snap(H*input.rows),slots=[],original=[];
+ for(let i=0;i<input.paths.length;i++){
+  const ring=roundedSlot(input.paths[i],input.slotWidth),b=bounds(ring);
+  if(selfCrosses(ring))throw new Error('A rounded slot folds over itself. Reduce the slot width or increase the repeat size.');
+  original.push(ring);
+  const x0=Math.ceil(-b[2]/W),x1=Math.floor((fullW-b[0])/W),y0=Math.ceil(-b[3]/H),y1=Math.floor((fullH-b[1])/H);
+  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){
+   const shifted=ring.map(p=>[snap(p[0]+x*W),snap(p[1]+y*H)]),clipped=clipRing(shifted,fullW,fullH);
+   if(clipped.length<3||Math.abs(area(clipped))<EPS*EPS)continue;
+   slots.push({ring:clipped,full:shifted,b:bounds(clipped),id:`${i}:${x}:${y}`});
+   if(slots.length>MAX_SLOTS)throw new Error(`This selection exceeds ${MAX_SLOTS.toLocaleString()} slots. Export one repeat or a smaller panel.`);
+  }
+ }
+ if(!slots.length)throw new Error('No stitch slots fit this selection. Increase the repeat size or reduce the stitch opening.');
+ if(slots.reduce((n,s)=>n+s.full.length,0)>MAX_VERTICES)throw new Error('This panel is too complex for the browser mesh limit. Export fewer repeats.');
+ return {W:fullW,H:fullH,tileW:W,tileH:H,slots,original};
+}
+function spacingCheck(slots,W,H,threshold) {
+ const limit=Math.max(3,threshold*2),sorted=[...slots].sort((a,b)=>a.b[0]-b.b[0]),near=[],marks=[];let min=limit,minFound=false,collisions=0,thin=0,edgeMin=Infinity,edgeCuts=0;
+ for(const s of sorted){
+  for(let i=near.length-1;i>=0;i--)if(near[i].b[2]+limit<s.b[0])near.splice(i,1);
+  for(const a of near){const lower=Math.hypot(Math.max(0,s.b[0]-a.b[2],a.b[0]-s.b[2]),Math.max(0,s.b[1]-a.b[3],a.b[1]-s.b[3]));if(lower>Math.max(min,threshold))continue;
+   const v=ringDistance(a.ring,s.ring,Math.max(min,threshold));
+   if(v.p&&v.d<min){min=v.d;minFound=true;}
+   if(v.d<EPS*1.5)collisions++;
+   if(v.p&&v.d+EPS<threshold){thin++;if(marks.length<80)marks.push([v.p,v.q]);}
+  }
+  near.push(s);
+  const b=s.b,ds=[b[0],W-b[2],b[1],H-b[3]],cuts=ds.some(d=>d<=EPS);
+  if(cuts)edgeCuts++;
+  // Crossing the boundary is intentional. Only a positive rim is measured.
+  for(let i=0;i<4;i++)if(ds[i]>EPS){
+   if(ds[i]<edgeMin)edgeMin=ds[i];
+   if(ds[i]+EPS<threshold&&marks.length<80){const axis=i<2?0:1,sign=i%2===0?1:-1,p=s.ring.reduce((best,p)=>sign*p[axis]<sign*best[axis]?p:best),q=[...p];q[axis]=i===0||i===2?0:i===1?W:H;marks.push([p,q]);}
+  }
+ }
+ return {minWeb:min,minWebExact:minFound,thinPairs:thin,collisions,edgeMin:Number.isFinite(edgeMin)?edgeMin:null,edgeCuts,marks};
+}
+function lowerBound(a,v){let lo=0,hi=a.length;while(lo<hi){const m=(lo+hi)>>1;if(a[m]<v)lo=m+1;else hi=m;}return lo;}
+/** Horizontal-sweep cell decomposition; slots must be disjoint. */
+function triangulatePlate(slots,W,H,progress) {
+ const levels=new Set([0,Math.round(H*GRID)]),edges=[],events=new Map();let nextId=2;
+ const at=(e,y)=>e.vertical!==undefined?e.vertical:snap(e.a[0]+(y-e.a[1])*(e.b[0]-e.a[0])/(e.b[1]-e.a[1]));
+ const leftWall={id:0,vertical:0},rightWall={id:1,vertical:W};
+ const addEvent=(y,type,e)=>{const yi=Math.round(y*GRID);levels.add(yi);if(!events.has(yi))events.set(yi,{start:[],end:[]});events.get(yi)[type].push(e);};
+ for(const slot of slots)for(let i=0;i<slot.full.length;i++){
+  const a=slot.full[i],b=slot.full[(i+1)%slot.full.length];if(Math.abs(a[1]-b[1])<EPS*.5)continue;
+  const lo=Math.max(0,Math.min(a[1],b[1])),hi=Math.min(H,Math.max(a[1],b[1]));if(hi-lo<EPS*.5)continue;
+  const e={a,b,id:nextId++};edges.push(e);addEvent(lo,'start',e);addEvent(hi,'end',e);
+  // A clipped edge becomes an outer wall exactly at these levels.
+  if(Math.abs(b[0]-a[0])>EPS*.5)for(const x of [0,W]){const t=(x-a[0])/(b[0]-a[0]);if(t>0&&t<1){const y=a[1]+t*(b[1]-a[1]);if(y>lo&&y<hi)levels.add(Math.round(y*GRID));}}
+ }
+ const ys=[...levels].sort((a,b)=>a-b),active=new Set(),cells=[];let open=new Map();
+ function finish(cell){if(cell.y1-cell.y0<EPS*.5)return;const pts=clean([[at(cell.l,cell.y0),cell.y0],[at(cell.r,cell.y0),cell.y0],[at(cell.r,cell.y1),cell.y1],[at(cell.l,cell.y1),cell.y1]].map(p=>[Math.max(0,Math.min(W,p[0])),p[1]]));if(pts.length>=3&&Math.abs(area(pts))>EPS*EPS*.1)cells.push(pts);}
+ for(let j=0;j<ys.length-1;j++){
+  const y0=ys[j]/GRID,y1=ys[j+1]/GRID,ev=events.get(ys[j]);if(ev){for(const e of ev.end)active.delete(e);for(const e of ev.start)active.add(e);}
+  if(y1-y0<EPS*.5)continue;
+  const mid=(y0+y1)/2,xs=[...active].map(e=>({e,x:e.a[0]+(mid-e.a[1])*(e.b[0]-e.a[0])/(e.b[1]-e.a[1])})).sort((a,b)=>a.x-b.x);
+  if(xs.length%2)throw new Error('The slot boundary is not closed. Try a slightly different repeat size.');
+  const ranges=[];let prev=leftWall,prevX=0;
+  for(let k=0;k<xs.length;k+=2){const a=xs[k],b=xs[k+1];if(b.x<=0||a.x>=W)continue;
+   if(a.x>prevX+EPS*.05)ranges.push({l:prev,r:a.e});
+   if(b.x>=W){prev=rightWall;prevX=W;break;}prev=b.e;prevX=b.x;
+  }
+  if(prevX<W-EPS*.05)ranges.push({l:prev,r:rightWall});
+  const now=new Map();for(const r of ranges){const id=`${r.l.id}:${r.r.id}`,c=open.get(id)||{...r,y0,y1};c.y1=y1;now.set(id,c);}
+  for(const [id,c] of open)if(!now.has(id))finish(c);open=now;
+  if(j%500===0)progress(`Building surface: ${Math.round(j/ys.length*100)}%`);
+ }
+ for(const c of open.values())finish(c);
+ // Split both sides of every horizontal join at the same vertices.
+ const splits=new Map();for(const c of cells)for(const p of c){const y=Math.round(p[1]*GRID);if(!splits.has(y))splits.set(y,new Set());splits.get(y).add(Math.round(p[0]*GRID));}
+ for(const [y,xs] of splits)splits.set(y,[...xs].sort((a,b)=>a-b));
+ const vertices=[],vmap=new Map(),triangles=[];
+ function vertex(p){const k=key(p);if(vmap.has(k))return vmap.get(k);const id=vertices.length;vmap.set(k,id);vertices.push(p);return id;}
+ for(const cell of cells){
+  const ring=[];
+  for(let i=0;i<cell.length;i++){
+   const a=cell[i],b=cell[(i+1)%cell.length];ring.push(a);
+   if(Math.abs(a[1]-b[1])<EPS*.5){const xs=splits.get(Math.round(a[1]*GRID)),lo=Math.round(Math.min(a[0],b[0])*GRID),hi=Math.round(Math.max(a[0],b[0])*GRID),part=[];for(let k=lowerBound(xs,lo+1);k<xs.length&&xs[k]<hi;k++)part.push([xs[k]/GRID,a[1]]);if(b[0]<a[0])part.reverse();ring.push(...part);}
+  }
+  if(area(ring)<0)ring.reverse();
+  const ids=ring.map(vertex),center=cell.reduce((p,a)=>[p[0]+a[0]/cell.length,p[1]+a[1]/cell.length],[0,0]),ci=vertices.length;vertices.push(center);
+  for(let i=0;i<ids.length;i++){const a=ids[i],b=ids[(i+1)%ids.length];if(cross(center,vertices[a],vertices[b])>1e-12)triangles.push([ci,a,b]);}
+  if(triangles.length>400000)throw new Error('The surface exceeds the browser mesh limit. Export a smaller panel.');
+ }
+ if(!triangles.length)throw new Error('The slots remove the entire plate. Reduce slot width.');
+ const surfaceEdges=new Map(),parent=triangles.map((_,i)=>i);const find=i=>{while(parent[i]!==i){parent[i]=parent[parent[i]];i=parent[i];}return i;};
+ const union=(a,b)=>{a=find(a);b=find(b);if(a!==b)parent[b]=a;};
+ for(let f=0;f<triangles.length;f++)for(let k=0;k<3;k++){const a=triangles[f][k],b=triangles[f][(k+1)%3],id=a<b?`${a},${b}`:`${b},${a}`;if(!surfaceEdges.has(id))surfaceEdges.set(id,{a,b,f,count:1});else{const e=surfaceEdges.get(id);e.count++;if(e.count>2||e.a===a)throw new Error('The surface triangulation could not be validated. Adjust the repeat or slot width.');union(e.f,f);}}
+ const boundary=[...surfaceEdges.values()].filter(e=>e.count===1),components=new Set(triangles.map((_,i)=>find(i))).size;
+ const actualArea=triangles.reduce((sum,t)=>sum+cross(vertices[t[0]],vertices[t[1]],vertices[t[2]])/2,0),expectedArea=W*H-slots.reduce((sum,s)=>sum+Math.abs(area(s.ring)),0);
+ if(Math.abs(actualArea-expectedArea)>Math.max(.015,W*H*2e-5))throw new Error('The generated surface failed its area check. No STL was created.');
+ const outgoing=new Map();for(const e of boundary){if(outgoing.has(e.a))throw new Error('A slot creates a point-touching boundary. Increase the spacing.');outgoing.set(e.a,e.b);}
+ const seen=new Set(),outlineRings=[];
+ for(const e of boundary){if(seen.has(e.a))continue;const ring=[];let v=e.a;do{if(seen.has(v)||!outgoing.has(v))throw new Error('The stencil outline is not a closed loop.');seen.add(v);ring.push(vertices[v]);v=outgoing.get(v);}while(v!==e.a);outlineRings.push(ring);}
+ return {vertices,triangles,boundary,components,outlineRings,area:actualArea,cells:cells.length};
+}
+function extrude(surface,W,H,thickness) {
+ const n=surface.vertices.length,vertices=[];
+ // Reflect SVG's downward Y into a right-handed, upward-Y STL coordinate system.
+ for(const z of [0,thickness])for(const p of surface.vertices)vertices.push([p[0],H-p[1],z]);
+ const faces=[];
+ for(const t of surface.triangles){faces.push([t[0],t[1],t[2]]);faces.push([t[0]+n,t[2]+n,t[1]+n]);}
+ for(const e of surface.boundary){const a=e.b,b=e.a;faces.push([a,b,b+n],[a,b+n,a+n]);}
+ if(faces.length>900000)throw new Error('The mesh exceeds the export limit. Export fewer repeats.');
+ // Match vertices after Float32 serialization, not merely before it.
+ const unique=new Map(),mapped=[],points=[];
+ for(const v of vertices){const p=v.map(Math.fround),id=p.join(',');if(!unique.has(id)){unique.set(id,points.length);points.push(p);}mapped.push(unique.get(id));}
+ const edgeCounts=new Map();let volume=0;
+ const position=new Float32Array(faces.length*9),buffer=new ArrayBuffer(84+faces.length*50),view=new DataView(buffer);
+ const title=`Sashiko stencil; mm; ${W}x${H}x${thickness}; rounded through slots`;
+ for(let i=0;i<Math.min(80,title.length);i++)view.setUint8(i,title.charCodeAt(i));view.setUint32(80,faces.length,true);
+ for(let i=0;i<faces.length;i++){
+  const ids=faces[i].map(v=>mapped[v]),[a,b,c]=ids.map(v=>points[v]),u=b.map((v,k)=>v-a[k]),v=c.map((val,k)=>val-a[k]),normal=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],len=Math.hypot(...normal);
+  if(len<1e-12)throw new Error('A triangle collapsed at STL precision. Slightly change the repeat size or slot width.');
+  const offset=84+i*50;normal.forEach((v,k)=>view.setFloat32(offset+k*4,v/len,true));
+  [a,b,c].forEach((p,j)=>p.forEach((v,k)=>{view.setFloat32(offset+12+(j*3+k)*4,v,true);position[i*9+j*3+k]=v;}));
+  volume+=(a[0]*(b[1]*c[2]-b[2]*c[1])-a[1]*(b[0]*c[2]-b[2]*c[0])+a[2]*(b[0]*c[1]-b[1]*c[0]))/6;
+  for(let k=0;k<3;k++){const a=ids[k],b=ids[(k+1)%3],id=a<b?`${a},${b}`:`${b},${a}`,e=edgeCounts.get(id)||[0,0];e[0]++;e[1]+=a<b?1:-1;edgeCounts.set(id,e);}
+ }
+ for(const e of edgeCounts.values())if(e[0]!==2||e[1]!==0)throw new Error('The STL failed its closed-mesh check. No file was created. Slightly adjust repeat size.');
+ if(volume<=0||Math.abs(volume-surface.area*thickness)>Math.max(.015,volume*2e-5))throw new Error('The STL volume check failed. No file was created.');
+ return {position,buffer,triangles:faces.length,volume,watertight:true};
+}
+function generate(input,progress=()=>{}) {
+ if(!input||!Array.isArray(input.paths)||!Number.isFinite(input.tileW)||!Number.isFinite(input.tileH))throw new Error('Invalid stencil input.');
+ if(input.slotWidth<.3||input.slotWidth>3||input.thickness<.4||input.thickness>5||input.minWeb<.2||input.minWeb>3)throw new Error('Stencil settings are outside the supported limits.');
+ if(!Number.isInteger(input.columns)||!Number.isInteger(input.rows)||input.columns<1||input.rows<1||input.columns>20||input.rows>20)throw new Error('Invalid repeat counts.');
+ progress('Creating rounded through-slot outlines...');
+ const plate=prepareSlots(input),{W,H,slots}=plate;
+ progress('Checking slot spacing and edge rims...');
+ const spacing=spacingCheck(slots,W,H,input.minWeb),warnings=[],errors=[];
+ if(spacing.collisions)errors.push(`${spacing.collisions} slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes.`);
+ if(spacing.thinPairs)warnings.push(`${spacing.thinPairs} slot pair(s) leave less than ${input.minWeb.toFixed(2)} mm of plastic. Smallest measured slot web: ${spacing.minWeb.toFixed(2)} mm.`);
+ if(spacing.edgeMin!==null&&spacing.edgeMin+EPS<input.minWeb)warnings.push(`A positive rim near an outer edge is only ${spacing.edgeMin.toFixed(2)} mm thick. This is separate from intentional slots crossing the tile boundary.`);
+ const previewRings=slots.map(s=>s.ring);
+ const base={W,H,thickness:input.thickness,slotWidth:input.slotWidth,slotCount:slots.length,spacing,warnings,errors,previewRings,components:null,tolerance:TOL,quantization:EPS,geometryVersion:1};
+ if(errors.length)return base;
+ progress('Triangulating the perforated plate...');
+ const surface=triangulatePlate(slots,W,H,progress);base.components=surface.components;
+ if(surface.components!==1){base.errors.push(`This cut pattern separates the plate into ${surface.components} pieces. Reduce slot width or change the repeat size before printing.`);return base;}
+ progress('Extruding and validating the STL...');
+ return {...base,...extrude(surface,W,H,input.thickness),outlineRings:surface.outlineRings,area:surface.area,cells:surface.cells};
+}
+root.StencilEngine=Object.freeze({generate,roundedSlot,clipRing,spacingCheck,triangulatePlate,extrude,GRID,TOL});
+})(typeof globalThis==='undefined'?self:globalThis);
+
+</script>
+<script id="stencil-preview-source">
+/* A small local WebGL preview of the actual exported triangles, not an SVG relief. */
+(function(root){
+'use strict';
+class StencilPreview {
+ constructor(canvas){
+  this.canvas=canvas;this.gl=canvas.getContext('webgl',{antialias:true,alpha:false});this.yaw=-.32;this.pitch=.48;this.zoom=1;this.count=0;
+  if(!this.gl)return new CanvasStencilPreview(canvas);
+  const gl=this.gl;
+  const shader=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error('The 3D preview shader could not start.');return s;};
+  const vs=shader(gl.VERTEX_SHADER,`attribute vec3 position; attribute vec3 normal; uniform vec3 center; uniform vec2 angle; uniform vec3 viewScale; varying float light;
+  vec3 rotate(vec3 p){float cy=cos(angle.x),sy=sin(angle.x),cx=cos(angle.y),sx=sin(angle.y); vec3 q=vec3(cy*p.x-sy*p.y,sy*p.x+cy*p.y,p.z); return vec3(q.x,cx*q.y-sx*q.z,sx*q.y+cx*q.z);}
+  void main(){vec3 p=rotate(position-center);vec3 n=rotate(normal);light=.48+.52*max(0.,dot(normalize(n),normalize(vec3(-.3,.7,1.))));gl_Position=vec4(p*viewScale,1.);}`);
+  const fs=shader(gl.FRAGMENT_SHADER,'precision mediump float; varying float light; void main(){gl_FragColor=vec4(vec3(.27,.43,.36)*light,1.);}');
+  this.program=gl.createProgram();gl.attachShader(this.program,vs);gl.attachShader(this.program,fs);gl.linkProgram(this.program);if(!gl.getProgramParameter(this.program,gl.LINK_STATUS))throw new Error('The 3D preview could not start.');
+  gl.useProgram(this.program);this.pos=gl.createBuffer();this.normal=gl.createBuffer();
+  this.center=gl.getUniformLocation(this.program,'center');this.angle=gl.getUniformLocation(this.program,'angle');this.scale=gl.getUniformLocation(this.program,'viewScale');
+  this.positionAttr=gl.getAttribLocation(this.program,'position');this.normalAttr=gl.getAttribLocation(this.program,'normal');
+  gl.enable(gl.DEPTH_TEST);gl.enable(gl.CULL_FACE);gl.cullFace(gl.BACK);gl.clearColor(.94,.94,.91,1);
+  let drag=null;
+  canvas.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});
+  canvas.addEventListener('pointermove',e=>{if(!drag)return;this.yaw+=(e.clientX-drag[0])*.008;this.pitch=this.pitch+(e.clientY-drag[1])*.008;drag=[e.clientX,e.clientY];this.draw();});
+  const stop=()=>{drag=null;};canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
+  canvas.addEventListener('wheel',e=>{e.preventDefault();this.zoom=Math.max(.5,Math.min(5,this.zoom*Math.exp(-e.deltaY*.001)));this.draw();},{passive:false});
+  canvas.addEventListener('dblclick',()=>this.reset());
+  canvas.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','+','-'].includes(e.key)){e.preventDefault();if(e.key==='Home')return this.reset();if(e.key==='ArrowLeft')this.yaw-=.1;if(e.key==='ArrowRight')this.yaw+=.1;if(e.key==='ArrowUp')this.pitch-=.1;if(e.key==='ArrowDown')this.pitch+=.1;if(e.key==='+')this.zoom=Math.min(5,this.zoom*1.1);if(e.key==='-')this.zoom=Math.max(.5,this.zoom/1.1);this.draw();}});
+ }
+ setMesh(result){
+  const gl=this.gl,p=result.position,n=new Float32Array(p.length);this.dims=[result.W,result.H,result.thickness];this.count=p.length/3;
+  for(let i=0;i<p.length;i+=9){const ux=p[i+3]-p[i],uy=p[i+4]-p[i+1],uz=p[i+5]-p[i+2],vx=p[i+6]-p[i],vy=p[i+7]-p[i+1],vz=p[i+8]-p[i+2],v=[uy*vz-uz*vy,uz*vx-ux*vz,ux*vy-uy*vx],l=Math.hypot(...v);for(let j=0;j<3;j++)for(let k=0;k<3;k++)n[i+j*3+k]=v[k]/l;}
+  gl.bindBuffer(gl.ARRAY_BUFFER,this.pos);gl.bufferData(gl.ARRAY_BUFFER,p,gl.STATIC_DRAW);gl.bindBuffer(gl.ARRAY_BUFFER,this.normal);gl.bufferData(gl.ARRAY_BUFFER,n,gl.STATIC_DRAW);this.draw();
+ }
+ reset(){this.yaw=-.32;this.pitch=.48;this.zoom=1;this.draw();}
+ draw(){
+  if(!this.count)return;const gl=this.gl,c=this.canvas,dpr=Math.min(2,window.devicePixelRatio||1),w=Math.max(1,Math.round(c.clientWidth*dpr)),h=Math.max(1,Math.round(c.clientHeight*dpr));if(c.width!==w||c.height!==h){c.width=w;c.height=h;}gl.viewport(0,0,w,h);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(this.program);
+  const [W,H,T]=this.dims,cy=Math.cos(this.yaw),sy=Math.sin(this.yaw),cx=Math.cos(this.pitch),sx=Math.sin(this.pitch),corners=[];for(const x of [-W/2,W/2])for(const y of [-H/2,H/2])for(const z of [-T/2,T/2])corners.push([cy*x-sy*y,cx*(sy*x+cy*y)-sx*z]);const spanX=Math.max(...corners.map(p=>p[0]))-Math.min(...corners.map(p=>p[0])),spanY=Math.max(...corners.map(p=>p[1]))-Math.min(...corners.map(p=>p[1])),fit=Math.min(w/spanX,h/spanY)*.82*this.zoom;
+  gl.uniform3f(this.center,W/2,H/2,T/2);gl.uniform2f(this.angle,this.yaw,this.pitch);gl.uniform3f(this.scale,2*fit/w,2*fit/h,-1/(Math.max(W,H,T)*4));
+  gl.bindBuffer(gl.ARRAY_BUFFER,this.pos);gl.enableVertexAttribArray(this.positionAttr);gl.vertexAttribPointer(this.positionAttr,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ARRAY_BUFFER,this.normal);gl.enableVertexAttribArray(this.normalAttr);gl.vertexAttribPointer(this.normalAttr,3,gl.FLOAT,false,0,0);gl.drawArrays(gl.TRIANGLES,0,this.count);
+ }
+}
+
+/** Software fallback: the same actual triangles, flat-shaded and depth-sorted.
+ * Used when WebGL is unavailable; it does not substitute a faux SVG relief. */
+class CanvasStencilPreview {
+ constructor(canvas){
+  this.canvas=canvas;this.ctx=canvas.getContext('2d');if(!this.ctx)throw new Error('3D preview is unavailable. Top view and STL export still work.');
+  this.yaw=-.32;this.pitch=.48;this.zoom=1;this.mesh=null;this.pending=false;let drag=null;
+  canvas.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});
+  canvas.addEventListener('pointermove',e=>{if(!drag)return;this.yaw+=(e.clientX-drag[0])*.008;this.pitch=this.pitch+(e.clientY-drag[1])*.008;drag=[e.clientX,e.clientY];this.draw();});
+  canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
+  canvas.addEventListener('wheel',e=>{e.preventDefault();this.zoom=Math.max(.5,Math.min(5,this.zoom*Math.exp(-e.deltaY*.001)));this.draw();},{passive:false});
+  canvas.addEventListener('dblclick',()=>this.reset());
+  canvas.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','+','-'].includes(e.key)){e.preventDefault();if(e.key==='Home')return this.reset();if(e.key==='ArrowLeft')this.yaw-=.1;if(e.key==='ArrowRight')this.yaw+=.1;if(e.key==='ArrowUp')this.pitch-=.1;if(e.key==='ArrowDown')this.pitch+=.1;if(e.key==='+')this.zoom=Math.min(5,this.zoom*1.1);if(e.key==='-')this.zoom=Math.max(.5,this.zoom/1.1);this.draw();}});
+ }
+ reset(){this.yaw=-.32;this.pitch=.48;this.zoom=1;this.draw();}
+ setMesh(r){this.mesh=r;this.draw();}
+ draw(){if(this.pending)return;this.pending=true;requestAnimationFrame(()=>{this.pending=false;this.paint();});}
+ paint(){
+  if(!this.mesh||this.canvas.hidden)return;
+  const c=this.canvas,ctx=this.ctx,dpr=Math.min(2,window.devicePixelRatio||1),w=Math.round(c.clientWidth*dpr),h=Math.round(c.clientHeight*dpr);if(!w||!h)return;
+  if(c.width!==w)c.width=w;if(c.height!==h)c.height=h;
+  ctx.fillStyle='#efefe8';ctx.fillRect(0,0,w,h);
+  const {W,H,thickness:T,position:p}=this.mesh,cy=Math.cos(this.yaw),sy=Math.sin(this.yaw),cx=Math.cos(this.pitch),sx=Math.sin(this.pitch);
+  const rot=(x,y,z)=>{const a=cy*x-sy*y,b=sy*x+cy*y;return [a,cx*b-sx*z,sx*b+cx*z];};
+  const corners=[];for(const x of [-W/2,W/2])for(const y of [-H/2,H/2])for(const z of [-T/2,T/2])corners.push(rot(x,y,z));const spanX=Math.max(...corners.map(p=>p[0]))-Math.min(...corners.map(p=>p[0])),spanY=Math.max(...corners.map(p=>p[1]))-Math.min(...corners.map(p=>p[1])),scale=Math.min(w/spanX,h/spanY)*.82*this.zoom;
+  const faces=[];
+  for(let i=0;i<p.length;i+=9){
+   if(p[i+2]===p[i+5]&&p[i+2]===p[i+8])continue;
+   const ps=[];for(let k=0;k<3;k++)ps.push(rot(p[i+k*3]-W/2,p[i+k*3+1]-H/2,p[i+k*3+2]-T/2));
+   const [a,b,c]=ps,u=b.map((v,k)=>v-a[k]),v=c.map((v,k)=>v-a[k]),n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],len=Math.hypot(...n);
+   if(n[2]<=1e-12||len<1e-12)continue;
+   const light=.48+.52*Math.max(0,(-.3*n[0]+.7*n[1]+n[2])/(len*Math.sqrt(1.58)));
+   faces.push({ps,flat:p[i+2]===p[i+5]&&p[i+2]===p[i+8],z:(a[2]+b[2]+c[2])/3,color:`rgb(${Math.round(69*light)} ${Math.round(110*light)} ${Math.round(92*light)})`});
+  }
+  faces.sort((a,b)=>a.z-b.z);
+  ctx.lineWidth=.45*dpr;ctx.lineJoin='round';
+  const append=f=>{for(let i=0;i<3;i++){const p=f.ps[i],x=w/2+p[0]*scale,y=h/2-p[1]*scale;if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);}ctx.closePath();};
+  for(const f of faces)if(!f.flat){ctx.beginPath();append(f);ctx.fillStyle=f.color;ctx.strokeStyle=f.color;ctx.fill();ctx.stroke();}
+  // Draw the verified mesh's boundary loops, rather than thousands of
+  // coplanar triangles. This avoids both raster hairlines and giant fill paths.
+  const up=rot(0,0,1),top=up[2]>=0,n=top?up:up.map(v=>-v),light=.48+.52*Math.max(0,(-.3*n[0]+.7*n[1]+n[2])/Math.sqrt(1.58));
+  ctx.beginPath();for(const ring of this.mesh.outlineRings||[]){for(let i=0;i<ring.length;i++){const p=rot(ring[i][0]-W/2,H/2-ring[i][1],top?T/2:-T/2),x=w/2+p[0]*scale,y=h/2-p[1]*scale;if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);}ctx.closePath();}
+  ctx.fillStyle=`rgb(${Math.round(69*light)} ${Math.round(110*light)} ${Math.round(92*light)})`;ctx.fill('evenodd');
+ }
+}
+root.StencilPreview=StencilPreview;
+})(window);
+
+</script>
+<script id="stencil-ui-source">
+/* Browser-only stencil export. Geometry runs in a cancellable, self-contained
+ * Blob worker: no CDN, service, build step, upload, or account is required. */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),studio=window.SashikoStudio;
+const defaults=Object.freeze({scope:'repeat',thickness:1.4,slotWidth:.9,minWeb:.9,showWarnings:true});
+const limits={thickness:[.4,5],slotWidth:[.3,3],minWeb:[.2,3]};
+const mm=n=>Number(n).toFixed(2).replace(/\.?0+$/,'');
+const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function validate(raw){const s={...defaults};if(!raw||typeof raw!=='object')return s;for(const [k,[lo,hi]]of Object.entries(limits))if(typeof raw[k]==='number'&&Number.isFinite(raw[k]))s[k]=Math.max(lo,Math.min(hi,raw[k]));if(['repeat','panel'].includes(raw.scope))s.scope=raw.scope;if(typeof raw.showWarnings==='boolean')s.showWarnings=raw.showWarnings;return s;}
+let settings={...defaults};try{settings=validate(JSON.parse(localStorage.getItem('sashiko-stencil-v1')));}catch(_){}
+let worker=null,timer=null,generation=0,result=null,inputSnapshot=null,preview=null,view='top',busy=false,started=0;
+function persist(){try{localStorage.setItem('sashiko-stencil-v1',JSON.stringify(settings));}catch(_){}}
+function sync(){for(const key of Object.keys(limits)){ $('stencil-'+key).value=settings[key];$('stencil-'+key+'-range').value=settings[key];}$('stencil-opening').value=studio.getState().opening;$('stencil-scope').value=settings.scope;$('stencil-showWarnings').checked=settings.showWarnings;}
+function samplePath(e,a,b){
+ const out=[e.at(a)];
+ const lineDistance=(p,x,y)=>{const dx=y[0]-x[0],dy=y[1]-x[1],L=dx*dx+dy*dy,t=Math.max(0,Math.min(1,((p[0]-x[0])*dx+(p[1]-x[1])*dy)/(L||1)));return Math.hypot(p[0]-x[0]-t*dx,p[1]-x[1]-t*dy);};
+ function split(a,b,p,q,depth){const m=(a+b)/2,c=e.at(m),p1=e.at((3*a+b)/4),p3=e.at((a+3*b)/4),error=Math.max(lineDistance(c,p,q),lineDistance(p1,p,q),lineDistance(p3,p,q));if(depth<14&&(error>.0015||(b-a>.6&&e.parts.some(p=>p.kind!=='line')))){split(a,m,p,c,depth+1);split(m,b,c,q,depth+1);}else out.push(q);}
+ split(a,b,out[0],e.at(b),0);return out;
+}
+function makeInput(m=studio.getModel(),s=settings){
+ if(!m)throw new Error('The pattern is not ready.');
+ if(m.skipped||m.omitted)throw new Error('The current pattern omits some stitches because they do not fit. Resolve the pattern warnings before exporting a stencil.');
+ const tooShort=m.dashes.filter(d=>d.length<=s.slotWidth+.02);
+ if(tooShort.length)throw new Error(`${tooShort.length} stitch(es) are not longer than the selected ${mm(s.slotWidth)} mm slot width. Reduce slot width, increase target stitch length, or enlarge the repeat.`);
+ const paths=m.dashes.map(d=>samplePath(m.edges[d.edge],d.from+s.slotWidth/2,d.to-s.slotWidth/2));
+ return {tileW:m.W,tileH:m.H,columns:s.scope==='repeat'?1:m.s.columns,rows:s.scope==='repeat'?1:m.s.rows,slotWidth:s.slotWidth,thickness:s.thickness,minWeb:s.minWeb,paths,pattern:m.s.pattern,settings:{pattern:{...m.s},stencil:{...s}}};
+}
+function cancel(){generation++;if(worker){worker.terminate();worker=null;}clearTimeout(timer);busy=false;}
+function setBusy(message){busy=true;$('stencil-progress').hidden=false;$('stencil-progress-text').textContent=message;$('stencil-download').disabled=true;$('stencil-report').disabled=true;$('stencil-ready').textContent='Working locally in your browser...';}
+function issue(text,type){const p=document.createElement('p');p.className='stencil-'+type;p.textContent=text;$('stencil-checks').append(p);}
+function showError(message){busy=false;result=null;$('stencil-progress').hidden=true;$('stencil-top').replaceChildren();$('stencil-canvas').hidden=true;$('stencil-top').hidden=false;$('stencil-checks').replaceChildren();issue(message,'error');$('stencil-metrics').replaceChildren();$('stencil-ready').textContent='No STL created. Adjust the settings above.';$('stencil-download').disabled=true;$('stencil-report').disabled=true;$('stencil-ack-row').hidden=true;}
+function schedule(){cancel();result=null;$('stencil-ack').checked=false;$('stencil-ack-row').hidden=true;persist();sync();if(!$('stencil-dialog').open)return;setBusy('Preparing stencil...');timer=setTimeout(build,180);}
+async function build(){
+ cancel();const id=++generation;started=performance.now();setBusy('Creating rounded slots...');$('stencil-checks').replaceChildren();$('stencil-metrics').replaceChildren();
+ let input;
+ try{input=makeInput();inputSnapshot=input;const W=input.tileW*input.columns,H=input.tileH*input.rows;$('stencil-dimensions').textContent=`${mm(W)} x ${mm(H)} x ${mm(input.thickness)} mm`;}catch(e){showError(e.message);return;}
+ const finished=r=>{if(id!==generation)return;worker?.terminate();worker=null;result=r;result.elapsedMs=Math.round(performance.now()-started);busy=false;$('stencil-progress').hidden=true;renderResult();};
+ const failed=e=>{if(id!==generation)return;worker?.terminate();worker=null;showError(e.message||String(e));};
+ try{
+  const code=$('stencil-engine-source').textContent+'\nself.onmessage=function(e){try{const r=StencilEngine.generate(e.data,function(text){self.postMessage({type:"progress",text:text});});const t=[];if(r.buffer)t.push(r.buffer);if(r.position)t.push(r.position.buffer);self.postMessage({type:"done",result:r},t);}catch(error){self.postMessage({type:"error",message:error.message||String(error)});}};';
+  const url=URL.createObjectURL(new Blob([code],{type:'text/javascript'}));
+  try{worker=new Worker(url);}finally{URL.revokeObjectURL(url);}
+  worker.onmessage=e=>{if(id!==generation)return;const d=e.data;if(d.type==='progress')$('stencil-progress-text').textContent=d.text;else if(d.type==='done')finished(d.result);else failed(new Error(d.message));};
+  worker.onerror=e=>{e.preventDefault();failed(new Error('The geometry worker could not run. Your browser may be blocking local workers. Open the app from a normal website or allow local JavaScript. '+(e.message||'')));};
+  worker.postMessage(input);
+ }catch(e){
+  // Main-thread fallback for older/restricted browsers. Files remain fully local.
+  await new Promise(resolve=>setTimeout(resolve,30));if(id!==generation)return;
+  try{finished(StencilEngine.generate(input));}catch(error){failed(error);}
+ }
+}
+function drawTop(){if(!result)return;const r=result,W=r.W,H=r.H,id='stencil-cut-mask',path=ring=>'M'+ring.map(p=>p.map(v=>v.toFixed(4)).join(' ')).join('L')+'Z';
+ const holes=r.previewRings.map(p=>`<path d="${path(p)}"/>`).join('');
+ const markers=settings.showWarnings?r.spacing.marks.map(([a,b])=>`<path d="M${a.join(' ')}L${b.join(' ')}"/><circle cx="${(a[0]+b[0])/2}" cy="${(a[1]+b[1])/2}" r="${Math.max(.45,Math.min(W,H)/130)}"/>`).join(''):'';
+ $('stencil-top').innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}mm" height="${H}mm" viewBox="0 0 ${W} ${H}" role="img" aria-label="Perforated stencil top view. Dark areas are plastic and light areas are through slots."><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="white"/><g fill="black">${holes}</g></mask></defs><rect width="${W}" height="${H}" fill="white"/><rect width="${W}" height="${H}" fill="#315e51" mask="url(#${id})"/><g stroke="#be513c" stroke-width="${Math.max(.10,Math.min(W,H)/380)}" fill="none">${markers}</g></svg>`;
+}
+function updateDownload(){const valid=!!(result?.buffer&&!result.errors.length&&!busy);$('stencil-download').disabled=!valid||(result.warnings.length>0&&!$('stencil-ack').checked);$('stencil-report').disabled=!result||busy;$('stencil-ready').textContent=busy?'Checking geometry...':!valid?'Resolve the geometry errors to enable STL export.':result.warnings.length&&!$('stencil-ack').checked?'Review and acknowledge the thin-plastic warnings before exporting.':`${result.triangles.toLocaleString()} triangles / ${(result.buffer.byteLength/1048576).toFixed(2)} MB / millimeters`;}
+function renderResult(){
+ if(!result)return;const r=result;drawTop();$('stencil-checks').replaceChildren();
+ $('stencil-metrics').innerHTML=`<div class="stencil-metric"><span>SLOT CUTOUTS</span><strong>${r.slotCount.toLocaleString()}</strong></div><div class="stencil-metric"><span>MIN. SLOT WEB</span><strong>${r.spacing.minWebExact?'':'&ge; '}${mm(r.spacing.minWeb)} mm</strong></div><div class="stencil-metric"><span>THICKNESS</span><strong>${mm(r.thickness)} mm</strong></div>`;
+ for(const text of r.errors)issue(text,'error');for(const text of r.warnings)issue(text,'warning');
+ if(r.buffer)issue('One connected plate. Closed mesh, consistent face orientation, and volume checks passed. No floor inside the slots.','ok');
+ if(r.spacing.edgeCuts){const p=document.createElement('p');p.className='hint';p.textContent=`${r.spacing.edgeCuts} slot cutout(s) meet the plate boundary. These are intentional seam continuations, not mesh defects.`;$('stencil-checks').append(p);}
+ $('stencil-ack-row').hidden=!r.warnings.length||!r.buffer;$('stencil-ack').checked=false;
+ if(r.buffer){try{if(!preview)preview=new StencilPreview($('stencil-canvas'));preview.setMesh(r);}catch(e){preview=null;if(view==='3d')issue(e.message,'warning');}}
+ if(!r.buffer&&view==='3d')view='top';setView(view);updateDownload();
+}
+function setView(mode){view=mode;document.querySelectorAll('[data-stencil-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stencilView===mode)));const is3d=mode==='3d'&&result?.buffer&&preview;$('stencil-top').hidden=!!is3d;$('stencil-canvas').hidden=!is3d;$('stencil-showWarnings').disabled=!!is3d;$('stencil-preview-caption').textContent=is3d?'Actual STL mesh. Drag to rotate; scroll to zoom; double-click to reset.':mode==='3d'&&!preview?'3D preview is unavailable; top view and STL export still work.':'Dark = printed plastic. Openings = no material at any height.';if(is3d)requestAnimationFrame(()=>preview.draw());}
+function download(data,name,type){const url=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+function report(){if(!result)return null;const {position,buffer,previewRings,outlineRings,...summary}=result;return {app:'Sashiko Pattern Studio',version:'1.1',units:'mm',description:'Flat stencil with rounded through-slots. No bevel or floor.',createdAt:new Date().toISOString(),settings:inputSnapshot?.settings,...summary};}
+function open(){studio.setState({});if(!$('stencil-dialog').open)$('stencil-dialog').showModal();sync();schedule();}
+$('export-stencil').addEventListener('click',open);$('stencil-close').addEventListener('click',()=>{cancel();$('stencil-dialog').close();});$('stencil-dialog').addEventListener('cancel',cancel);$('stencil-dialog').addEventListener('close',()=>{cancel();});
+$('stencil-scope').addEventListener('change',()=>{settings.scope=$('stencil-scope').value;schedule();});
+$('stencil-opening').addEventListener('change',()=>{const n=$('stencil-opening').valueAsNumber;studio.setState({opening:Number.isFinite(n)?Math.max(.2,Math.min(6,n)):1});});
+for(const [k,[lo,hi]]of Object.entries(limits)){
+ const el=$('stencil-'+k),range=$('stencil-'+k+'-range');
+ el.addEventListener('input',()=>{const n=el.valueAsNumber;if(!Number.isFinite(n)||n<lo||n>hi){cancel();result=null;$('stencil-download').disabled=true;$('stencil-ready').textContent=`Enter a value between ${lo} and ${hi} mm.`;return;}settings[k]=n;range.value=n;schedule();});
+ el.addEventListener('change',()=>{settings[k]=Number.isFinite(el.valueAsNumber)?Math.max(lo,Math.min(hi,el.valueAsNumber)):defaults[k];schedule();});
+ range.addEventListener('input',()=>{settings[k]=Number(range.value);el.value=range.value;schedule();});
+}
+$('stencil-showWarnings').addEventListener('change',()=>{settings.showWarnings=$('stencil-showWarnings').checked;persist();drawTop();});
+$('stencil-ack').addEventListener('change',updateDownload);
+$('stencil-defaults').addEventListener('click',()=>{settings={...defaults};schedule();});
+document.querySelectorAll('[data-stencil-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.stencilView)));
+$('stencil-download').addEventListener('click',()=>{if(!result?.buffer||$('stencil-download').disabled)return;download(result.buffer,`sashiko-${inputSnapshot.pattern}-${settings.scope}-${mm(result.W)}x${mm(result.H)}x${mm(result.thickness)}mm.stl`,'model/stl');$('stencil-ready').textContent='STL saved. Import as millimeters and review the sliced toolpaths.';});
+$('stencil-report').addEventListener('click',()=>{if(result)download(JSON.stringify(report(),null,2),'sashiko-stencil-build-report.json','application/json');});
+window.addEventListener('sashiko-pattern-change',()=>{if($('stencil-dialog').open)schedule();});
+window.addEventListener('resize',()=>{if(preview&&view==='3d')preview.draw();});
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(()=>{if(preview&&view==='3d')preview.draw();}).observe($('stencil-viewport'));
+window.SashikoStencil=Object.freeze({defaults,validate,makeInput,getSettings:()=>({...settings}),setSettings:raw=>{settings=validate(raw);sync();persist();if($('stencil-dialog').open)schedule();},open,getResult:()=>result,getReport:report,isBusy:()=>busy});
+sync();
+})();
+
+</script>
+</body>
+</html>
