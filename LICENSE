@@ -1,0 +1,136 @@
+SashikoStudio License
+PolyForm Noncommercial 1.0.0 with Commercial Output Exception
+Version 1.0 — October 7, 2026
+
+Copyright (c) 2026 ACB-prgm
+
+BASE LICENSE
+
+Except as expressly modified by the Additional Permission below, SashikoStudio
+(the "Software") is licensed under the PolyForm Noncommercial License 1.0.0:
+
+https://polyformproject.org/licenses/noncommercial/1.0.0
+
+The PolyForm Noncommercial License 1.0.0 is incorporated into these terms by
+reference.
+
+Required Notice: Copyright (c) 2026 ACB-prgm. SashikoStudio is licensed under
+the PolyForm Noncommercial License 1.0.0 with the Commercial Output Exception
+set out below.
+
+
+ADDITIONAL PERMISSION — COMMERCIAL OUTPUT EXCEPTION
+
+The licensor grants the following additional permission notwithstanding the
+noncommercial-use limitation in the PolyForm Noncommercial License 1.0.0.
+
+1. Commercial Use to Create Output
+
+You may use the Software, including in a business, professional practice, or
+other commercial activity, for the purpose of creating Output.
+
+For example, you may use SashikoStudio to create designs or files for yourself,
+for a client, for products you sell, or as part of a commercial design or
+manufacturing workflow.
+
+This permission applies to use of the Software to create Output. It does not
+grant permission to commercialize the Software itself.
+
+2. Output Rights
+
+Subject to the Third-Party Rights section below, you may use, copy, modify,
+distribute, publish, sublicense, manufacture from, and sell Output for any
+purpose, including commercial purposes, without payment of royalties or a
+requirement to attribute SashikoStudio.
+
+You may also use Output to make, distribute, and sell physical products,
+including stitched works, printed templates, guides, tools, patterns, and
+3D-printed objects.
+
+To the extent that any copyright or other intellectual-property rights
+controlled by the licensor are embodied in Output, the licensor grants you a
+worldwide, perpetual, irrevocable, royalty-free license to exercise those
+rights as necessary for the permissions above.
+
+3. Definition of Output
+
+"Output" means a design, pattern, file, document, model, image, measurement,
+toolpath, or other result produced through the ordinary use of the Software.
+
+Output includes, without limitation, exported SVG, STL, PDF, image, pattern,
+template, and similar files.
+
+Output does not include:
+
+(a) the Software itself;
+(b) the Software's source code or object code;
+(c) a copy or substantial portion of the Software's user interface;
+(d) documentation or other repository contents copied independently of an
+    Output; or
+(e) source assets distributed with the Software except to the extent those
+    assets are represented or incorporated in an Output produced through
+    ordinary use of the Software.
+
+4. No Commercialization of the Software
+
+The Additional Permission does not permit you to use the Software itself as a
+commercial product or service.
+
+Without a separate commercial license from the licensor, you may not:
+
+(a) sell, rent, lease, license, or sublicense the Software or a modified version
+    of the Software;
+
+(b) commercially redistribute, repackage, rebrand, or white-label the Software
+    or a modified version of the Software;
+
+(c) incorporate the Software's source code or object code into a product or
+    service that is sold, licensed, monetized, or otherwise provided for
+    commercial advantage;
+
+(d) charge users for access to the Software or to a hosted, embedded, or
+    modified version of the Software;
+
+(e) operate an advertising-supported, sponsored, subscription-based, or
+    otherwise monetized service whose product includes access to or use of the
+    Software; or
+
+(f) distribute a modified version of the Software for a commercial purpose.
+
+For clarity, charging for Output, for physical goods made from Output, or for
+design services in which you use the Software to create Output is expressly
+permitted and is not considered commercialization of the Software under this
+section.
+
+5. Noncommercial Software Uses
+
+Nothing in this Additional Permission reduces the permissions already granted
+by the PolyForm Noncommercial License 1.0.0. Noncommercial use, modification,
+and distribution of the Software remain governed by that license.
+
+6. Third-Party Rights
+
+These terms grant only rights that the licensor has authority to grant. They do
+not grant rights in third-party fonts, libraries, trademarks, imported artwork,
+user-supplied content, or other third-party materials that may be used with or
+included in the Software or an Output. Those materials remain subject to their
+applicable terms and rights.
+
+7. No Claim to User Content
+
+The licensor does not claim ownership of content that you create or import
+merely because you use the Software. The permissions in this license concern
+only rights controlled by the licensor.
+
+8. Conflict
+
+If this Additional Permission conflicts with the PolyForm Noncommercial License
+1.0.0, this Additional Permission controls only to the extent necessary to
+permit the activities expressly described above. All other terms of the
+PolyForm Noncommercial License 1.0.0 remain in effect.
+
+9. Separate Commercial Licensing
+
+The licensor may offer separate commercial licenses for uses of the Software
+that are not permitted by these terms. No such separate license is implied by
+this file.
