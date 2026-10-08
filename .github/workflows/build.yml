@@ -38,6 +38,7 @@ jobs:
           python tests/test_build.py
           node tests/test_pattern_helpers.js
           node tests/test_layout_stencil.js
+          node tests/test_solid_junctions.js
       - name: Check committed runtime on pull requests
         if: github.event_name == 'pull_request'
         run: git diff --exit-code -- index.html
