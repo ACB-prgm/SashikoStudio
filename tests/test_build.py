@@ -23,6 +23,8 @@ assert len(ids) == len(set(ids)), 'pattern ids must be unique'
 result = subprocess.run([sys.executable, str(ROOT / 'build.py')], cwd=ROOT, check=True, text=True, capture_output=True)
 html = (ROOT / 'index.html').read_text(encoding='utf-8')
 assert '/* PATTERN_MODULES */' not in html
+assert '/* PATTERN_HELPERS */' not in html
+assert 'function patternGraph(' in html
 for path in files:
     marker = f'// BEGIN BUNDLED PATTERN: src/patterns/{path.name}'
     assert marker in html, f'{path.name}: missing from built index.html'

@@ -51,6 +51,10 @@ def build() -> None:
     pattern_app = read_safe(SRC / 'pattern-app.js')
     if pattern_app.count(PATTERN_MARKER) != 1:
         raise RuntimeError(f'pattern-app.js must contain exactly one {PATTERN_MARKER!r} marker.')
+    helper_marker = '/* PATTERN_HELPERS */'
+    if pattern_app.count(helper_marker) != 1:
+        raise RuntimeError('pattern-app.js must contain exactly one pattern helper marker.')
+    pattern_app = pattern_app.replace(helper_marker, read_safe(SRC / 'pattern-helpers.js'))
     pattern_app = pattern_app.replace(PATTERN_MARKER, pattern_modules)
 
     html = (SRC / 'template.html').read_text(encoding='utf-8')

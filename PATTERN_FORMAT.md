@@ -254,3 +254,49 @@ validates required metadata and duplicate IDs.
 For a new family of geometry that cannot be expressed with the existing
 primitives, extend the shared geometry engine first rather than implementing an
 export-specific workaround inside one pattern file.
+
+
+## Shared geometry helpers (reference-library update)
+
+The build now includes `src/pattern-helpers.js` before the discovered designs.
+Keep that file and the updated `build.py` when copying a new pattern into a repo.
+
+### `patternLines(points, route = '')`
+
+Returns one non-periodic engine edge for each consecutive pair of points. It
+preserves corners as junctions rather than treating a sharp turn as a smooth
+curve. Repeat the first point at the end to close a polygon; do not add duplicate
+consecutive points.
+
+```js
+const edges = patternLines([[0, 0], [W / 2, 0], [W / 2, W / 2]], 'step');
+```
+
+### `patternGraph(W, H, edges)`
+
+Returns `{W, H, edges}` with intersections split and duplicate geometry removed,
+including intersections with neighboring translated repeats. Pass only
+single-primitive, non-periodic `edge(line(...))` or `edge(arc(...))` paths.
+
+```js
+return patternGraph(W, W, [
+  edge(line([0, 0], [W, W]), 'diagonal-a'),
+  edge(line([0, W], [W, 0]), 'diagonal-b')
+]);
+```
+
+The returned segments have shared endpoints at the center crossing; the stitch
+engine can therefore reserve its junction opening there. Without splitting,
+simply drawing two crossing paths does not make the engine discover a junction.
+
+The helper does not support cubic intersection solving, generic multi-part paths
+or `periodic: true` paths. Split those explicitly and return `{W,H,edges}`
+directly. It is not a proof that an arbitrary input is a valid intended repeat:
+author and inspect a complete periodic geometry, not an arbitrary image crop.
+Deduplication uses a small tolerance relative to repeat size; avoid nearly
+coincident geometry and tiny accidental sliver edges.
+
+`reference` is optional descriptive metadata containing the supplied source
+filename. It does not load an image or fetch any external resource. Refer to
+[PATTERN_LIBRARY.md](PATTERN_LIBRARY.md) for the imported references, inferred
+curve proportions, omitted reference, example settings and validation scope.

@@ -1,0 +1,156 @@
+{
+  "cases": [
+    {
+      "pattern": "interlaced",
+      "layout": "repeat",
+      "triangles": 20636,
+      "volume": 1719.6343353428583,
+      "ms": 152,
+      "errors": [],
+      "warnings": [
+        "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.35 mm.",
+        "A positive rim near an outer edge is only 0.44 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "interlaced",
+      "layout": "2x2",
+      "triangles": 76152,
+      "volume": 6878.537289760727,
+      "ms": 306,
+      "errors": [],
+      "warnings": [
+        "96 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.35 mm.",
+        "A positive rim near an outer edge is only 0.44 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "grid",
+      "layout": "repeat",
+      "triangles": 8388,
+      "volume": 3160.114827750397,
+      "ms": 38,
+      "errors": [],
+      "warnings": [
+        "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm."
+      ]
+    },
+    {
+      "pattern": "grid",
+      "layout": "2x2",
+      "triangles": 27680,
+      "volume": 12640.460079184566,
+      "ms": 113,
+      "errors": [],
+      "warnings": [
+        "16 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm."
+      ]
+    },
+    {
+      "pattern": "diamonds",
+      "layout": "repeat",
+      "triangles": 10816,
+      "volume": 3131.8684370538167,
+      "ms": 37,
+      "errors": [],
+      "warnings": [
+        "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+        "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "diamonds",
+      "layout": "2x2",
+      "triangles": 36016,
+      "volume": 12527.473725801865,
+      "ms": 110,
+      "errors": [],
+      "warnings": [
+        "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+        "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "circles",
+      "layout": "repeat",
+      "triangles": 18288,
+      "volume": 3101.2378148724874,
+      "ms": 85,
+      "errors": [],
+      "warnings": [
+        "8 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.69 mm.",
+        "A positive rim near an outer edge is only 0.06 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "circles",
+      "layout": "2x2",
+      "triangles": 65040,
+      "volume": 12404.951164218854,
+      "ms": 220,
+      "errors": [],
+      "warnings": [
+        "48 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.13 mm.",
+        "A positive rim near an outer edge is only 0.06 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "chevrons",
+      "layout": "repeat",
+      "triangles": 4496,
+      "volume": 1575.6979944449263,
+      "ms": 17,
+      "errors": [],
+      "warnings": [
+        "1 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.80 mm.",
+        "A positive rim near an outer edge is only 0.40 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "chevrons",
+      "layout": "2x2",
+      "triangles": 14864,
+      "volume": 6302.791954124501,
+      "ms": 44,
+      "errors": [],
+      "warnings": [
+        "6 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.80 mm.",
+        "A positive rim near an outer edge is only 0.40 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "waves",
+      "layout": "repeat",
+      "triangles": 5184,
+      "volume": 1254.0966286308317,
+      "ms": 15,
+      "errors": [],
+      "warnings": [
+        "A positive rim near an outer edge is only 0.47 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "waves",
+      "layout": "2x2",
+      "triangles": 17568,
+      "volume": 5016.386513118802,
+      "ms": 55,
+      "errors": [],
+      "warnings": [
+        "A positive rim near an outer edge is only 0.47 mm thick. This is separate from intentional slots crossing the tile boundary."
+      ]
+    },
+    {
+      "pattern": "interlaced",
+      "layout": "4x6",
+      "triangles": 437736,
+      "ms": 1944,
+      "watertight": true
+    }
+  ],
+  "collisionBlocked": true,
+  "detachedPlateBlocked": true,
+  "capsuleAreaError": 0.005388432351949746,
+  "emptyBlocked": true,
+  "oversizeBlocked": true
+}

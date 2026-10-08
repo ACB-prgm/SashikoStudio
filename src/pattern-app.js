@@ -61,6 +61,8 @@ function registerPattern(def) {
  PATTERNS[id]=Object.freeze({...def,id,order});
 }
 
+/* PATTERN_HELPERS */
+
 /* PATTERN_MODULES */
 
 if(!Object.hasOwn(PATTERNS,DEFAULTS.pattern))throw new Error(`Default pattern '${DEFAULTS.pattern}' is not registered.`);
@@ -88,6 +90,24 @@ function buildModel(raw){
   // Rounded caps are inset later. This also separates arms at acute angles.
   const separation=Math.min(.2,s.opening/3),angleClearance=(s.weight+separation)/(2*Math.sin(Math.max(.08,angle)/2))-s.weight/2;
   n.clearance=Math.max(s.opening/2,angleClearance);
+  // Parallel tangents on different curves do not stay parallel: they diverge
+  // quadratically. A straight-ray estimate would unnecessarily erase short
+  // intervals between the seigaiha inner-wave contacts and the wave tips.
+  if(angle<.15 && n.arms.some(a=>edges[a.ei].parts.some(p=>p.kind!=='line'))) {
+    const offsetAt=(arm,d)=>{const e=edges[arm.ei],p=e.at(arm.end?e.L-d:d),q=arm.end?e.p1:e.p0;return [p[0]-q[0],p[1]-q[1]];};
+    const separated=c=>{
+      const d=c+s.weight/2, points=n.arms.map(a=>offsetAt(a,d));
+      for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++)if(hypot(points[i],points[j])<s.weight+separation-1e-9)return false;
+      return true;
+    };
+    let lo=s.opening/2, hi=lo;
+    const limit=Math.min(...n.arms.map(a=>edges[a.ei].L))-s.weight/2-.01, step=Math.max(.025,s.weight/4);
+    while(hi<limit&&!separated(hi)){lo=hi;hi=Math.min(limit,hi+step);}
+    if(hi<=limit&&separated(hi)){
+      for(let k=0;k<24;k++){const mid=(lo+hi)/2;if(separated(mid))hi=mid;else lo=mid;}
+      n.clearance=Math.max(s.opening/2,hi);
+    }
+  }
   for(const a of n.arms)edges[a.ei][a.end?'endClear':'startClear']=n.clearance;
  }
  const q=s.ratioA/s.ratioB,targetGap=s.stitch/q,dashes=[],lengths=[],gaps=[],fits=[],warnings=[];let skipped=0,omitted=0;

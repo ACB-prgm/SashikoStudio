@@ -57,7 +57,7 @@
   <div class="notices" id="notices" role="status"></div>
   <div class="export-bar"><div class="export-buttons"><button class="button primary" id="export-tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1v9m-3-3 3 3 3-3M2 11v3h12v-3"/></svg>Repeat SVG</button><button class="button" id="export-panel">Panel SVG</button><button class="button" id="print-panel">Print panel</button><button class="button stencil-launch" id="export-stencil">Stencil / STL</button></div></div><div class="export-caption" id="export-caption">Black on white. True millimeter dimensions. Preview guides never export.</div>
   <details class="notes"><summary>How the rhythm and repeats work</summary><p><strong>Geometry first.</strong> Each pattern is a periodic network of complete lines and curves. The interlaced design is a geometric reconstruction of your reference, not a crop of the old image. Its rectangular repeat contains two staggered rows.</p><p><strong>Stitches second.</strong> The engine finds shared junctions, reserves clear space, and fits a whole number of stitches along each interval. Interior stitch-to-gap ratios are preserved; stitch length can change slightly from interval to interval. Junction gaps are intentional exceptions. The actual range above is the one to use.</p><p><strong>Edges are not stopping points.</strong> Full stitched curves are translated across the boundaries before the output is clipped. Stitch spacing is never restarted merely because it reaches an edge. Wave rows fit a whole number of stitch-and-gap periods to one wavelength.</p><p><strong>The tile's box is part of the repeat.</strong> Repeat the exported SVG at its exact document width and height, with no spacing, mirroring, or "crop to artwork." Some curves and stitches should be cut by the edge: the next tile completes them. Cropping the SVG tightly to its visible black marks would break the repeat.</p><p><strong>Front-side design, not an automatic sewing route.</strong> This app does not choose stitch order, optimize back-side carries, or estimate skein length. A gap at a junction does not mean you need to cut the thread. Plan how to traverse the continuous geometry before stitching.</p><p><strong>Print scale.</strong> Use 100% / actual size, turn off browser headers and footers, and measure the 50 mm ruler. PDF saving is available through your browser's print dialog. SVGs retain millimeter dimensions, but importing applications can rescale them.</p><p><strong>STL stencil export.</strong> The stencil tool turns each stitch into a rounded through-slot, then extrudes the remaining plastic as a flat plate. Slot width is separate from SVG line weight. Minimum plastic spacing is checked, not silently repaired. Thin areas require acknowledgement; touching slots, detached pieces, or failed mesh checks block export. There is no floor or Z bevel. View both sides in your slicer and test a small print before making a large template.</p><p><strong>About the style.</strong> These are adjustable design choices, not universal sashiko requirements. See <a href="https://upcyclestitches.com/sashiko-rules/" target="_blank" rel="noopener noreferrer">Atsushi Futatsuya's discussion of sashiko rules</a>. Implementation references: <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/pattern" target="_blank" rel="noopener noreferrer">SVG repeat units</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@page" target="_blank" rel="noopener noreferrer">print pages</a>. These optional links are the only external resources; the app itself makes no network requests.</p></details>
-  <div class="footer"><span>Made of lines, not pixels.</span><span>v1.1 / SVG + STL / offline</span></div>
+  <div class="footer"><span>Made of lines, not pixels.</span><span>v1.2 / SVG + STL / offline</span></div>
  </section>
 </main>
 <dialog id="stencil-dialog" aria-labelledby="stencil-title">
@@ -152,6 +152,130 @@ function registerPattern(def) {
  PATTERNS[id]=Object.freeze({...def,id,order});
 }
 
+/** Shared authoring helpers. All coordinates and tolerances are in mm.
+ * These build continuous geometry, never stitches or stencil slots.
+ * patternGraph splits LINE / CIRCULAR ARC crossings, including translated
+ * neighbors, then removes coincident segments. Cubics must be split by authors.
+ */
+function patternLines(points, route = '') {
+  return points.slice(1).map((p, i) => edge(line(points[i], p), route));
+}
+function patternGraph(W, H, input) {
+  const eps = Math.min(W, H) * 1e-8;
+  const cross = (a, b) => a[0] * b[1] - a[1] * b[0];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1]];
+  const shifted = (p, x, y) => [p[0] + x, p[1] + y];
+  function moved(p, x, y) {
+    if (p.kind === 'line') return line(shifted(p.p0, x, y), shifted(p.p1, x, y));
+    if (p.kind === 'arc') return arc(shifted(p.c, x, y), p.r, p.a0, p.a1);
+    throw new Error('patternGraph supports lines and circular arcs only. Split other curves explicitly.');
+  }
+  function canonical(p) {
+    const m = p.at(p.L / 2);
+    return moved(p, -Math.floor((m[0] + eps) / W) * W, -Math.floor((m[1] + eps) / H) * H);
+  }
+  function key(p) {
+    const pts = [0, .25, .5, .75, 1].map(t => p.at(p.L * t).map(x => Math.round(x / eps)).join(','));
+    const a = pts.join(';'), b = pts.reverse().join(';');
+    return a < b ? a : b;
+  }
+  const raw = [], seen = new Set();
+  for (const e of input) {
+    if (!e.parts || e.parts.length !== 1 || e.periodic) throw new Error('patternGraph expects single-primitive, non-periodic edges.');
+    if (e.L <= eps) continue;
+    const p = canonical(e.parts[0]), k = key(p);
+    if (!seen.has(k)) { seen.add(k); raw.push({p, route:e.route}); }
+  }
+  // Return a parameter on this finite primitive, not on its supporting circle.
+  function parameter(p, v) {
+    if (p.kind === 'line') {
+      const d = sub(p.p1, p.p0), z = sub(v, p.p0), L2 = p.L * p.L;
+      const t = (z[0] * d[0] + z[1] * d[1]) / L2;
+      return t >= -1e-8 && t <= 1 + 1e-8 && Math.abs(cross(d, z)) <= eps * p.L * 4 ? clamp(t, 0, 1) : null;
+    }
+    if (Math.abs(hypot(v, p.c) - p.r) > eps * 4) return null;
+    const span = p.a1 - p.a0, a = Math.atan2(v[1] - p.c[1], v[0] - p.c[0]);
+    for (let k = -3; k <= 3; k++) {
+      const t = (a + k * TAU - p.a0) / span;
+      if (t >= -1e-8 && t <= 1 + 1e-8) return clamp(t, 0, 1);
+    }
+    return null;
+  }
+  function intersections(a, b) {
+    if (a.kind === 'line' && b.kind === 'line') {
+      const u = sub(a.p1, a.p0), v = sub(b.p1, b.p0), d = sub(b.p0, a.p0), den = cross(u, v);
+      if (Math.abs(den) <= eps * (a.L + b.L)) return [a.p0, a.p1, b.p0, b.p1];
+      const t = cross(d, v) / den;
+      return [lerp(a.p0, a.p1, t)];
+    }
+    if (a.kind === 'arc' && b.kind === 'arc') {
+      const d = hypot(a.c, b.c);
+      if (d < eps) return Math.abs(a.r - b.r) < eps ? [a.p0, a.p1, b.p0, b.p1] : [];
+      if (d > a.r + b.r + eps || d < Math.abs(a.r - b.r) - eps) return [];
+      const x = (a.r*a.r - b.r*b.r + d*d) / (2*d), h2 = a.r*a.r - x*x;
+      if (h2 < -eps * Math.max(a.r, b.r)) return [];
+      const h = Math.sqrt(Math.max(0, h2)), u = sub(b.c, a.c).map(v => v/d), m = shifted(a.c, x*u[0], x*u[1]);
+      return [[m[0]-h*u[1], m[1]+h*u[0]], [m[0]+h*u[1], m[1]-h*u[0]]];
+    }
+    const l = a.kind === 'line' ? a : b, c = a.kind === 'arc' ? a : b;
+    const v = sub(l.p1, l.p0), z = sub(l.p0, c.c), A = l.L*l.L;
+    const B = 2 * (v[0]*z[0] + v[1]*z[1]), C = z[0]*z[0] + z[1]*z[1] - c.r*c.r, D = B*B - 4*A*C;
+    if (D < -eps * A) return [];
+    const root = Math.sqrt(Math.max(0, D));
+    return [(-B-root)/(2*A), (-B+root)/(2*A)].map(t => lerp(l.p0, l.p1, t));
+  }
+  const out = [], emitted = new Set();
+  for (let i = 0; i < raw.length; i++) {
+    const {p:a, route} = raw[i], cuts = [0, 1], A = a.bounds;
+    for (let j = 0; j < raw.length; j++) {
+      const b0 = raw[j].p, B = b0.bounds;
+      const xmin = Math.ceil((A[0]-B[2]-eps)/W), xmax = Math.floor((A[2]-B[0]+eps)/W);
+      const ymin = Math.ceil((A[1]-B[3]-eps)/H), ymax = Math.floor((A[3]-B[1]+eps)/H);
+      for (let x=xmin; x<=xmax; x++) for (let y=ymin; y<=ymax; y++) {
+        if (i===j && x===0 && y===0) continue;
+        const b = moved(b0, x*W, y*H);
+        for (const v of intersections(a,b)) {
+          const t = parameter(a,v);
+          if (t !== null && parameter(b,v) !== null) cuts.push(t);
+        }
+      }
+    }
+    cuts.sort((a,b)=>a-b);
+    const unique = cuts.filter((t,i)=>!i || (t-cuts[i-1])*a.L>eps*4);
+    for (let k=1; k<unique.length; k++) {
+      const u=unique[k-1], v=unique[k];
+      if ((v-u)*a.L<=eps*4) continue;
+      const part = canonical(a.kind==='line' ? line(a.at(u*a.L),a.at(v*a.L)) : arc(a.c,a.r,a.a0+(a.a1-a.a0)*u,a.a0+(a.a1-a.a0)*v));
+      const id = key(part);
+      if (!emitted.has(id)) { emitted.add(id); out.push(edge(part,route)); }
+    }
+  }
+  return {W,H,edges:out};
+}
+
+
+// BEGIN BUNDLED PATTERN: src/patterns/asanoha.js
+/** Reconstructed continuous geometry from 02_L-1003_asanoha.jpg. No border or labels. */
+registerPattern({
+  id: "asanoha",
+  order: 102,
+  name: "Asanoha",
+  note: "Triangular hemp-leaf geometry. Each triangle connects its vertices to its center.",
+  reference: "02_L-1003_asanoha.jpg",
+  aspect: 1 / Math.sqrt(3),
+  build(W) {
+    const H=W/Math.sqrt(3), h=W/2, E=[];
+    const faces=[[[0,0],[0,H],[h,H/2]],[[0,0],[h,-H/2],[h,H/2]],[[h,H/2],[h,1.5*H],[W,H]],[[h,H/2],[W,0],[W,H]]];
+    for(const t of faces){
+      E.push(...patternLines([...t,t[0]],'triangular-grid'));
+      const c=[0,1].map(k=>t.reduce((s,p)=>s+p[k],0)/3);
+      for(const p of t) E.push(edge(line(c,p),'leaf-ray'));
+    }
+    return patternGraph(W,H,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/asanoha.js
+
 // BEGIN BUNDLED PATTERN: src/patterns/chevrons.js
 registerPattern({
   id: 'chevrons',
@@ -165,6 +289,24 @@ registerPattern({
   }
 });
 // END BUNDLED PATTERN: src/patterns/chevrons.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/chidori-tsunagi.js
+/** Reconstructed continuous geometry from 15_293_chidori-tsunagi.jpg. No border or labels. */
+registerPattern({
+  id: "chidori-tsunagi",
+  order: 115,
+  name: "Chidori tsunagi",
+  note: "Long scalloped paths join a sparse grid of crossings. Smooth semicircle joins do not restart the stitch rhythm.",
+  reference: "15_293_chidori-tsunagi.jpg",
+  aspect: 1,
+  build(W) {
+    const R=W/4;
+    const h=path([arc([R,0],R,Math.PI,0),arc([3*R,0],R,Math.PI,TAU)],{route:'horizontal-scallop'});
+    const v=path([arc([0,R],R,-Math.PI/2,-3*Math.PI/2),arc([0,3*R],R,-Math.PI/2,Math.PI/2)],{route:'vertical-scallop'});
+    return {W,H:W,edges:[h,v]};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/chidori-tsunagi.js
 
 // BEGIN BUNDLED PATTERN: src/patterns/circles.js
 registerPattern({
@@ -196,6 +338,30 @@ registerPattern({
 });
 // END BUNDLED PATTERN: src/patterns/diamonds.js
 
+// BEGIN BUNDLED PATTERN: src/patterns/fundou-tsunagi.js
+/** Reconstructed continuous geometry from 13_211_fundou-tsunagi.jpg. No border or labels. */
+registerPattern({
+  id: "fundou-tsunagi",
+  order: 113,
+  name: "Fundou tsunagi",
+  note: "Linked counterweight curves, built from alternating quarter circles on a staggered lattice.",
+  reference: "13_211_fundou-tsunagi.jpg",
+  aspect: 1,
+  build(W) {
+    const g=W/2;
+    // The two node types have opposite curvature. Reusing one node type
+    // would create scallop rows instead of the reference's crossing S-curves.
+    const E=[
+      edge(arc([g,0],g,Math.PI,Math.PI/2),'down-curve'),
+      edge(arc([0,-g],g,Math.PI/2,0),'up-curve'),
+      edge(arc([g,2*g],g,-Math.PI/2,0),'down-curve'),
+      edge(arc([2*g,g],g,Math.PI,1.5*Math.PI),'up-curve')
+    ];
+    return {W,H:W,edges:E};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/fundou-tsunagi.js
+
 // BEGIN BUNDLED PATTERN: src/patterns/grid.js
 registerPattern({
   id: 'grid',
@@ -211,6 +377,43 @@ registerPattern({
   }
 });
 // END BUNDLED PATTERN: src/patterns/grid.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/hanaguruma.js
+/** Reconstructed continuous geometry from 03_L-1004_hanaguruma.jpg. No border or labels. */
+registerPattern({
+  id: "hanaguruma",
+  order: 103,
+  name: "Hanaguruma",
+  note: "Six-petal circular flowers on a staggered triangular lattice. Dense junctions benefit from a larger repeat.",
+  reference: "03_L-1004_hanaguruma.jpg",
+  aspect: Math.sqrt(3),
+  build(W) {
+    const H=Math.sqrt(3)*W, E=[];
+    for(const c of [[0,0],[W/2,H/2]]) for(let i=0;i<6;i++) E.push(edge(arc(c,W,i*Math.PI/3,(i+1)*Math.PI/3),'petal'));
+    return patternGraph(W,H,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/hanaguruma.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/hishi-seigaiha.js
+/** Reconstructed continuous geometry from 16_H-2037_hishi-seigaiha.jpg. No border or labels. */
+registerPattern({
+  id: "hishi-seigaiha",
+  order: 116,
+  name: "Hishi seigaiha",
+  note: "Four nested angular waves inside a staggered diamond lattice.",
+  reference: "16_H-2037_hishi-seigaiha.jpg",
+  aspect: 0.5,
+  build(W) {
+    const a=W/2,b=W/4,H=W/2,E=[];
+    for(const [x,y] of [[0,0],[a,b]]) for(let k=0;k<4;k++){
+      const h=k*b/2, dx=a*(1-h/(2*b)), base=b+h/2;
+      E.push(...patternLines([[x-dx,y+base],[x,y+h],[x+dx,y+base]],'diamond-wave'));
+    }
+    return patternGraph(W,H,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/hishi-seigaiha.js
 
 // BEGIN BUNDLED PATTERN: src/patterns/interlaced.js
 registerPattern({
@@ -248,6 +451,202 @@ registerPattern({
 });
 // END BUNDLED PATTERN: src/patterns/interlaced.js
 
+// BEGIN BUNDLED PATTERN: src/patterns/juuji.js
+/** Reconstructed continuous geometry from 12_208_juuji.jpg. No border or labels. */
+registerPattern({
+  id: "juuji",
+  order: 112,
+  name: "Juuji",
+  note: "Offset crosses and steps on a five-unit lattice. Junctions are opened where the reference stitches cross.",
+  reference: "12_208_juuji.jpg",
+  aspect: 1,
+  build(W) {
+    const g=W/5, E=[];
+    // Continuous unit-grid edges reconstructed from one complete 5 x 5 repeat.
+    // The five-unit phase is important: a two-cross checkerboard is NOT this design.
+    const horizontal=['11.1.','1.11.','1.1.1','.11.1','.1.11'];
+    const vertical=['.111.','1..11','111..','..111','11..1'];
+    for(let y=0;y<5;y++) for(let x=0;x<5;x++) {
+      if(horizontal[y][x]==='1') E.push(edge(line([x*g,y*g],[(x+1)*g,y*g]),'horizontal-step'));
+      if(vertical[y][x]==='1') E.push(edge(line([x*g,y*g],[x*g,(y+1)*g]),'vertical-step'));
+    }
+    return patternGraph(W,W,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/juuji.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/kaki-no-hana.js
+/** Reconstructed continuous geometry from 17_H-2039_kaki-no-hana.jpg. No border or labels. */
+registerPattern({
+  id: "kaki-no-hana",
+  order: 117,
+  name: "Kaki no hana",
+  note: "Stepped flower outlines with small square centers on staggered rows.",
+  reference: "17_H-2039_kaki-no-hana.jpg",
+  aspect: 0.75,
+  build(W) {
+    const g=W/8,H=6*g,E=[];
+    const flower=[[-.5,-2.5],[.5,-2.5],[.5,-1.5],[1.5,-1.5],[1.5,-.5],[2.5,-.5],[2.5,.5],[1.5,.5],[1.5,1.5],[.5,1.5],[.5,2.5],[-.5,2.5],[-.5,1.5],[-1.5,1.5],[-1.5,.5],[-2.5,.5],[-2.5,-.5],[-1.5,-.5],[-1.5,-1.5],[-.5,-1.5],[-.5,-2.5]];
+    const square=[[-.5,-.5],[.5,-.5],[.5,.5],[-.5,.5],[-.5,-.5]];
+    for(const c of [[0,0],[4*g,3*g]]) for(const shape of [flower,square]) E.push(...patternLines(shape.map(p=>[c[0]+p[0]*g,c[1]+p[1]*g]),shape===flower?'flower':'center'));
+    return patternGraph(W,H,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/kaki-no-hana.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/kamon.js
+/** Reconstructed continuous geometry from 07_H-1141_kamon.jpg. No border or labels. */
+registerPattern({
+  id: "kamon",
+  order: 107,
+  name: "Kamon",
+  note: "Four-leaf crests with diagonal veins and fitted cubic petal shoulders.",
+  reference: "07_H-1141_kamon.jpg",
+  aspect: 1,
+  build(W) {
+    const g=W/2, E=[];
+    for(let y=0;y<2;y++) for(let x=0;x<2;x++) {
+      const ox=x*g, oy=y*g, reverse=(x+y)%2===1;
+      const P=([a,b])=>[ox+(reverse?1-a:a)*g,oy+b*g];
+      // Fuller than circular quadrants: fitted cubic sides reproduce the
+      // reference's almost-square petal shoulders. Only endpoints intersect.
+      E.push(edge(cubic([[0,0],[.9,0],[1,.1],[1,1]].map(P)),'petal'));
+      E.push(edge(cubic([[0,0],[0,.9],[.1,1],[1,1]].map(P)),'petal'));
+      E.push(edge(line(P([0,0]),P([1,1])),'vein'));
+    }
+    return {W,H:W,edges:E};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/kamon.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/kasane-rindou.js
+/** Reconstructed continuous geometry from 06_H-1142_kasane-rindou.jpg. No border or labels. */
+registerPattern({
+  id: "kasane-rindou",
+  order: 106,
+  name: "Kasane rindou",
+  note: "Overlapping folded triangles inside a hexagonal radial lattice. Crossings are split into open junctions.",
+  reference: "06_H-1142_kasane-rindou.jpg",
+  aspect: Math.sqrt(3),
+  build(W) {
+    const R=W/Math.sqrt(3), H=3*R, E=[];
+    for(const c of [[0,0],[W/2,H/2]]){
+      const v=Array.from({length:6},(_,i)=>[c[0]+R*Math.sin(i*Math.PI/3),c[1]-R*Math.cos(i*Math.PI/3)]);
+      E.push(...patternLines([...v,v[0]],'hexagon'));
+      for(let i=0;i<3;i++) E.push(edge(line(v[i],v[i+3]),'radial'));
+      for(let parity=0;parity<2;parity++) for(let k=0;k<3;k++){
+        const a=v[(parity+2*k)%6], b=v[(parity+2*k+2)%6];
+        const m=[0,1].map(j=>c[j]+.7*((a[j]+b[j])/2-c[j]));
+        E.push(...patternLines([a,m,b],'folded-triangle'));
+      }
+    }
+    return patternGraph(W,H,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/kasane-rindou.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/nowaki.js
+/** Reconstructed continuous geometry from 09_201_nowaki.jpg. No border or labels. */
+registerPattern({
+  id: "nowaki",
+  order: 109,
+  name: "Nowaki",
+  note: "Staggered wave fans with two short interior wind strokes. Interior curves are fitted Beziers.",
+  reference: "09_201_nowaki.jpg",
+  aspect: 1,
+  build(W) {
+    const R=W/2, E=[];
+    for(const [x,y] of [[0,0],[R,R]]){
+      E.push(edge(arc([x,y],R,Math.PI,1.5*Math.PI),'wave'),edge(arc([x,y],R,1.5*Math.PI,2*Math.PI),'wave'));
+      const P=([a,b])=>[x+a*R,y+b*R];
+      E.push(edge(cubic([[-1,0],[-.82,-.43],[-.48,-.77],[0,-.72]].map(P)),'wind'));
+      E.push(edge(cubic([[-1,0],[-.70,-.30],[-.35,-.50],[0,-.45]].map(P)),'wind'));
+    }
+    return {W,H:W,edges:E};
+  }
+});
+// END BUNDLED PATTERN: src/patterns/nowaki.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/sayagata.js
+/** Reconstructed continuous geometry from 10_204_sayagata.jpg. No border or labels. */
+registerPattern({
+  id: "sayagata",
+  order: 110,
+  name: "Sayagata",
+  note: "Interlocking angular meanders on a diagonal lattice. All corners and crossings retain deliberate gaps.",
+  reference: "10_204_sayagata.jpg",
+  aspect: 1,
+  build(W) {
+    const u=W/(5*Math.SQRT2), E=[];
+    const connection=[[0,0],[0,-1],[-1,-1],[-1,-2],[6,-2],[6,-1],[5,-1],[5,0]];
+    for(const [parity,c] of [[0,[0,0]],[1,[W/2,W/2]]]) for(let k=0;k<2;k++){
+      const pts=connection.map(([x,y])=>{if(parity)y=-y;if(k)[x,y]=[-y,x];return [c[0]+(x-y)*u/Math.SQRT2,c[1]+(x+y)*u/Math.SQRT2];});
+      E.push(...patternLines(pts,'meander'));
+    }
+    return patternGraph(W,W,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/sayagata.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/seigaiha.js
+/** Reconstructed continuous geometry from 11_207_seigaiha.jpg. No border or labels. */
+registerPattern({
+  id: "seigaiha",
+  order: 111,
+  name: "Seigaiha",
+  note: "Double circular waves. Inner arcs terminate on the following row instead of floating above it.",
+  reference: "11_207_seigaiha.jpg",
+  aspect: 1,
+  build(W) {
+    const R=W/2, E=[];
+    for(const c of [[0,0],[R,R]]) for(const q of [1,.72]){
+      const K=(1+q*q)/2, x=(K+Math.sqrt(2*q*q-K*K))/2, a=Math.atan2(K-x,x);
+      E.push(edge(arc(c,q*R,Math.PI-a,TAU+a),q===1?'outer-wave':'inner-wave'));
+    }
+    return patternGraph(W,W,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/seigaiha.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/shippo.js
+/** Reconstructed continuous geometry from 01_L-1001_shippo.jpg. No border or labels. */
+registerPattern({
+  id: "shippo",
+  order: 101,
+  name: "Shippo",
+  note: "Interlocking circles with open junctions; the classic four-petal repeat.",
+  reference: "01_L-1001_shippo.jpg",
+  aspect: 1,
+  build(W) {
+    const R=W/2, E=[];
+    for (const c of [[0,0],[R,R]]) for(let i=0;i<4;i++) E.push(edge(arc(c,R,i*Math.PI/2,(i+1)*Math.PI/2),'circle'));
+    return patternGraph(W,W,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/shippo.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/tsubomi.js
+/** Reconstructed continuous geometry from 08_H-1075_tsubomi.jpg. No border or labels. */
+registerPattern({
+  id: "tsubomi",
+  order: 108,
+  name: "Tsubomi",
+  note: "Four interlocking square buds. The reference uses solid guides; this version applies the selected running-stitch rhythm.",
+  reference: "08_H-1075_tsubomi.jpg",
+  aspect: 1,
+  build(W) {
+    const u=W/(5*Math.SQRT2), E=[];
+    const hook=[[1,-1],[1,-2],[-1,-2],[-1,0],[1,0]];
+    for(const c of [[0,0],[W/2,W/2]]) for(let k=0;k<4;k++){
+      const a=k*Math.PI/2, ca=Math.cos(a), sa=Math.sin(a);
+      const pts=hook.map(([x,y])=>{const X=(x*ca-y*sa)*u,Y=(x*sa+y*ca)*u;return [c[0]+(X-Y)/Math.SQRT2,c[1]+(X+Y)/Math.SQRT2];});
+      E.push(...patternLines(pts,'square-bud'));
+    }
+    return patternGraph(W,W,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/tsubomi.js
+
 // BEGIN BUNDLED PATTERN: src/patterns/waves.js
 registerPattern({
   id: 'waves',
@@ -267,6 +666,55 @@ registerPattern({
   }
 });
 // END BUNDLED PATTERN: src/patterns/waves.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/yabane.js
+/** Reconstructed continuous geometry from 14_209_yabane.jpg. No border or labels. */
+registerPattern({
+  id: "yabane",
+  order: 114,
+  name: "Yabane",
+  note: "Parallel diagonal shafts crossed by regularly staggered stair-step feathers.",
+  reference: "14_209_yabane.jpg",
+  aspect: 1,
+  build(W) {
+    const g=W/6, E=[];
+    for(let k=0;k<6;k++) E.push(edge(line([k*g,0],[k*g-W,W]),'diagonal'));
+    // A stair repeats by (g,g); neighboring stairs are displaced by (1.5g,-1.5g).
+    // Six grid units give an axis-aligned repeat without reversing the stair phase.
+    for(let j=-3;j<=3;j++) for(let k=-6;k<=9;k++){
+      const a=[(k+1.5*j)*g,(k-1.5*j)*g], b=[a[0]+g,a[1]], c=[a[0]+g,a[1]+g];
+      for(const [p,q] of [[a,b],[b,c]]){
+        const m=lerp(p,q,.5);
+        if(m[0]>=-1e-8&&m[0]<W-1e-8&&m[1]>=-1e-8&&m[1]<W-1e-8) E.push(edge(line(p,q),'feather'));
+      }
+    }
+    return patternGraph(W,W,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/yabane.js
+
+// BEGIN BUNDLED PATTERN: src/patterns/yoshiwara-tsunagi.js
+/** Reconstructed continuous geometry from 04_H-2148_yoshiwara-tsunagi.jpg. No border or labels. */
+registerPattern({
+  id: "yoshiwara-tsunagi",
+  order: 104,
+  name: "Yoshiwara tsunagi",
+  note: "Interlocking, open-ended square links, rotated into a diagonal chain.",
+  reference: "04_H-2148_yoshiwara-tsunagi.jpg",
+  aspect: 1 / 3,
+  build(W) {
+    const H=W/3, u=W*Math.SQRT2/15, E=[];
+    const left=[[-1,-2],[-2,-2],[-2,2],[0,2]], right=[[0,-2],[2,-2],[2,2],[1,2]];
+    // Parallel chains need a 3:1 rectangular repeat, not a square tile.
+    // In the unrotated construction lattice: translations (2.5,2.5) and (5,-2.5).
+    for(const C of [[0,0],[W/2,H/2]]) {
+      const P=([x,y])=>[C[0]+(x-y)*u/Math.SQRT2,C[1]+(x+y)*u/Math.SQRT2];
+      E.push(...patternLines(left.map(P),'left-hook'),...patternLines(right.map(P),'right-hook'));
+    }
+    return patternGraph(W,H,E);
+  }
+});
+// END BUNDLED PATTERN: src/patterns/yoshiwara-tsunagi.js
 
 if(!Object.hasOwn(PATTERNS,DEFAULTS.pattern))throw new Error(`Default pattern '${DEFAULTS.pattern}' is not registered.`);
 Object.freeze(PATTERNS);
@@ -293,6 +741,24 @@ function buildModel(raw){
   // Rounded caps are inset later. This also separates arms at acute angles.
   const separation=Math.min(.2,s.opening/3),angleClearance=(s.weight+separation)/(2*Math.sin(Math.max(.08,angle)/2))-s.weight/2;
   n.clearance=Math.max(s.opening/2,angleClearance);
+  // Parallel tangents on different curves do not stay parallel: they diverge
+  // quadratically. A straight-ray estimate would unnecessarily erase short
+  // intervals between the seigaiha inner-wave contacts and the wave tips.
+  if(angle<.15 && n.arms.some(a=>edges[a.ei].parts.some(p=>p.kind!=='line'))) {
+    const offsetAt=(arm,d)=>{const e=edges[arm.ei],p=e.at(arm.end?e.L-d:d),q=arm.end?e.p1:e.p0;return [p[0]-q[0],p[1]-q[1]];};
+    const separated=c=>{
+      const d=c+s.weight/2, points=n.arms.map(a=>offsetAt(a,d));
+      for(let i=0;i<points.length;i++)for(let j=i+1;j<points.length;j++)if(hypot(points[i],points[j])<s.weight+separation-1e-9)return false;
+      return true;
+    };
+    let lo=s.opening/2, hi=lo;
+    const limit=Math.min(...n.arms.map(a=>edges[a.ei].L))-s.weight/2-.01, step=Math.max(.025,s.weight/4);
+    while(hi<limit&&!separated(hi)){lo=hi;hi=Math.min(limit,hi+step);}
+    if(hi<=limit&&separated(hi)){
+      for(let k=0;k<24;k++){const mid=(lo+hi)/2;if(separated(mid))hi=mid;else lo=mid;}
+      n.clearance=Math.max(s.opening/2,hi);
+    }
+  }
   for(const a of n.arms)edges[a.ei][a.end?'endClear':'startClear']=n.clearance;
  }
  const q=s.ratioA/s.ratioB,targetGap=s.stitch/q,dashes=[],lengths=[],gaps=[],fits=[],warnings=[];let skipped=0,omitted=0;

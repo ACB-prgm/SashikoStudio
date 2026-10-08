@@ -1,4 +1,4 @@
-# Sashiko Pattern Studio 1.1
+# Sashiko Pattern Studio 1.2
 
 A self-contained browser app for periodic sashiko stitch maps, SVG export,
 actual-size paper printing, and **3D-printable marking stencils**.
@@ -12,6 +12,20 @@ accounts, runtime dependencies, or uploaded designs.
 For a static website (including GitHub Pages), put `index.html` at the site's
 entry location. Only that file is required at runtime. The `src/`, `tests/`, and
 `build.py` files are for maintenance; they do not need to run on the host.
+
+## Reference pattern library
+
+This update adds 16 reconstructed reference designs, bringing the library to
+22 patterns. See **[PATTERN_LIBRARY.md](PATTERN_LIBRARY.md)** for the complete
+source-to-pattern mapping, reconstruction notes, the one omitted reference
+(Onoe Kasane), and the exact validation scope.
+
+The JSON files in `presets/reference-library/` are loadable through **Load
+settings**. They demonstrate STL generation for each new pattern, but retain
+thin-plastic warnings and are not print certifications. Several dense designs
+correctly block STL export at the app's default settings because the wider slots
+collide. Read the pattern-library notes before treating a mesh as print-ready.
+
 
 ## Add or edit patterns
 
@@ -28,7 +42,7 @@ Typical workflow:
 ```sh
 cp src/patterns/grid.js src/patterns/my-pattern.js
 # edit the new file
-python build.py
+python3 build.py
 ```
 
 Then inspect **One repeat** and **Seam check** in the app before testing SVG and
@@ -142,6 +156,7 @@ build.py                   Rebuild index.html from src (Python 3, standard libra
 src/
   template.html            Existing page layout plus integration markers
   pattern-app.js           Shared geometry/stitch engine, SVGs, print, presets
+  pattern-helpers.js       Periodic line/arc intersections and polyline helpers
   patterns/                One JavaScript source file per design; auto-discovered
     interlaced.js
     grid.js
@@ -160,13 +175,15 @@ tests/
   test_geometry.js         Mesh generation and invalid-geometry guards
   validate_stl.py          Independent trimesh/Shapely validation
 PATTERN_FORMAT.md           Pattern authoring contract and examples
+PATTERN_LIBRARY.md          Reference mapping, approximations and stencil notes
+presets/reference-library/  Mesh-checked example settings; warnings still apply
 validation/                Results from this delivery
 ```
 
 After editing source or adding/removing a file in `src/patterns/`, run:
 
 ```sh
-python build.py
+python3 build.py
 ```
 
 No npm install or front-end build framework is needed.

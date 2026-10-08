@@ -1,0 +1,3673 @@
+{
+  "patterns": [
+    {
+      "name": "shippo",
+      "W": 48,
+      "H": 48,
+      "edges": 8,
+      "dashes": 80,
+      "min": 1.923487167244664,
+      "max": 1.923487167244664,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 45.300000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "shippo",
+          "stitch": 3,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.9,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "asanoha",
+      "W": 48,
+      "H": 27.71281292110204,
+      "edges": 18,
+      "dashes": 108,
+      "min": 1.9059758597063505,
+      "max": 2.0477191660473224,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 18.299999999813735,
+      "meshExample": {
+        "settings": {
+          "pattern": "asanoha",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 3,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "hanaguruma",
+      "W": 48,
+      "H": 83.13843876330611,
+      "edges": 12,
+      "dashes": 156,
+      "min": 1.9206849473789338,
+      "max": 1.920684947378937,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 55.300000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "hanaguruma",
+          "stitch": 3,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.9,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "yoshiwara-tsunagi",
+      "W": 48,
+      "H": 16,
+      "edges": 12,
+      "dashes": 44,
+      "min": 1.3220562748477138,
+      "max": 1.857915415197187,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [
+        "Fitting changes some stitches by up to 34% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative."
+      ],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 4,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 4,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 4,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 10.800000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "yoshiwara-tsunagi",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": [
+          "Fitting changes some stitches by up to 34% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative."
+        ]
+      }
+    },
+    {
+      "name": "kasane-rindou",
+      "W": 48,
+      "H": 83.13843876330611,
+      "edges": 78,
+      "dashes": 312,
+      "min": 1.96756277484182,
+      "max": 2.1061693487318904,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 42.300000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "kasane-rindou",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 6,
+          "tileWidth": 72,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": [
+          "Fitting changes some stitches by up to 35% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative."
+        ]
+      }
+    },
+    {
+      "name": "kamon",
+      "W": 48,
+      "H": 48,
+      "edges": 12,
+      "dashes": 84,
+      "min": 1.8724440388276868,
+      "max": 2.0597782932844537,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 50.9000000001397,
+      "meshExample": {
+        "settings": {
+          "pattern": "kamon",
+          "stitch": 3,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.9,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "tsubomi",
+      "W": 48,
+      "H": 48,
+      "edges": 40,
+      "dashes": 96,
+      "min": 2.0960750331302838,
+      "max": 2.1705844122715727,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 23.5999999998603,
+      "meshExample": {
+        "settings": {
+          "pattern": "tsubomi",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "nowaki",
+      "W": 48,
+      "H": 48,
+      "edges": 8,
+      "dashes": 72,
+      "min": 1.923487167244664,
+      "max": 2.119697929926296,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 20.399999999906868,
+      "meshExample": {
+        "settings": {
+          "pattern": "nowaki",
+          "stitch": 3,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.9,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "sayagata",
+      "W": 48,
+      "H": 48,
+      "edges": 28,
+      "dashes": 104,
+      "min": 2.0522459865765876,
+      "max": 2.1705844122715723,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 17.800000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "sayagata",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "seigaiha",
+      "W": 48,
+      "H": 48,
+      "edges": 10,
+      "dashes": 70,
+      "min": 1.99603357371097,
+      "max": 2.877665690225009,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [
+        "Fitting changes some stitches by up to 44% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative."
+      ],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 4,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 4,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 4,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 14.300000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "seigaiha",
+          "stitch": 3,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.9,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": [
+          "Fitting changes some stitches by up to 45% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative."
+        ]
+      }
+    },
+    {
+      "name": "juuji",
+      "W": 48,
+      "H": 48,
+      "edges": 30,
+      "dashes": 90,
+      "min": 1.9846153846153842,
+      "max": 1.9846153846153851,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 14.599999999860302,
+      "meshExample": {
+        "settings": {
+          "pattern": "juuji",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "fundou-tsunagi",
+      "W": 48,
+      "H": 48,
+      "edges": 4,
+      "dashes": 44,
+      "min": 2.0773082175326896,
+      "max": 2.0773082175326896,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 6.5,
+      "meshExample": {
+        "settings": {
+          "pattern": "fundou-tsunagi",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "yabane",
+      "W": 48,
+      "H": 48,
+      "edges": 52,
+      "dashes": 196,
+      "min": 1.5952570935313815,
+      "max": 2.0717404548408433,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 41.300000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "yabane",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 2,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": [
+          "Fitting changes some stitches by up to 31% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative."
+        ]
+      }
+    },
+    {
+      "name": "chidori-tsunagi",
+      "W": 48,
+      "H": 48,
+      "edges": 2,
+      "dashes": 46,
+      "min": 1.9751740801634081,
+      "max": 1.9751740801634081,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 7,
+      "meshExample": {
+        "settings": {
+          "pattern": "chidori-tsunagi",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "hishi-seigaiha",
+      "W": 48,
+      "H": 24,
+      "edges": 28,
+      "dashes": 80,
+      "min": 2.0490655497319397,
+      "max": 2.1405764746872635,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 15.800000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "hishi-seigaiha",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 2,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    },
+    {
+      "name": "kaki-no-hana",
+      "W": 48,
+      "H": 36,
+      "edges": 48,
+      "dashes": 96,
+      "min": 1.875,
+      "max": 1.875,
+      "skipped": 0,
+      "omitted": 0,
+      "warnings": [],
+      "inputError": null,
+      "matrix": [
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 24,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 48,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 1.5,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 2,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 0.5,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 1,
+          "skipped": 0,
+          "omitted": 0
+        },
+        {
+          "tileWidth": 96,
+          "stitch": 3,
+          "opening": 2,
+          "skipped": 0,
+          "omitted": 0
+        }
+      ],
+      "ms": 16.800000000046566,
+      "meshExample": {
+        "settings": {
+          "pattern": "kaki-no-hana",
+          "stitch": 2,
+          "ratioA": 3,
+          "ratioB": 2,
+          "opening": 1,
+          "tileWidth": 48,
+          "columns": 2,
+          "rows": 2,
+          "weight": 0.35,
+          "transparent": false,
+          "paper": "letter",
+          "display": "stitches",
+          "seams": false,
+          "nodes": false,
+          "view": "tile"
+        },
+        "skipped": 0,
+        "omitted": 0,
+        "warnings": []
+      }
+    }
+  ],
+  "pageErrors": [],
+  "registered": [
+    "asanoha",
+    "chevrons",
+    "chidori-tsunagi",
+    "circles",
+    "diamonds",
+    "fundou-tsunagi",
+    "grid",
+    "hanaguruma",
+    "hishi-seigaiha",
+    "interlaced",
+    "juuji",
+    "kaki-no-hana",
+    "kamon",
+    "kasane-rindou",
+    "nowaki",
+    "sayagata",
+    "seigaiha",
+    "shippo",
+    "tsubomi",
+    "waves",
+    "yabane",
+    "yoshiwara-tsunagi"
+  ]
+}
