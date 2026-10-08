@@ -1363,8 +1363,8 @@ function sync(){
  if(document.activeElement!==$('stencil-opening'))$('stencil-opening').value=studio.getState().opening;
  $('stencil-scope').value=settings.scope;$('stencil-style').value=settings.style;$('stencil-showWarnings').checked=settings.showWarnings;$('stencil-rimEnabled').checked=settings.rimEnabled;
  for(const id of ['stencil-rimWidth','stencil-rimWidth-range','stencil-cornerRadius','stencil-cornerRadius-range'])$(id).disabled=!settings.rimEnabled;
- $('stencil-style-note').textContent=settings.style==='solid'?'Continuous geometry is cut without stitch gaps. Closed loops may release islands, in which case export is blocked.':settings.style==='dots'?'One circular opening at the center of each fitted stitch. Opening width is the dot diameter.':'Round-ended through-slots at the fitted stitch positions.';
- $('stencil-opening').disabled=settings.style==='solid';
+ $('stencil-style-note').textContent=settings.style==='solid'?'Continuous cuts retain the junction opening as a plastic bridge, including rounded-end clearance. Closed loops without junctions can still release islands; export is blocked if the plate disconnects.':settings.style==='dots'?'One circular opening at the center of each fitted stitch. Opening width is the dot diameter.':'Round-ended through-slots at the fitted stitch positions.';
+ $('stencil-opening').disabled=false;
 }
 function samplePath(e,a,b){
  const out=[e.at(a)];
@@ -1372,15 +1372,59 @@ function samplePath(e,a,b){
  function split(a,b,p,q,depth){const m=(a+b)/2,c=e.at(m),p1=e.at((3*a+b)/4),p3=e.at((a+3*b)/4),error=Math.max(lineDistance(c,p,q),lineDistance(p1,p,q),lineDistance(p3,p,q));if(depth<14&&(error>.0015||(b-a>.6&&e.parts.some(p=>p.kind!=='line')))){split(a,m,p,c,depth+1);split(m,b,c,q,depth+1);}else out.push(q);}
  split(a,b,out[0],e.at(b),0);return out;
 }
+/** Continuous cuts between junctions, with material left at every junction.
+ * The SVG clearances are a minimum; wider STL caps also need enough room.
+ * Work on a separate trim table so neither the stitch map nor its state changes.
+ */
+function solidPaths(m,s){
+ const radius=s.slotWidth/2,opening=m.s.opening,epsilon=.0002;
+ const trims=m.edges.map(e=>e.periodic?[0,0]:[(e.startClear||0)+radius,(e.endClear||0)+radius]);
+ const fail=()=>{throw new Error('Junction spacing and opening width leave no continuous cut on one or more curve intervals. Increase tile size, reduce junction opening, or reduce opening width. No cuts were omitted.');};
+ for(const node of m.nodes){
+  const arms=node.arms;
+  // Move every incident arm into a common coordinate system. An arm may be
+  // represented in a neighboring tile, including both ends of the same edge.
+  const centers=d=>arms.map(a=>{const e=m.edges[a.ei],p=e.at(a.end?e.L-d:d),q=a.end?e.p1:e.p0;return [p[0]-q[0],p[1]-q[1]];});
+  const separated=d=>{
+   const ps=centers(d),required=s.slotWidth+opening+epsilon;
+   for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++)if(Math.hypot(ps[i][0]-ps[j][0],ps[i][1]-ps[j][1])<required)return false;
+   return true;
+  };
+  // End caps extend radius beyond their centers. Starting at clearance+radius
+  // prevents them from filling the configured gap, even on straight junctions.
+  let lo=Math.max(opening/2+radius,...arms.map(a=>trims[a.ei][a.end?1:0])),hi=lo;
+  const limit=Math.min(...arms.map(a=>m.edges[a.ei].L))-radius-.02;
+  if(hi>limit)fail();
+  // Actual curve points handle tangent curves and acute junctions better than
+  // a straight-ray angle formula. Find the first clear bracket, then refine it.
+  const step=Math.max(.025,s.slotWidth/8);
+  while(hi<limit&&!separated(hi)){lo=hi;hi=Math.min(limit,hi+step);}
+  if(!separated(hi))fail();
+  if(hi>lo)for(let k=0;k<24;k++){const mid=(lo+hi)/2;if(separated(mid))hi=mid;else lo=mid;}
+  for(const a of arms)trims[a.ei][a.end?1:0]=hi;
+ }
+ const paths=[];
+ for(let i=0;i<m.edges.length;i++){
+  const e=m.edges[i],from=trims[i][0],to=e.L-trims[i][1];
+  if(to-from<=.02)fail();
+  // Only the edge's real junctions are trimmed. Internal primitive joins and
+  // periodic tile seams stay continuous; their round caps are unioned as before.
+  let offset=0;
+  for(const p of e.parts){
+   const a=Math.max(0,from-offset),b=Math.min(p.L,to-offset);
+   if(b-a>1e-8)paths.push(samplePath({at:x=>p.at(x),parts:[p]},a,b));
+   offset+=p.L;
+  }
+ }
+ return paths;
+}
 function makeInput(m=studio.getModel(),s=settings){
  if(!m)throw new Error('The pattern is not ready.');s=validate(s);
  const l=s.scope==='repeat'?SashikoLayout.oneRepeat(m.W,m.H,s):SashikoLayout.plan(m.W,m.H,m.s,s);
  if(!l.valid)throw new Error('No complete tile fits inside the export size and rim. Enlarge the canvas, reduce the rim, or reduce tile size.');
  let paths;
  if(s.style==='solid'){
-  // Each primitive is widened separately, then the mesh engine unions all cuts.
-  // Splitting at corners gives round joins and avoids offsetting sharp folds.
-  paths=m.edges.flatMap(e=>e.parts.map(p=>samplePath({at:x=>p.at(x),parts:[p]},0,p.L)));
+  paths=solidPaths(m,s);
  }else{
   if(m.skipped||m.omitted)throw new Error('The stitch map omits marks that do not fit. Increase tile size or reduce junction opening / line weight before stencil export.');
   if(s.style==='dots')paths=m.dashes.map(d=>[m.edges[d.edge].at((d.from+d.to)/2)]);
