@@ -1,224 +1,218 @@
-# Sashiko Pattern Studio 1.2
+# Sashiko Pattern Studio 1.3
 
-A self-contained browser app for periodic sashiko stitch maps, SVG export,
-actual-size paper printing, and **3D-printable marking stencils**.
+A browser-only tool for tileable sashiko designs, actual-size SVG/paper output,
+and 3D-printable marking stencils. The library contains 22 patterns. See
+[PATTERN_LIBRARY.md](PATTERN_LIBRARY.md) for reference coverage and the one
+intentionally omitted reconstruction.
 
-## Run or publish
+## Run, build, and publish
 
-Open `index.html` in a modern browser. All pattern computation and STL generation
-are local. There are no external JavaScript libraries, CDNs, API calls, fonts,
-accounts, runtime dependencies, or uploaded designs.
+Open `index.html` in a modern browser, or publish the repository root through
+GitHub Pages. Everything runs locally: no server, uploads, CDNs, accounts, or
+runtime dependencies. `index.html` remains the complete, self-contained runtime.
 
-For a static website (including GitHub Pages), put `index.html` at the site's
-entry location. Only that file is required at runtime. The `src/`, `tests/`, and
-`build.py` files are for maintenance; they do not need to run on the host.
-
-## Reference pattern library
-
-This update adds 16 reconstructed reference designs, bringing the library to
-22 patterns. See **[PATTERN_LIBRARY.md](PATTERN_LIBRARY.md)** for the complete
-source-to-pattern mapping, reconstruction notes, the one omitted reference
-(Onoe Kasane), and the exact validation scope.
-
-The JSON files in `presets/reference-library/` are loadable through **Load
-settings**. They demonstrate STL generation for each new pattern, but retain
-thin-plastic warnings and are not print certifications. Several dense designs
-correctly block STL export at the app's default settings because the wider slots
-collide. Read the pattern-library notes before treating a mesh as print-ready.
-
-
-## Add or edit patterns
-
-Pattern definitions are modular. Each design lives in its own JavaScript file
-under `src/patterns/`; `build.py` discovers the directory automatically and
-bundles every design into the standalone `index.html`. There is no pattern
-manifest to maintain.
-
-For the exact registration contract, available geometry primitives, tileability
-rules, and examples, see **[PATTERN_FORMAT.md](PATTERN_FORMAT.md)**.
-
-Typical workflow:
+After editing source or adding a pattern:
 
 ```sh
-cp src/patterns/grid.js src/patterns/my-pattern.js
-# edit the new file
 python3 build.py
 ```
 
-Then inspect **One repeat** and **Seam check** in the app before testing SVG and
-STL output. Pattern files define continuous geometry only; stitch fitting and all
-exports remain shared engine behavior.
+The build uses only Python's standard library. Designs under `src/patterns/*.js`
+are discovered automatically; there is no manifest to maintain. Read
+[PATTERN_FORMAT.md](PATTERN_FORMAT.md) for the registration contract, primitives,
+intersection helpers, tileability requirements, and examples.
 
-## Make a stencil
+The **Build standalone application** workflow runs dependency-free checks on
+`dev` pushes and pull requests. After a successful source push to `dev`, its
+separate write-scoped job commits a rebuilt `index.html` to `dev` when needed.
+It never merges a PR or modifies `main`. A rejected non-fast-forward push does
+not overwrite concurrent work; rerun the build after reconciling the branch.
+Local builds remain supported. Pull requests check that the committed runtime
+matches the source. GitHub Pages still serves the built file from `main` after
+review and merge; Pages does not run Python at request time.
 
-1. Select and size a design with the normal pattern controls.
-2. Click **Stencil / STL** below the main preview.
-3. Choose **One seamless repeat** or **Full panel**.
-4. Set plate thickness and slot width. Defaults are 1.4 mm and 0.9 mm.
-5. Review the top view, optional rotatable 3D mesh, and spacing warnings.
-6. Download the binary STL and import it into your slicer as millimeters.
+## Independent tile and export sizes
 
-The 3D object is a flat plate. Each stitch is a **hole all the way through**,
-with rounded ends in the XY plane. There is no backing floor, recessed level,
-raised relief, or Z bevel. The plate's outside corners are not rounded: its exact
-rectangular dimensions are part of the repeat. An individual slot intersecting
-the perimeter is intentionally open at that perimeter; the next tile completes
-it. Do not resize individual tiles inconsistently or insert a gap between them.
+**Tile width** controls motif scale. Tile height follows each design's aspect
+ratio so the geometry is not distorted. **Export width/height** control the
+final panel canvas independently.
 
-The STL always uses the stitches, even when the main 2D display is set to solid
-construction geometry. SVG line weight and STL slot width are separate controls.
-Increasing slot width does not extend the nominal stitch length: the slot's
-centerline is shortened before its round caps are added.
+The app fits as many **complete** tiles as possible into that canvas, preserves
+tile dimensions, and centers any leftover space. It does not stretch the pattern
+or crop partial tiles just to fill the requested size. The calculated row and
+column counts and margins are displayed. If no complete tile fits, panel and
+stencil export are blocked with an explanation.
 
-**Junction opening** in the stencil dialog is linked to the main pattern setting.
-Changing it updates the SVG/stitch map as well. It can change the fitted stitch
-lengths, which remain visible in the main app. Nothing automatically changes
-stitch length, junctions, or the design merely to suppress a warning.
+The starting layout is **3 x 3 tiles**, including the enabled protective rim.
+While this automatic starting layout is selected, changing tile size or design
+updates the canvas to retain three rows and columns. The preset menu includes
+100, 150, and 200 mm squares, US Letter, A4, and A3. These presets only populate
+editable width/height fields; editing either field switches to a fixed canvas.
+Choosing a fixed preset or editing dimensions keeps the canvas fixed while tile
+size changes. Selecting **3 x 3 tiles** returns to the automatic starting layout.
+Automatic canvas dimensions round upward to 0.001 mm, avoiding fractional
+rounding that would accidentally exclude the last row.
 
-## Check the plastic, not just the mesh
+Panel SVG and full-panel STL use the selected outer width and height. For example,
+a **100 x 100 mm** selection remains **100 x 100 mm**, including the STL rim.
+A single **Repeat SVG** is still the unpadded, exact repeat rectangle and remains
+suitable for edge-to-edge digital tiling. Canvas SVGs include the centered margins
+and should not be treated as fundamental repeat units.
 
-The default minimum-plastic-spacing threshold is 0.9 mm. It is an advisory
-threshold, **not a guarantee for any nozzle or material**. The checks include:
+Paper-sized canvases print on one matching nominal sheet at 100% scale. Disable
+browser headers/footers and automatic scaling. Physical printer margins may clip
+artwork near an edge; use a smaller canvas or borderless printing as appropriate.
+Larger canvases are split across sheets with 5 mm overlap, without rescaling.
 
-- Shortest distance between nearby distinct slot polygons.
-- Positive plastic rims between a slot and an outside edge.
-- Touching/overlapping slots, point-touching boundaries, and detached pieces.
-- Mesh edge closure, oriented faces, finite triangle area after Float32 STL
-  serialization, and positive volume consistent with plate area and thickness.
+## Stencil defaults and controls
 
-Thin-web and thin-rim warnings require explicit acknowledgement before download.
-Touching/overlapping slots, disconnected plates, a slot wider than its fitted
-stitch, or a failed mesh check block the STL. The app does not quietly delete
-stitches or add bridges to make an invalid selection printable.
+| Setting | New default |
+| --- | ---: |
+| SVG line weight | 0.9 mm |
+| Export area | Full panel |
+| Plate thickness | 0.9 mm |
+| Opening width | 1.8 mm |
+| Protective rim | Enabled |
+| Minimum rim width | 1.0 mm |
+| Outer corner radius | 0.6 mm |
+| Cut style | Stitch slots (dashed) |
 
-Widening marks from a thin SVG stroke to a useful marking slot can significantly
-reduce plastic near a junction. For the default interlaced pattern at 48 mm repeat
-width, 2 mm target stitches, and 0.9 mm slots, the measured slot-to-slot web is
-about 0.35 mm with a 1 mm junction opening. Increasing that opening to 2 mm gives
-about 1.00 mm between slots, but can still leave thin rims at the repeat boundary.
-Both configurations are mathematically connected; neither is a physical-print
-certification. Look at the slicer's actual toolpaths and print a small sample.
+Stencil fields accept typed decimals, arrow stepping, and sliders. A focused
+field is not normalized during typing, so entering `1.2` does not become `12`.
+Validation is finalized on change/blur or Enter. Invalid intermediate entries
+cannot leave a stale STL download enabled.
 
-The red top-view indicators mark examples of sub-threshold areas (up to 80), not
-all possible weak sections. `>=` before the minimum-web metric means no closer
-pair was found within the measured search radius. The check is not a medial-axis
-analysis, minimum load-bearing-neck proof, printer tolerance simulation, or
-mechanical-strength analysis. Thin rims and boundary openings need particular
-attention on a finite physical tile.
+**The width default is not a printability guarantee.** Some fitted 2 mm stitches
+are shorter than 1.8 mm or too close at junctions for 1.8 mm openings. Those
+combinations correctly block export. Reduce opening width, increase stitch
+length/tile size/junction opening, or use an appropriate checked example. The
+app does not silently remove marks, widen gaps, or alter the design to make an
+unsafe configuration appear valid.
 
-The **Save build report** button records dimensions, source settings, mesh
-statistics, and warnings in JSON. It is separate from **Save settings**, which
-stores both pattern and stencil controls. Version-1 settings files still load;
-missing stencil fields receive their defaults.
+### Protective rim and rounded corners
 
-## How the geometry is made
+The rim is uncut material around the centered complete-tile array. For a fixed
+canvas its width is reserved **inside** the selected outer dimensions before
+calculating tile counts. Remainder space can make the actual border wider than
+the selected minimum. For **One repeat**, the plate is one tile plus the rim on
+all four sides. Cuts that reach the design area's boundary stop there, not at
+the outside of the rimmed plate.
 
-The existing geometric primitives and fitted stitch intervals remain the source
-of truth. The STL engine does not trace a raster or reverse-engineer an exported
-SVG.
+Outer corners are rounded in XY only; there is no Z bevel or backing floor.
+The effective corner radius is limited to the rim width and half the plate size
+so rounding cannot intrude into the design. A warning reports any radius limit.
+Disabling the rim restores square outer corners.
 
-1. Sample each fitted stitch along its original curve, insetting each end by
-   half the selected slot width. Adaptive centerline chord tolerance: 0.0015 mm.
-2. Construct a constant-width polygonal slot with round end caps. Nominal cap
-   chord tolerance: 0.003 mm. Smooth sampled curves use offset joins.
-3. Quantize to a 0.0001 mm XY grid, make periodic copies, and clip to the complete
-   tile or panel. The final STL then uses Float32 coordinates.
-4. Diagnose distinct slot collisions and insufficient spacing.
-5. Sweep the remaining material into trapezoidal cells, retaining unchanged
-   intervals across adjacent scan bands. Split every shared horizontal edge at
-   identical vertices to avoid T-junctions.
-6. Triangulate the cells and assemble the actual material boundary loops.
-7. Extrude the surface and its boundaries to the chosen thickness, with no
-   faces covering the slot interiors.
-8. Validate topology, orientation, area, and volume, then write binary STL.
+**Do not butt rimmed stencil edges together to repeat a pattern.** Their outside
+size includes blank border material. Align by the pattern repeat coordinates.
+For physically edge-to-edge repeat tiles, disable the rim and choose One repeat.
 
-SVG curves stay analytic as before. STL outlines are necessarily polygonal
-approximations. Repeat dimensions are quantized to the XY grid before replication
-so neighboring stencil tiles use the same lattice. Displayed dimensions are
-rounded for readability; slicer and report values are more precise.
+### Three through-cut styles
 
-Geometry calculation normally runs in a cancellable Blob Web Worker. An older
-browser that cannot construct a worker uses the same engine on the main thread;
-large panels may pause the UI in that fallback. The 3D preview uses the actual
-mesh with WebGL, or a software-projected, flat-shaded mesh and verified boundary
-loops when WebGL is unavailable. Drag to rotate, wheel to zoom, double-click or
-Home to reset; keyboard arrows and +/- are also supported.
+- **Stitch slots:** round-ended slots on the fitted stitch intervals. Opening
+  width is independent of SVG line weight. Slot centerlines are shortened before
+  adding caps so widening them does not increase nominal stitch length.
+- **Dots:** one circular hole at the midpoint of every fitted stitch; opening
+  width is the diameter. These are marking dots, not needle-puncture endpoints.
+- **Solid lines:** continuous construction geometry without stitch gaps.
+  Intersecting cuts are explicitly unioned before meshing. A closed cut loop can
+  release a loose island; the exporter blocks disconnected plates instead of
+  quietly dropping islands or adding unrequested bridges. Open patterns such as
+  wave rows can remain connected through the protective rim. Minimum internal
+  web thickness is not measured in solid mode, and the UI says so.
 
-There are explicit complexity limits: 10,000 slot cutouts, 400,000 slot-boundary
-vertices, 400,000 surface triangles, and 900,000 final STL triangles. Hitting a
-limit asks for a smaller panel instead of an incomplete export.
+All modes cut completely through a flat plate. There is no recessed floor.
+STL coordinates are millimeters; import them as millimeters in the slicer.
+
+## Geometry and safety checks
+
+The periodic construction paths remain the source of truth for SVGs and STLs.
+Stitch fitting, junction clearances, and exports are common engine behavior, not
+part of each pattern file. SVG curves are analytic; STL boundaries are sampled
+polygonal approximations on a 0.0001 mm XY grid. Solid intersections are split
+at shared quantized vertices before the scanline union, material decomposition,
+and extrusion. Surface joins share matching vertices rather than T-junctions.
+
+Discrete cutouts are checked for overlaps, nearby thin webs, and edge margins.
+The threshold (default 0.9 mm) is advisory, not a nozzle/material certification.
+Thin-plastic warnings require acknowledgement. Overlapping discrete holes,
+disconnected material, point-touching boundaries, invalid triangles, inconsistent
+orientation, failed area/volume checks, and non-closed meshes block downloads.
+Solid mode permits intentional overlapping cuts, but not disconnected material.
+Checks are not a full mechanical, medial-axis, tolerance, or slicer simulation.
+
+Generation runs in a cancellable local Blob worker, with a main-thread fallback.
+The top view and rotatable 3D view use the computed geometry. Mesh complexity
+limits produce an error rather than an incomplete file. Inspect the sliced
+result and print a small test; software checks do not certify physical prints.
+
+## Saved settings
+
+Version 3 stores canvas sizing, cut style, and rim controls together with the
+existing pattern and stencil settings. Version 1/2 JSON files still load: their
+row/column counts are converted to physical canvas dimensions and their stencils
+retain the legacy no-rim behavior. The checked examples in
+`presets/reference-library/` intentionally keep their original dimensions.
+
+This release uses versioned browser storage so first load starts with the new
+defaults rather than the previous automatic preferences. Explicit saved JSON
+files remain importable. **Reset** restores the current defaults.
 
 ## Source layout
 
 ```text
-index.html                 The complete runtime app; publish this file
-build.py                   Rebuild index.html from src (Python 3, standard library)
-src/
-  template.html            Existing page layout plus integration markers
-  pattern-app.js           Shared geometry/stitch engine, SVGs, print, presets
-  pattern-helpers.js       Periodic line/arc intersections and polyline helpers
-  patterns/                One JavaScript source file per design; auto-discovered
-    interlaced.js
-    grid.js
-    diamonds.js
-    circles.js
-    chevrons.js
-    waves.js
-  stencil-dialog.html      Stencil controls and preview dialog
-  stencil.css              Responsive stencil UI
-  stencil-ui.js            Settings, sampling, worker, preview, downloads
-  stencil-engine.js        Slot geometry, material sweep, mesh, STL, validation
-  stencil-preview.js       WebGL and software mesh viewers
-tests/
-  test_browser.py          Offline browser flow, downloads, desktop/mobile
-  test_guards.py           Invalid settings, cancellation, preset regression
-  test_geometry.js         Mesh generation and invalid-geometry guards
-  validate_stl.py          Independent trimesh/Shapely validation
-PATTERN_FORMAT.md           Pattern authoring contract and examples
-PATTERN_LIBRARY.md          Reference mapping, approximations and stencil notes
-presets/reference-library/  Mesh-checked example settings; warnings still apply
-validation/                Results from this delivery
+index.html                  Generated, self-contained runtime
+build.py                    Python standard-library build
+src/panel-layout.js         Pure canvas / complete-tile fitting math
+src/pattern-app.js          Geometry, stitch fitting, SVG, print, main UI
+src/pattern-helpers.js      Shared pattern-authoring geometry helpers
+src/patterns/*.js           One source file per design
+src/template.html          Page layout and main styles
+src/stencil-dialog.html    Stencil controls
+src/stencil.css            Responsive stencil styling
+src/stencil-ui.js          Input, curve sampling, worker and downloads
+src/stencil-engine.js      Cut outlines, union, material mesh, STL checks
+src/stencil-preview.js     3D mesh viewers
+presets/reference-library/ Legacy checked example settings
+PATTERN_FORMAT.md          Design authoring guide
+PATTERN_LIBRARY.md         Reference reconstruction notes
+validation/export-controls/ Current feature and regression summaries
 ```
-
-After editing source or adding/removing a file in `src/patterns/`, run:
-
-```sh
-python3 build.py
-```
-
-No npm install or front-end build framework is needed.
 
 ## Verification
 
-The delivered version was tested in Chromium, with the browser context offline.
-The test harness injects the self-contained HTML because this environment blocks
-navigation to local file and HTTP URLs. Therefore a live GitHub Pages deployment,
-Safari/Firefox, and physical prints were **not** verified here. The software 3D
-fallback was exercised and visually inspected; WebGL was unavailable in this
-test environment.
-
-Checks covered all six designs as one-repeat and 2x2 stencils, plus the default
-4x6 interlaced panel. Independent trimesh/Shapely checks verified a single closed
-component, consistent winding, expected dimensions/volume, no covering triangles
-at hole-interior samples, and matching opposite-edge opening traces. Browser
-checks included SVG/print regression, version-1 and version-2 settings, warning
-acknowledgement, overly wide slots, cancellation, and full-panel export.
-
-These are geometric/software tests, not exhaustive tests of every setting.
-Inspect each generated file in a slicer and test your printer/material.
-
-To repeat the checks, install the optional **development-only** tools:
+Dependency-free checks:
 
 ```sh
+python3 tests/test_build.py
+node tests/test_pattern_helpers.js
+node tests/test_layout_stencil.js
+```
+
+Optional development-only browser and independent mesh checks (use a virtual
+environment for Python packages):
+
+```sh
+python3 -m venv .venv
+. .venv/bin/activate
 python -m pip install playwright trimesh shapely numpy
 python -m playwright install chromium
-python tests/test_build.py
+python tests/test_export_controls.py
+python tests/validate_layout_stl.py
 python tests/test_browser.py
 python tests/test_guards.py
 node tests/test_geometry.js
 python tests/validate_stl.py
+python tests/test_reference_patterns.py
+node tests/test_reference_meshes.js
+python tests/validate_reference_stl.py
 ```
 
-Tests use `CHROMIUM_PATH` when set, an installed `chromium` command when present,
-or Playwright's downloaded Chromium otherwise. Generated fixtures and STLs go
-in `test-results/` and are not required by the application.
+Tests honor `CHROMIUM_PATH`, an installed `chromium`, or Playwright's downloaded
+browser. Generated fixtures go in `test-results/` (ignored by Git). New checks
+cover slow typed decimals, preset edits, independent tile size, exact SVG/STL
+canvas dimensions, rounded rims, dots, solid unions, island blocking, zero-fit
+handling, settings compatibility, mobile layout, and actual browser downloads.
+Historical inputs are explicit in regression tests because new defaults are
+intentionally different. Tests are sampled coverage, not proof of every possible
+combination or a physical-print certification.

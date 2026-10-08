@@ -9,9 +9,10 @@ for(const name of names) {
  for(const example of [false,true]) {
   const label=example?'verified':'defaults';
   const file=`${name}${example?'-verified':''}-input.json`;
+  if(!fs.existsSync(path.join(out,file))) { if(example)throw new Error(name+': missing verified fixture');continue; }
   const input=JSON.parse(fs.readFileSync(path.join(out,file),'utf8'));
   for(const count of [1,2]) {
-   const begin=Date.now(),r=StencilEngine.generate({...input,columns:count,rows:count});
+   const begin=Date.now(),r=StencilEngine.generate({...input,columns:count,rows:count,outerW:undefined,outerH:undefined});
    const info={pattern:name,settings:label,layout:`${count}x${count}`,triangles:r.triangles||0,watertight:!!r.watertight,components:r.components,errors:r.errors,warnings:r.warnings,ms:Date.now()-begin};
    if(example) assert(r.buffer && !r.errors.length,`${name}: checked example failed: ${r.errors}`);
    if(r.buffer) {

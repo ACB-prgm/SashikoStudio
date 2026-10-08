@@ -8,10 +8,10 @@
  * IMPORTANT: never dash a cropped tile. Cut only after periodic replication.
  */
 (() => {
-const VERSION = 2;
+const VERSION = 3;
 const TAU = Math.PI * 2;
-const DEFAULTS = Object.freeze({pattern:'interlaced',stitch:2,ratioA:3,ratioB:2,opening:1,tileWidth:48,columns:4,rows:6,weight:0.35,transparent:false,paper:'letter',display:'stitches',seams:false,nodes:false,view:'panel'});
-const LIMITS = {stitch:[0.5,10],ratioA:[1,10],ratioB:[1,10],opening:[0.2,6],tileWidth:[12,120],columns:[1,20],rows:[1,20],weight:[0.15,0.9]};
+const DEFAULTS = Object.freeze({pattern:'interlaced',stitch:2,ratioA:3,ratioB:2,opening:1,tileWidth:48,columns:3,rows:3,panelAuto:true,panelWidth:146,panelHeight:84.623,weight:0.9,transparent:false,paper:'letter',display:'stitches',seams:false,nodes:false,view:'panel'});
+const LIMITS = {stitch:[0.5,10],ratioA:[1,10],ratioB:[1,10],opening:[0.2,6],tileWidth:[12,120],panelWidth:[2,1200],panelHeight:[2,1200],weight:[0.15,0.9]};
 const $ = id => document.getElementById(id);
 const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
 const hypot = (a,b) => Math.hypot(a[0]-b[0],a[1]-b[1]);
@@ -71,19 +71,29 @@ Object.freeze(PATTERNS);
 function validate(raw){
  const out={...DEFAULTS};if(!raw||typeof raw!=='object'||Array.isArray(raw))return out;
  for(const [key,[lo,hi]] of Object.entries(LIMITS)){if(typeof raw[key]==='number'&&Number.isFinite(raw[key]))out[key]=clamp(raw[key],lo,hi);}
- out.columns=Math.round(out.columns);out.rows=Math.round(out.rows);
+ // Old JSON files described a tile count instead of a physical canvas.
+ if(typeof raw.panelAuto==='boolean')out.panelAuto=raw.panelAuto;
+ if(!Object.hasOwn(raw,'panelWidth')&&Number.isFinite(raw.columns)&&Number.isFinite(raw.rows)) {
+   const def=PATTERNS[raw.pattern]||PATTERNS[out.pattern];out.panelAuto=false;
+   out.panelWidth=out.tileWidth*Math.max(1,Math.min(200,Math.round(raw.columns)));
+   out.panelHeight=out.tileWidth*def.aspect*Math.max(1,Math.min(200,Math.round(raw.rows)));
+ }
  if(Object.hasOwn(PATTERNS,raw.pattern))out.pattern=raw.pattern;
  for(const key of ['transparent','seams','nodes'])if(typeof raw[key]==='boolean')out[key]=raw[key];
- if(['letter','a4'].includes(raw.paper))out.paper=raw.paper;
+ if(['letter','a4','a3'].includes(raw.paper))out.paper=raw.paper;
  if(['stitches','geometry','overlay'].includes(raw.display))out.display=raw.display;
  if(['panel','tile','seams'].includes(raw.view))out.view=raw.view;
  return out;
 }
+function getFrame(){return window.SashikoStencil?.getSettings()||SashikoLayout.FRAME;}
+function getPanelLayout(m=model,frame=getFrame()){return SashikoLayout.plan(m.W,m.H,m.s,frame);}
 function nodeKey(p,W,H){let x=mod(p[0],W),y=mod(p[1],H);if(W-x<1e-5||x<1e-5)x=0;if(H-y<1e-5||y<1e-5)y=0;return `${x.toFixed(4)},${y.toFixed(4)}`;}
 
 /** Fit dashes to geometry, not the viewport. No junction is discovered from pixels. */
 function buildModel(raw){
  const s=validate(raw),geo=PATTERNS[s.pattern].build(s.tileWidth),{W,H,edges}=geo,nodes=new Map();
+ const layout=SashikoLayout.plan(W,H,s,getFrame());
+ s.columns=layout.columns;s.rows=layout.rows;s.panelWidth=layout.W;s.panelHeight=layout.H;
  edges.forEach((e,ei)=>{e.id=ei;if(e.periodic)return;[e.p0,e.p1].forEach((p,end)=>{const key=nodeKey(p,W,H),v=e.tangent(!!end).map(x=>end?-x:x);if(!nodes.has(key))nodes.set(key,{key,p:[mod(p[0],W),mod(p[1],H)],arms:[],clearance:0});nodes.get(key).arms.push({ei,end,v});});});
  for(const n of nodes.values()){
   let angle=Math.PI;for(let i=0;i<n.arms.length;i++)for(let j=i+1;j<n.arms.length;j++){const a=n.arms[i].v,b=n.arms[j].v,dot=clamp(a[0]*b[0]+a[1]*b[1],-1,1);angle=Math.min(angle,Math.acos(dot));}
@@ -142,7 +152,7 @@ function buildModel(raw){
  if(maxDeviation>.25)warnings.push(`Fitting changes some stitches by up to ${Math.round(maxDeviation*100)}% from the target. A larger repeat or shorter target stitch usually gives a closer fit. The displayed actual lengths are authoritative.`);
  if(q<=1)warnings.push(`The selected ${mm(s.ratioA)}:${mm(s.ratioB)} ratio makes stitches ${q===1?'equal to':'shorter than'} interior gaps. Choose 3:2 for the longer-stitch style.`);
  const bounds=[Math.min(...edges.map(e=>e.bounds[0])),Math.min(...edges.map(e=>e.bounds[1])),Math.max(...edges.map(e=>e.bounds[2])),Math.max(...edges.map(e=>e.bounds[3]))];
- return {s,W,H,edges,nodes:[...nodes.values()],dashes,lengths,gaps,fits,min,max,maxDeviation,warnings,skipped,omitted,bounds};
+ return {s,W,H,layout,edges,nodes:[...nodes.values()],dashes,lengths,gaps,fits,min,max,maxDeviation,warnings,skipped,omitted,bounds};
 }
 
 // -- Rendering. A single global clip means no per-tile anti-aliased hairlines. --
@@ -170,12 +180,12 @@ function svgFor(m,cols=1,rows=1,options={}){
 }
 
 // -- Application state, accessible controls and responsive preview. --
-let state={...DEFAULTS};try{const saved=JSON.parse(localStorage.getItem('sashiko-studio-v1')||'null');if(saved)state=validate(saved);}catch(_){/* Private/file contexts may disallow storage. */}
+let state={...DEFAULTS};try{const saved=JSON.parse(localStorage.getItem('sashiko-studio-v3')||'null');if(saved)state=validate(saved);}catch(_){/* Private/file contexts may disallow storage. */}
 let model=null,zoom=1,renderTimer=null,toastTimer=null;
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4200);}
-function persist(){try{localStorage.setItem('sashiko-studio-v1',JSON.stringify(state));}catch(_){/* JSON save/load is always available as a fallback. */}}
+function persist(){try{localStorage.setItem('sashiko-studio-v3',JSON.stringify(state));}catch(_){/* JSON save/load is always available as a fallback. */}}
 function syncControls(){
- for(const key of Object.keys(LIMITS)){if($(key))$(key).value=state[key];if($(key+'-range'))$(key+'-range').value=state[key];}
+ for(const key of Object.keys(LIMITS)){if($(key)&&document.activeElement!==$(key))$(key).value=state[key];if($(key+'-range'))$(key+'-range').value=state[key];}
  for(const key of ['transparent','seams','nodes'])$(key).checked=state[key];
  for(const key of ['paper','display'])$(key).value=state[key];
  document.querySelectorAll('[data-pattern]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pattern===state.pattern)));
@@ -183,13 +193,32 @@ function syncControls(){
  document.querySelectorAll('[data-ratio]').forEach(b=>{const [a,c]=b.dataset.ratio.split(',').map(Number);b.classList.toggle('active',Math.abs(a/c-state.ratioA/state.ratioB)<1e-6);});
 }
 function dimensionsForView(){return state.view==='tile'?[1,1]:state.view==='seams'?[3,3]:[state.columns,state.rows];}
-function drawPreview(){if(!model)return;const [cols,rows]=dimensionsForView();$('sheet').innerHTML=svgFor(model,cols,rows,{mode:state.display,seams:state.seams||state.view==='seams',nodes:state.nodes,transparent:false});sizePreview();$('sheet-label').textContent=`${cols} x ${rows} repeat${cols*rows===1?'':'s'}  /  ${mm(cols*model.W)} x ${mm(rows*model.H)} mm${state.view==='seams'?'  /  seams are preview guides only':''}`;}
-function sizePreview(){if(!model)return;const [cols,rows]=dimensionsForView(),stage=$('preview-stage'),svg=$('sheet').querySelector('svg');if(!svg)return;const availW=Math.max(150,stage.clientWidth-60),availH=Math.max(180,stage.clientHeight-77),scale=Math.min(availW/(cols*model.W),availH/(rows*model.H))*zoom;svg.style.width=`${cols*model.W*scale}px`;svg.style.height=`${rows*model.H*scale}px`;$('zoom-label').textContent=zoom===1?'Fit':`${Math.round(zoom*100)}%`;}
+/** Keep the complete-tile array centered inside the requested physical canvas. */
+function panelSVG(m,options={}){
+ const l=getPanelLayout(m),[x,y,w,h]=options.rect||[0,0,l.W,l.H];
+ let drawing='';
+ if(l.valid){const inner=svgFor(m,l.columns,l.rows,{...options,rect:undefined,transparent:true});drawing=inner.replace(`width="${fmt(l.contentW)}mm"`,`width="${fmt(l.contentW)}"`).replace(`height="${fmt(l.contentH)}mm"`,`height="${fmt(l.contentH)}"`).replace('<svg ',`<svg x="${fmt(l.x)}" y="${fmt(l.y)}" overflow="hidden" `);}
+ return `<svg xmlns="http://www.w3.org/2000/svg" width="${fmt(w)}mm" height="${fmt(h)}mm" viewBox="${fmt(x)} ${fmt(y)} ${fmt(w)} ${fmt(h)}" role="img" aria-label="Pattern export canvas"><title>${xml(PATTERNS[m.s.pattern].name)} - export canvas</title>${options.transparent?'':`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="white"/>`}${drawing}</svg>`;
+}
+function drawPreview(){
+ if(!model)return;const [cols,rows]=dimensionsForView(),opts={mode:state.display,seams:state.seams||state.view==='seams',nodes:state.nodes,transparent:false};
+ $('sheet').innerHTML=state.view==='panel'?panelSVG(model,opts):svgFor(model,cols,rows,opts);sizePreview();
+ const l=getPanelLayout(model);
+ $('sheet-label').textContent=state.view==='panel'?`${l.columns} x ${l.rows} complete tiles / ${mm(l.W)} x ${mm(l.H)} mm canvas / centered`:`${cols} x ${rows} repeat${cols*rows===1?'':'s'} / ${mm(cols*model.W)} x ${mm(rows*model.H)} mm${state.view==='seams'?' / guides only':''}`;
+}
+function sizePreview(){
+ if(!model)return;const [cols,rows]=dimensionsForView(),l=getPanelLayout(model),w=state.view==='panel'?l.W:cols*model.W,h=state.view==='panel'?l.H:rows*model.H,stage=$('preview-stage'),svg=$('sheet').querySelector('svg');if(!svg)return;
+ const availW=Math.max(150,stage.clientWidth-60),availH=Math.max(180,stage.clientHeight-77),scale=Math.min(availW/w,availH/h)*zoom;
+ svg.style.width=`${w*scale}px`;svg.style.height=`${h*scale}px`;$('zoom-label').textContent=zoom===1?'Fit':`${Math.round(zoom*100)}%`;
+}
 function render(){
  try{model=buildModel(state);state=model.s;const p=PATTERNS[state.pattern];$('pattern-title').textContent=p.name;$('pattern-note').textContent=p.note;
  $('target-gap').textContent=`${mm(state.stitch/(state.ratioA/state.ratioB))} mm target gap`;
  const q=state.ratioA/state.ratioB,period=25,a=period*q/(1+q);$('rhythm').innerHTML=`<path d="M2 7.5H139" stroke="#315e51" stroke-width="2" stroke-dasharray="${a} ${period-a}" fill="none"/>`;
- $('tile-dimensions').textContent=`${mm(model.W)} x ${mm(model.H)} mm`;$('panel-dimensions').textContent=`Panel: ${mm(model.W*state.columns)} x ${mm(model.H*state.rows)} mm`;
+ $('tile-dimensions').textContent=`${mm(model.W)} x ${mm(model.H)} mm`;const layout=getPanelLayout(model);$('panel-dimensions').textContent=`${layout.columns} columns x ${layout.rows} rows / ${mm(layout.contentW)} x ${mm(layout.contentH)} mm of pattern`;
+ $('tile-height').textContent=`Tile height: ${mm(model.H)} mm (pattern aspect preserved)`;
+ $('panel-fit-note').textContent=layout.valid?`${state.panelAuto?'3 x 3 starting layout. ':''}Complete tiles only. Margins: ${mm(layout.x)} mm left/right, ${mm(layout.y)} mm top/bottom. ${layout.rim?'Includes the minimum STL rim.':'No rim reserved.'}`:'No complete tile fits. Increase the canvas or decrease tile size.';
+ $('export-panel').disabled=!layout.valid;$('print-panel').disabled=!layout.valid;
  $('actual-length').textContent=model.lengths.length?(model.max-model.min<.015?`${mm(model.min)} mm`:`${mm(model.min)}-${mm(model.max)} mm`):'No stitches';
  $('fit-note').textContent=`Target ${mm(state.stitch)} mm / up to ${Math.round(model.maxDeviation*100)}% fit adjustment`;
  $('stitch-count').textContent=model.dashes.length.toLocaleString();$('gap-range').textContent=model.gaps.length?`Interior gaps ${mm(Math.min(...model.gaps))}-${mm(Math.max(...model.gaps))} mm`:'No interior gaps on these intervals';
@@ -202,26 +231,38 @@ function scheduleRender(){clearTimeout(renderTimer);renderTimer=setTimeout(rende
 function flush(){clearTimeout(renderTimer);render();if(!model)throw new Error('The pattern is not ready. Reset the settings and try again.');}
 function makeCards(){for(const [key,p] of Object.entries(PATTERNS).sort((a,b)=>a[1].order-b[1].order||a[0].localeCompare(b[0]))){const b=document.createElement('button');b.type='button';b.className='pattern-card';b.dataset.pattern=key;b.setAttribute('aria-pressed',String(state.pattern===key));const m=buildModel({...DEFAULTS,pattern:key,tileWidth:24,stitch:1.2,opening:.65,weight:.2});b.innerHTML=svgFor(m,2,key==='interlaced'?2:1,{mode:'stitches'})+`<span class="card-name">${xml(p.name)}</span>`;b.addEventListener('click',()=>{state.pattern=key;zoom=1;render();});$('pattern-list').append(b);}}
 function download(text,name,type){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
-function exportSVG(tile){try{flush();const mode=state.display==='geometry'?'geometry':'stitches',cols=tile?1:state.columns,rows=tile?1:state.rows,svg=svgFor(model,cols,rows,{mode,transparent:state.transparent});download('<?xml version="1.0" encoding="UTF-8"?>\n'+svg,`sashiko-${state.pattern}-${tile?'repeat':'panel'}-${mm(cols*model.W)}x${mm(rows*model.H)}mm-${mode}.svg`,'image/svg+xml;charset=utf-8');toast(`${tile?'Repeat':'Panel'} SVG saved. Preserve its exact width and height when tiling.`);}catch(e){toast(e.message);}}
+function exportSVG(tile){try{
+ flush();const mode=state.display==='geometry'?'geometry':'stitches',l=getPanelLayout(model);
+ if(!tile&&!l.valid)throw new Error('No complete tile fits the selected export size.');
+ const svg=tile?svgFor(model,1,1,{mode,transparent:state.transparent}):panelSVG(model,{mode,transparent:state.transparent});
+ const w=tile?model.W:l.W,h=tile?model.H:l.H;
+ download('<?xml version="1.0" encoding="UTF-8"?>\n'+svg,`sashiko-${state.pattern}-${tile?'repeat':'panel'}-${mm(w)}x${mm(h)}mm-${mode}.svg`,'image/svg+xml;charset=utf-8');
+ toast(tile?'Repeat SVG saved. Preserve its exact size when tiling.':'Panel SVG saved at the selected canvas size.');
+ }catch(e){toast(e.message);}}
 
 /** Generate exact-scale printable crops, with 5 mm overlap between pages. */
 function buildPrint(m){
- const s=m.s,mode=s.display==='geometry'?'geometry':'stitches',[paperW,paperH]=s.paper==='a4'?[210,297]:[215.9,279.4],cropW=paperW-20,cropH=paperH-40,overlap=5,W=m.W*s.columns,H=m.H*s.rows;
+ const s=m.s,l=getPanelLayout(m),mode=s.display==='geometry'?'geometry':'stitches';
+ if(!l.valid)throw new Error('No complete tile fits the selected export size.');
+ const [paperW,paperH]=s.paper==='a4'?[210,297]:s.paper==='a3'?[297,420]:[215.9,279.4];
+ const fits=l.W<=paperW+1e-7&&l.H<=paperH+1e-7;
+ const cropW=fits?paperW:paperW-20,cropH=fits?paperH:paperH-40,overlap=5,W=l.W,H=l.H;
  const nx=W<=cropW?1:1+Math.ceil((W-cropW)/(cropW-overlap)),ny=H<=cropH?1:1+Math.ceil((H-cropH)/(cropH-overlap));
- if(nx*ny>64)throw new Error(`This panel needs ${nx*ny} pages. Reduce panel size to 64 pages or fewer, or export SVG instead.`);
+ if(nx*ny>64)throw new Error(`This canvas needs ${nx*ny} pages. Reduce the size or export SVG instead.`);
  const pages=[];
  for(let iy=0;iy<ny;iy++)for(let ix=0;ix<nx;ix++){
-  const x=ix*(cropW-overlap),y=iy*(cropH-overlap),w=Math.min(cropW,W-x),h=Math.min(cropH,H-y),num=iy*nx+ix+1;
-  const drawing=svgFor(m,s.columns,s.rows,{mode,rect:[x,y,w,h],transparent:false});
-  const ruler='<svg xmlns="http://www.w3.org/2000/svg" width="52mm" height="7mm" viewBox="0 0 52 7"><path d="M1 2V5M1 3.5H51M51 2V5" fill="none" stroke="black" stroke-width=".18"/><text x="26" y="1.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="2">50 mm calibration</text></svg>';
-  pages.push(`<section class="print-page" style="width:${paperW}mm;height:${paperH}mm"><div class="print-heading"><strong>${xml(PATTERNS[s.pattern].name)}</strong> / ${mm(W)} x ${mm(H)} mm panel<br>Page ${num} of ${nx*ny} / row ${iy+1}, column ${ix+1} / origin ${mm(x)}, ${mm(y)} mm</div><div class="print-map">${drawing}</div><div class="print-foot">${ruler}<div class="print-caption">Print at 100% / actual size. Disable headers and footers.<br>${nx*ny>1?'Adjacent pages overlap by 5 mm. Align matching stitches.':'Measure the ruler before transferring to fabric.'}<br>${mode==='geometry'?'Solid guide geometry':`Target ${mm(s.stitch)} mm / actual ${mm(m.min)}-${mm(m.max)} mm / ${mm(s.ratioA)}:${mm(s.ratioB)} interior ratio`}</div></div></section>`);
+  const x=ix*(cropW-overlap),y=iy*(cropH-overlap),w=Math.min(cropW,W-x),h=Math.min(cropH,H-y);
+  const drawing=panelSVG(m,{mode,rect:[x,y,w,h],transparent:false});
+  const heading=fits?'':`<div class="print-heading"><strong>${xml(PATTERNS[s.pattern].name)}</strong> / ${mm(W)} x ${mm(H)} mm canvas<br>Row ${iy+1}, column ${ix+1} / 5 mm overlap</div>`;
+  const style=fits?`padding:0;display:flex;align-items:center;justify-content:center;`:'';
+  pages.push(`<section class="print-page" style="width:${paperW}mm;height:${paperH}mm;${style}">${heading}<div class="print-map">${drawing}</div></section>`);
  }
  return {html:pages.join(''),count:pages.length,paperW,paperH,nx,ny,cropW,cropH,overlap};
 }
 
 for(const [key,[lo,hi]] of Object.entries(LIMITS)){
- const el=$(key);el.addEventListener('input',()=>{const value=el.valueAsNumber;if(!Number.isFinite(value)||value<lo||value>hi)return;state[key]=['rows','columns'].includes(key)?Math.round(value):value;if($(key+'-range'))$(key+'-range').value=state[key];scheduleRender();});
- el.addEventListener('change',()=>{const value=el.valueAsNumber;state[key]=Number.isFinite(value)?clamp(value,lo,hi):DEFAULTS[key];if(['rows','columns'].includes(key))state[key]=Math.round(state[key]);render();});
+ const el=$(key);el.addEventListener('input',()=>{const value=el.valueAsNumber;if(!Number.isFinite(value)||value<lo||value>hi)return;state[key]=value;if(key==='panelWidth'||key==='panelHeight')state.panelAuto=false;if($(key+'-range'))$(key+'-range').value=state[key];scheduleRender();});
+ el.addEventListener('change',()=>{const value=el.valueAsNumber;state[key]=Number.isFinite(value)?clamp(value,lo,hi):DEFAULTS[key];if(key==='panelWidth'||key==='panelHeight')state.panelAuto=false;el.value=state[key];render();});
  const range=$(key+'-range');if(range)range.addEventListener('input',()=>{state[key]=Number(range.value);el.value=state[key];scheduleRender();});
 }
 document.querySelectorAll('[data-ratio]').forEach(b=>b.addEventListener('click',()=>{[state.ratioA,state.ratioB]=b.dataset.ratio.split(',').map(Number);render();}));
@@ -232,12 +273,22 @@ $('zoom-in').addEventListener('click',()=>{zoom=Math.min(6,zoom*1.4);sizePreview
 $('export-tile').addEventListener('click',()=>exportSVG(true));$('export-panel').addEventListener('click',()=>exportSVG(false));
 $('save-preset').addEventListener('click',()=>{flush();download(JSON.stringify({app:'Sashiko Pattern Studio',version:VERSION,settings:state,stencil:window.SashikoStencil?.getSettings()},null,2),'sashiko-settings.json','application/json');toast('Settings saved. Load this JSON file to restore the design.');});
 $('load-preset').addEventListener('click',()=>$('preset-file').click());
-$('preset-file').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>100000)throw new Error('Settings files must be smaller than 100 KB.');const parsed=JSON.parse(await file.text());if(parsed.app!=='Sashiko Pattern Studio'||![1,2].includes(parsed.version)||!parsed.settings)throw new Error('This is not a supported Sashiko Pattern Studio settings file.');state=validate(parsed.settings);if(window.SashikoStencil)window.SashikoStencil.setSettings(parsed.stencil||{});zoom=1;render();toast('Settings loaded.');}catch(e){toast('Could not load settings: '+e.message);}finally{event.target.value='';}});
+$('preset-file').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>100000)throw new Error('Settings files must be smaller than 100 KB.');const parsed=JSON.parse(await file.text());if(parsed.app!=='Sashiko Pattern Studio'||![1,2,3].includes(parsed.version)||!parsed.settings)throw new Error('This is not a supported Sashiko Pattern Studio settings file.');state=validate(parsed.settings);if(window.SashikoStencil)window.SashikoStencil.setSettings(parsed.version<3?{scope:'repeat',thickness:1.4,slotWidth:.9,rimEnabled:false,cornerRadius:0,...parsed.stencil}:parsed.stencil||{});zoom=1;render();toast('Settings loaded.');}catch(e){toast('Could not load settings: '+e.message);}finally{event.target.value='';}});
 $('reset').addEventListener('click',()=>{state={...DEFAULTS};window.SashikoStencil?.setSettings({});zoom=1;render();toast('Default design restored.');});
 $('print-panel').addEventListener('click',()=>{try{flush();const pages=buildPrint(model);$('print-root').innerHTML=pages.html;$('print-size').textContent=`@media print{@page{size:${pages.paperW}mm ${pages.paperH}mm;margin:0}}`;setTimeout(()=>window.print(),120);}catch(e){toast(e.message);}});
 window.addEventListener('resize',sizePreview);
 if(typeof ResizeObserver!=='undefined')new ResizeObserver(sizePreview).observe($('preview-stage'));
 // A small read-only testing/extension surface. All exported files remain standalone.
-window.SashikoStudio=Object.freeze({version:VERSION,defaults:DEFAULTS,patterns:PATTERNS,validate,buildModel,svgFor,buildPrint,getState:()=>({...state}),getModel:()=>model,setState:raw=>{state=validate({...state,...raw});render();}});
+window.SashikoStudio=Object.freeze({version:VERSION,defaults:DEFAULTS,patterns:PATTERNS,validate,buildModel,svgFor,panelSVG,getPanelLayout,buildPrint,getState:()=>({...state}),getModel:()=>model,setState:raw=>{const next={...state,...raw};
+ if((Object.hasOwn(raw,'columns')||Object.hasOwn(raw,'rows'))&&!Object.hasOwn(raw,'panelWidth')){const w=next.tileWidth,h=w*PATTERNS[next.pattern].aspect,r=getFrame().rimEnabled?getFrame().rimWidth:0;next.panelAuto=false;next.panelWidth=(raw.columns??state.columns)*w+2*r;next.panelHeight=(raw.rows??state.rows)*h+2*r;}
+ else if((Object.hasOwn(raw,'panelWidth')||Object.hasOwn(raw,'panelHeight'))&&!Object.hasOwn(raw,'panelAuto'))next.panelAuto=false;
+ state=validate(next);render();}});
+
+$('size-preset').addEventListener('change',()=>{
+ const value=$('size-preset').value;if(!value)return;
+ if(value==='auto')state.panelAuto=true;
+ else{const [w,h]=value.split(',').map(Number);state.panelAuto=false;state.panelWidth=w;state.panelHeight=h;if(value==='215.9,279.4')state.paper='letter';if(value==='210,297')state.paper='a4';if(value==='297,420')state.paper='a3';}
+ $('size-preset').value='';zoom=1;render();
+});
 makeCards();syncControls();render();
 })();

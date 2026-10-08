@@ -11,6 +11,8 @@ with sync_playwright() as p:
     page.context.set_offline(True)
     page.set_content((ROOT/"index.html").read_text(),wait_until="load")
     page.wait_for_function('window.SashikoStudio && window.SashikoStencil')
+    # Original six: preserve historical inputs explicitly to catch mesh regressions.
+    page.evaluate('SashikoStudio.setState({weight:.35,columns:4,rows:6});SashikoStencil.setSettings({scope:"repeat",thickness:1.4,slotWidth:.9,rimEnabled:false})')
     page.screenshot(path=str(OUT/'main-desktop.png'),full_page=True)
     page.click('#export-stencil')
     page.wait_for_function('!SashikoStencil.isBusy()',timeout=120000)
@@ -45,7 +47,7 @@ with sync_playwright() as p:
     page.click('#stencil-close')
     with page.expect_download() as info:page.click('#save-preset')
     info.value.save_as(OUT/'settings-v2.json')
-    saved=json.loads((OUT/'settings-v2.json').read_text());assert saved['version']==2 and saved['stencil']['slotWidth']==.9
+    saved=json.loads((OUT/'settings-v2.json').read_text());assert saved['version']==3 and saved['stencil']['slotWidth']==.9
     page.set_viewport_size({'width':390,'height':844});page.click('#export-stencil')
     page.wait_for_function('!SashikoStencil.isBusy() && SashikoStencil.getResult() !== null',timeout=120000)
     page.click('[data-stencil-view="top"]')

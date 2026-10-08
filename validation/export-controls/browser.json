@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "requested defaults and automatic 3x3",
+    "four visible design rows with internal scrolling",
+    "presets remain editable, tile size independent, true-scale nested SVG",
+    "typed decimals in all six stencil number fields, including pauses",
+    "exact-size framed STL, rounded corners, dots, actual download",
+    "solid union exports open waves and blocks loose islands",
+    "zero-fit guard and return to automatic sizing",
+    "version 3 round-trip and version 2 compatibility",
+    "mobile layout and cancellation"
+  ],
+  "pageErrors": [],
+  "offline": true
+}

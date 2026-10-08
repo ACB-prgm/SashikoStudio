@@ -1,0 +1,66 @@
+[
+  {
+    "case": "clamped-radius",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 2.790018811538175e-07,
+    "triangles": 544
+  },
+  {
+    "case": "fixed-canvas",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 0.0002651059221534524,
+    "triangles": 1288
+  },
+  {
+    "case": "no-rim",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 1.5277999665386233e-06,
+    "triangles": 204
+  },
+  {
+    "case": "round-dots",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 3.4645739503957884e-06,
+    "triangles": 692
+  },
+  {
+    "case": "rounded-slots",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 2.425243280868017e-06,
+    "triangles": 436
+  },
+  {
+    "case": "solid-cross",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 5.680596757429157e-06,
+    "triangles": 320
+  },
+  {
+    "case": "solid-diagonals",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 0.00033361270668308407,
+    "triangles": 968
+  },
+  {
+    "case": "solid-zigzag",
+    "closed": true,
+    "connected": true,
+    "throughHoles": true,
+    "independentVolumeError": 8.56295916662475e-05,
+    "triangles": 896
+  }
+]

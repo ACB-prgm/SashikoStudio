@@ -62,6 +62,7 @@ def build() -> None:
     html = html.replace('<!-- STENCIL_DIALOG -->', (SRC / 'stencil-dialog.html').read_text(encoding='utf-8'))
 
     script_sources = [
+        ('panel-layout.js', 'panel-layout-source', read_safe(SRC / 'panel-layout.js')),
         ('pattern-app.js', 'pattern-app-source', pattern_app),
         ('stencil-engine.js', 'stencil-engine-source', read_safe(SRC / 'stencil-engine.js')),
         ('stencil-preview.js', 'stencil-preview-source', read_safe(SRC / 'stencil-preview.js')),
