@@ -1,10 +1,11 @@
 /* Sashiko Pattern Studio: dependency-free stencil geometry. Units are mm.
- * Input: disjoint, rounded slot rings on a periodic lattice.
+ * Input: rounded slots, circular dots, or unioned continuous cuts on a periodic lattice.
  * Algorithm: subtract holes by a horizontal sweep; merge unchanged material
  * intervals into trapezoids; split ALL shared horizontal edges identically;
  * triangulate each convex cell, then extrude its boundary. This avoids the
  * non-conforming hole bridges/T-junctions possible with a rendering-only
- * triangulator. Overlapping slots are diagnosed, never silently merged.
+ * triangulator. Separate stitch holes are checked for collision; solid cuts are
+ * explicitly unioned. All exports still require one connected, closed plate.
  */
 (function(root) {
 'use strict';
@@ -64,23 +65,38 @@ function ringDistance(a,b,limit) {
  return best;
 }
 function selfCrosses(ring) {for(let i=0;i<ring.length;i++)for(let j=i+2;j<ring.length;j++){if(i===0&&j===ring.length-1)continue;if(segmentDistance(ring[i],ring[(i+1)%ring.length],ring[j],ring[(j+1)%ring.length]).d<1e-8)return true;}return false;}
+function circleRing(center,r) {
+ const n=Math.max(24,Math.ceil(Math.PI/Math.acos(Math.max(-1,1-TOL/r))));
+ return clean(Array.from({length:n},(_,i)=>[center[0]+r*Math.cos(2*Math.PI*i/n),center[1]+r*Math.sin(2*Math.PI*i/n)]));
+}
+function roundedRectangle(W,H,r=0) {
+ r=Math.max(0,Math.min(r,W/2,H/2));if(r<EPS)return [[0,0],[W,0],[W,H],[0,H]];
+ const n=Math.max(6,Math.ceil((Math.PI/2)/(2*Math.acos(Math.max(-1,1-TOL/r))))),out=[];
+ for(const [cx,cy,a0]of [[W-r,r,-Math.PI/2],[W-r,H-r,0],[r,H-r,Math.PI/2],[r,r,Math.PI]])for(let i=0;i<=n;i++){const a=a0+i*Math.PI/(2*n);out.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}
+ return clean(out);
+}
 function prepareSlots(input) {
- const W=snap(input.tileW),H=snap(input.tileH),fullW=snap(W*input.columns),fullH=snap(H*input.rows),slots=[],original=[];
+ const tileW=snap(input.tileW),tileH=snap(input.tileH),contentW=snap(tileW*input.columns),contentH=snap(tileH*input.rows);
+ const rim=input.rimEnabled?input.rimWidth:0,W=snap(input.outerW??(contentW+2*rim)),H=snap(input.outerH??(contentH+2*rim));
+ if(W+EPS*4<contentW+2*rim||H+EPS*4<contentH+2*rim)throw new Error('The complete tile array and rim do not fit the selected export size.');
+ const ox=snap((W-contentW)/2),oy=snap((H-contentH)/2),slots=[],original=[];
+ // A radius no larger than the reserved rim cannot round into the design area.
+ const radius=input.rimEnabled?Math.min(input.cornerRadius||0,rim,W/2,H/2):0;
  for(let i=0;i<input.paths.length;i++){
-  const ring=roundedSlot(input.paths[i],input.slotWidth),b=bounds(ring);
-  if(selfCrosses(ring))throw new Error('A rounded slot folds over itself. Reduce the slot width or increase the repeat size.');
+  const ring=input.style==='dots'?circleRing(input.paths[i][0],input.slotWidth/2):roundedSlot(input.paths[i],input.slotWidth),b=bounds(ring);
+  if(selfCrosses(ring))throw new Error('A cut outline folds over itself. Reduce its width or increase tile size.');
   original.push(ring);
-  const x0=Math.ceil(-b[2]/W),x1=Math.floor((fullW-b[0])/W),y0=Math.ceil(-b[3]/H),y1=Math.floor((fullH-b[1])/H);
+  const x0=Math.ceil(-b[2]/tileW),x1=Math.floor((contentW-b[0])/tileW),y0=Math.ceil(-b[3]/tileH),y1=Math.floor((contentH-b[1])/tileH);
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){
-   const shifted=ring.map(p=>[snap(p[0]+x*W),snap(p[1]+y*H)]),clipped=clipRing(shifted,fullW,fullH);
+   const shifted=ring.map(p=>[snap(p[0]+x*tileW),snap(p[1]+y*tileH)]),clipped=clipRing(shifted,contentW,contentH).map(p=>[snap(p[0]+ox),snap(p[1]+oy)]);
    if(clipped.length<3||Math.abs(area(clipped))<EPS*EPS)continue;
-   slots.push({ring:clipped,full:shifted,b:bounds(clipped),id:`${i}:${x}:${y}`});
-   if(slots.length>MAX_SLOTS)throw new Error(`This selection exceeds ${MAX_SLOTS.toLocaleString()} slots. Export one repeat or a smaller panel.`);
+   slots.push({ring:clipped,full:clipped,b:bounds(clipped),id:`${i}:${x}:${y}`});
+   if(slots.length>MAX_SLOTS)throw new Error(`This selection exceeds ${MAX_SLOTS.toLocaleString()} cutouts. Choose a smaller panel.`);
   }
  }
- if(!slots.length)throw new Error('No stitch slots fit this selection. Increase the repeat size or reduce the stitch opening.');
- if(slots.reduce((n,s)=>n+s.full.length,0)>MAX_VERTICES)throw new Error('This panel is too complex for the browser mesh limit. Export fewer repeats.');
- return {W:fullW,H:fullH,tileW:W,tileH:H,slots,original};
+ if(!slots.length)throw new Error('No openings fit this selection. Increase tile size or reduce the junction opening.');
+ if(slots.reduce((n,s)=>n+s.ring.length,0)>MAX_VERTICES)throw new Error('This panel is too complex for the browser mesh limit. Export fewer tiles.');
+ return {W,H,tileW,tileH,contentW,contentH,offset:[ox,oy],rim,cornerRadius:radius,outerRing:roundedRectangle(W,H,radius),slots,original};
 }
 function spacingCheck(slots,W,H,threshold) {
  const limit=Math.max(3,threshold*2),sorted=[...slots].sort((a,b)=>a.b[0]-b.b[0]),near=[],marks=[];let min=limit,minFound=false,collisions=0,thin=0,edgeMin=Infinity,edgeCuts=0;
@@ -104,34 +120,68 @@ function spacingCheck(slots,W,H,threshold) {
  return {minWeb:min,minWebExact:minFound,thinPairs:thin,collisions,edgeMin:Number.isFinite(edgeMin)?edgeMin:null,edgeCuts,marks};
 }
 function lowerBound(a,v){let lo=0,hi=a.length;while(lo<hi){const m=(lo+hi)>>1;if(a[m]<v)lo=m+1;else hi=m;}return lo;}
-/** Horizontal-sweep cell decomposition; slots must be disjoint. */
-function triangulatePlate(slots,W,H,progress) {
- const levels=new Set([0,Math.round(H*GRID)]),edges=[],events=new Map();let nextId=2;
- const at=(e,y)=>e.vertical!==undefined?e.vertical:snap(e.a[0]+(y-e.a[1])*(e.b[0]-e.a[0])/(e.b[1]-e.a[1]));
- const leftWall={id:0,vertical:0},rightWall={id:1,vertical:W};
- const addEvent=(y,type,e)=>{const yi=Math.round(y*GRID);levels.add(yi);if(!events.has(yi))events.set(yi,{start:[],end:[]});events.get(yi)[type].push(e);};
- for(const slot of slots)for(let i=0;i<slot.full.length;i++){
-  const a=slot.full[i],b=slot.full[(i+1)%slot.full.length];if(Math.abs(a[1]-b[1])<EPS*.5)continue;
-  const lo=Math.max(0,Math.min(a[1],b[1])),hi=Math.min(H,Math.max(a[1],b[1]));if(hi-lo<EPS*.5)continue;
-  const e={a,b,id:nextId++};edges.push(e);addEvent(lo,'start',e);addEvent(hi,'end',e);
-  // A clipped edge becomes an outer wall exactly at these levels.
-  if(Math.abs(b[0]-a[0])>EPS*.5)for(const x of [0,W]){const t=(x-a[0])/(b[0]-a[0]);if(t>0&&t<1){const y=a[1]+t*(b[1]-a[1]);if(y>lo&&y<hi)levels.add(Math.round(y*GRID));}}
+/** Split crossings at a common quantized vertex before sweeping solid unions. */
+function splitCrossings(segments) {
+ if(segments.length>50000)throw new Error('Solid-line geometry is too complex. Use a smaller panel or stitch slots.');
+ const ordered=segments.map(e=>({...e,box:bounds([e.a,e.b]),cuts:[{t:0,p:e.a},{t:1,p:e.b}]})).sort((a,b)=>a.box[0]-b.box[0]),near=[];
+ let checks=0;
+ for(const e of ordered){
+  for(let i=near.length-1;i>=0;i--)if(near[i].box[2]<e.box[0]-EPS)near.splice(i,1);
+  for(const f of near){
+   if(e.group===f.group||e.box[3]<f.box[1]-EPS||f.box[3]<e.box[1]-EPS)continue;
+   if(++checks>4000000)throw new Error('Solid union reached its intersection limit. Use fewer tiles.');
+   const u=[e.b[0]-e.a[0],e.b[1]-e.a[1]],v=[f.b[0]-f.a[0],f.b[1]-f.a[1]],d=u[0]*v[1]-u[1]*v[0];if(Math.abs(d)<1e-12)continue;
+   const q=[f.a[0]-e.a[0],f.a[1]-e.a[1]],t=(q[0]*v[1]-q[1]*v[0])/d,z=(q[0]*u[1]-q[1]*u[0])/d;
+   if(t<-1e-9||t>1+1e-9||z<-1e-9||z>1+1e-9)continue;
+   const p=[snap(e.a[0]+t*u[0]),snap(e.a[1]+t*u[1])];
+   if(t>1e-9&&t<1-1e-9)e.cuts.push({t,p});if(z>1e-9&&z<1-1e-9)f.cuts.push({t:z,p});
+  }
+  near.push(e);
  }
- const ys=[...levels].sort((a,b)=>a-b),active=new Set(),cells=[];let open=new Map();
- function finish(cell){if(cell.y1-cell.y0<EPS*.5)return;const pts=clean([[at(cell.l,cell.y0),cell.y0],[at(cell.r,cell.y0),cell.y0],[at(cell.r,cell.y1),cell.y1],[at(cell.l,cell.y1),cell.y1]].map(p=>[Math.max(0,Math.min(W,p[0])),p[1]]));if(pts.length>=3&&Math.abs(area(pts))>EPS*EPS*.1)cells.push(pts);}
+ const out=[];
+ for(const e of ordered){e.cuts.sort((a,b)=>a.t-b.t);for(let i=0;i<e.cuts.length-1;i++){const a=e.cuts[i].p,b=e.cuts[i+1].p;if(key(a)!==key(b))out.push({a,b,group:e.group});}}
+ return out;
+}
+/** Scanline subtraction from a convex rounded plate; solid mode unions cut spans. */
+function triangulatePlate(slots,W,H,progress=()=>{},options={}) {
+ const outer=options.outerRing||roundedRectangle(W,H),levels=new Set([0,Math.round(H*GRID)]),events=new Map();let nextId=0;
+ const at=(e,y)=>snap(e.a[0]+(y-e.a[1])*(e.b[0]-e.a[0])/(e.b[1]-e.a[1]));
+ let segments=[];
+ for(const [group,ring] of [[-1,outer],...slots.map((s,i)=>[i,s.ring])])for(let i=0;i<ring.length;i++)segments.push({a:ring[i],b:ring[(i+1)%ring.length],group});
+ if(options.union)segments=splitCrossings(segments);
+ const addEvent=(y,type,e)=>{const yi=Math.round(y*GRID);levels.add(yi);if(!events.has(yi))events.set(yi,{start:[],end:[]});events.get(yi)[type].push(e);};
+ for(const seg of segments){
+  levels.add(Math.round(seg.a[1]*GRID));levels.add(Math.round(seg.b[1]*GRID));
+  if(Math.abs(seg.a[1]-seg.b[1])<EPS*.5)continue;
+  const e={...seg,id:nextId++};addEvent(Math.min(e.a[1],e.b[1]),'start',e);addEvent(Math.max(e.a[1],e.b[1]),'end',e);
+ }
+ const ys=[...levels].sort((a,b)=>a-b),active=new Set(),cells=[];let open=new Map(),integratedArea=0;
+ function finish(cell){if(cell.y1-cell.y0<EPS*.5)return;const pts=clean([[at(cell.l,cell.y0),cell.y0],[at(cell.r,cell.y0),cell.y0],[at(cell.r,cell.y1),cell.y1],[at(cell.l,cell.y1),cell.y1]]);if(pts.length>=3&&Math.abs(area(pts))>EPS*EPS*.1)cells.push(pts);}
  for(let j=0;j<ys.length-1;j++){
   const y0=ys[j]/GRID,y1=ys[j+1]/GRID,ev=events.get(ys[j]);if(ev){for(const e of ev.end)active.delete(e);for(const e of ev.start)active.add(e);}
   if(y1-y0<EPS*.5)continue;
-  const mid=(y0+y1)/2,xs=[...active].map(e=>({e,x:e.a[0]+(mid-e.a[1])*(e.b[0]-e.a[0])/(e.b[1]-e.a[1])})).sort((a,b)=>a.x-b.x);
-  if(xs.length%2)throw new Error('The slot boundary is not closed. Try a slightly different repeat size.');
-  const ranges=[];let prev=leftWall,prevX=0;
-  for(let k=0;k<xs.length;k+=2){const a=xs[k],b=xs[k+1];if(b.x<=0||a.x>=W)continue;
-   if(a.x>prevX+EPS*.05)ranges.push({l:prev,r:a.e});
-   if(b.x>=W){prev=rightWall;prevX=W;break;}prev=b.e;prevX=b.x;
+  const mid=(y0+y1)/2,groups=new Map();
+  for(const e of active){if(!groups.has(e.group))groups.set(e.group,[]);groups.get(e.group).push({e,x:e.a[0]+(mid-e.a[1])*(e.b[0]-e.a[0])/(e.b[1]-e.a[1])});}
+  const spans=[];let leftWall,rightWall;
+  for(const [group,xs] of groups){
+   xs.sort((a,b)=>a.x-b.x);if(xs.length%2)throw new Error('An outline is not closed at mesh precision. Slightly adjust the size or line width.');
+   if(group===-1){leftWall=xs[0];rightWall=xs.at(-1);continue;}
+   for(let k=0;k<xs.length;k+=2)spans.push({a:xs[k],b:xs[k+1]});
   }
-  if(prevX<W-EPS*.05)ranges.push({l:prev,r:rightWall});
-  const now=new Map();for(const r of ranges){const id=`${r.l.id}:${r.r.id}`,c=open.get(id)||{...r,y0,y1};c.y1=y1;now.set(id,c);}
-  for(const [id,c] of open)if(!now.has(id))finish(c);open=now;
+  const ranges=[];
+  if(leftWall&&rightWall){
+   spans.sort((a,b)=>a.a.x-b.a.x||b.b.x-a.b.x);
+   let prev=leftWall;
+   for(const span of spans){
+    if(span.b.x<=prev.x+1e-10||span.a.x>=rightWall.x)continue;
+    if(span.a.x>prev.x+1e-10)ranges.push({l:prev.e,r:span.a.e});
+    if(span.b.x>=rightWall.x){prev=rightWall;break;}
+    if(span.b.x>prev.x)prev=span.b;
+   }
+   if(prev.x<rightWall.x-1e-10)ranges.push({l:prev.e,r:rightWall.e});
+  }
+  const now=new Map();for(const r of ranges){const id=`${r.l.id}:${r.r.id}`,c=open.get(id)||{...r,y0,y1};c.y1=y1;now.set(id,c);integratedArea+=((at(r.r,y0)-at(r.l,y0))+(at(r.r,y1)-at(r.l,y1)))*(y1-y0)/2;}
+  for(const [id,c]of open)if(!now.has(id))finish(c);open=now;
   if(j%500===0)progress(`Building surface: ${Math.round(j/ys.length*100)}%`);
  }
  for(const c of open.values())finish(c);
@@ -156,7 +206,7 @@ function triangulatePlate(slots,W,H,progress) {
  const union=(a,b)=>{a=find(a);b=find(b);if(a!==b)parent[b]=a;};
  for(let f=0;f<triangles.length;f++)for(let k=0;k<3;k++){const a=triangles[f][k],b=triangles[f][(k+1)%3],id=a<b?`${a},${b}`:`${b},${a}`;if(!surfaceEdges.has(id))surfaceEdges.set(id,{a,b,f,count:1});else{const e=surfaceEdges.get(id);e.count++;if(e.count>2||e.a===a)throw new Error('The surface triangulation could not be validated. Adjust the repeat or slot width.');union(e.f,f);}}
  const boundary=[...surfaceEdges.values()].filter(e=>e.count===1),components=new Set(triangles.map((_,i)=>find(i))).size;
- const actualArea=triangles.reduce((sum,t)=>sum+cross(vertices[t[0]],vertices[t[1]],vertices[t[2]])/2,0),expectedArea=W*H-slots.reduce((sum,s)=>sum+Math.abs(area(s.ring)),0);
+ const actualArea=triangles.reduce((sum,t)=>sum+cross(vertices[t[0]],vertices[t[1]],vertices[t[2]])/2,0),expectedArea=options.union?integratedArea:Math.abs(area(outer))-slots.reduce((sum,s)=>sum+Math.abs(area(s.ring)),0);
  if(Math.abs(actualArea-expectedArea)>Math.max(.015,W*H*2e-5))throw new Error('The generated surface failed its area check. No STL was created.');
  const outgoing=new Map();for(const e of boundary){if(outgoing.has(e.a))throw new Error('A slot creates a point-touching boundary. Increase the spacing.');outgoing.set(e.a,e.b);}
  const seen=new Set(),outlineRings=[];
@@ -191,24 +241,30 @@ function extrude(surface,W,H,thickness) {
  return {position,buffer,triangles:faces.length,volume,watertight:true};
 }
 function generate(input,progress=()=>{}) {
- if(!input||!Array.isArray(input.paths)||!Number.isFinite(input.tileW)||!Number.isFinite(input.tileH))throw new Error('Invalid stencil input.');
- if(input.slotWidth<.3||input.slotWidth>3||input.thickness<.4||input.thickness>5||input.minWeb<.2||input.minWeb>3)throw new Error('Stencil settings are outside the supported limits.');
- if(!Number.isInteger(input.columns)||!Number.isInteger(input.rows)||input.columns<1||input.rows<1||input.columns>20||input.rows>20)throw new Error('Invalid repeat counts.');
- progress('Creating rounded through-slot outlines...');
- const plate=prepareSlots(input),{W,H,slots}=plate;
- progress('Checking slot spacing and edge rims...');
- const spacing=spacingCheck(slots,W,H,input.minWeb),warnings=[],errors=[];
- if(spacing.collisions)errors.push(`${spacing.collisions} slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes.`);
- if(spacing.thinPairs)warnings.push(`${spacing.thinPairs} slot pair(s) leave less than ${input.minWeb.toFixed(2)} mm of plastic. Smallest measured slot web: ${spacing.minWeb.toFixed(2)} mm.`);
- if(spacing.edgeMin!==null&&spacing.edgeMin+EPS<input.minWeb)warnings.push(`A positive rim near an outer edge is only ${spacing.edgeMin.toFixed(2)} mm thick. This is separate from intentional slots crossing the tile boundary.`);
- const previewRings=slots.map(s=>s.ring);
- const base={W,H,thickness:input.thickness,slotWidth:input.slotWidth,slotCount:slots.length,spacing,warnings,errors,previewRings,components:null,tolerance:TOL,quantization:EPS,geometryVersion:1};
+ if(!input||!Array.isArray(input.paths)||!Number.isFinite(input.tileW)||!Number.isFinite(input.tileH)||input.tileW<=0||input.tileH<=0)throw new Error('Invalid stencil input.');
+ for(const [k,lo,hi]of [['slotWidth',.3,3],['thickness',.4,5],['minWeb',.2,3]])if(!Number.isFinite(input[k])||input[k]<lo||input[k]>hi)throw new Error('Stencil settings are outside the supported limits.');
+ if(!Number.isInteger(input.columns)||!Number.isInteger(input.rows)||input.columns<1||input.rows<1||input.columns>200||input.rows>300)throw new Error('No complete tile fits, or too many tiles were requested.');
+ input={style:'slots',rimEnabled:false,rimWidth:1,cornerRadius:.6,...input};
+ if(!['slots','dots','solid'].includes(input.style))throw new Error('Unsupported stencil line style.');
+ if(!Number.isFinite(input.rimWidth)||input.rimWidth<.1||input.rimWidth>10||!Number.isFinite(input.cornerRadius)||input.cornerRadius<0||input.cornerRadius>10)throw new Error('Invalid rim or corner radius.');
+ for(const k of ['outerW','outerH'])if(input[k]!==undefined&&(!Number.isFinite(input[k])||input[k]<=0||input[k]>2500))throw new Error('Invalid outer plate size.');
+ for(const path of input.paths)if(!Array.isArray(path)||path.length<(input.style==='dots'?1:2)||path.some(p=>!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)))throw new Error('Invalid cut path.');
+ progress('Creating through-cut outlines...');
+ const plate=prepareSlots(input),{W,H,slots,outerRing}=plate,solid=input.style==='solid';
+ progress('Checking cut spacing and rim...');
+ const spacing=solid?{minWeb:null,minWebExact:false,thinPairs:0,collisions:0,edgeMin:plate.rim||null,edgeCuts:0,marks:[]}:spacingCheck(slots,W,H,input.minWeb),warnings=[],errors=[];
+ if(spacing.collisions)errors.push(`${spacing.collisions} cutout pair(s) touch or overlap. Reduce opening width, increase junction opening, or enlarge the tile. Separate stitch marks must remain separate holes.`);
+ if(spacing.thinPairs)warnings.push(`${spacing.thinPairs} cutout pair(s) leave less than ${input.minWeb.toFixed(2)} mm of plastic. Smallest measured web: ${spacing.minWeb.toFixed(2)} mm.`);
+ if(spacing.edgeMin!==null&&spacing.edgeMin+EPS<input.minWeb)warnings.push(`A rim near an outer edge is only ${spacing.edgeMin.toFixed(2)} mm thick.`);
+ if(solid)warnings.push('Solid lines are unioned continuous cuts. Closed loops can create loose islands; disconnected plates are blocked. Internal web thickness is not measured in solid mode.');
+ if(input.rimEnabled&&input.cornerRadius>plate.cornerRadius+EPS)warnings.push(`Corner radius limited to ${plate.cornerRadius.toFixed(2)} mm so rounding stays within the reserved rim.`);
+ const base={W,H,thickness:input.thickness,slotWidth:input.slotWidth,style:input.style,slotCount:slots.length,spacing,warnings,errors,previewRings:slots.map(s=>s.ring),outerRing,components:null,tolerance:TOL,quantization:EPS,geometryVersion:2,layout:{contentW:plate.contentW,contentH:plate.contentH,offset:plate.offset,rim:plate.rim,cornerRadius:plate.cornerRadius}};
  if(errors.length)return base;
- progress('Triangulating the perforated plate...');
- const surface=triangulatePlate(slots,W,H,progress);base.components=surface.components;
- if(surface.components!==1){base.errors.push(`This cut pattern separates the plate into ${surface.components} pieces. Reduce slot width or change the repeat size before printing.`);return base;}
+ progress(solid?'Unioning continuous cuts and building the plate...':'Triangulating the perforated plate...');
+ const surface=triangulatePlate(slots,W,H,progress,{outerRing,union:solid});base.components=surface.components;
+ if(surface.components!==1){base.errors.push(`This cut pattern separates the plate into ${surface.components} pieces. ${solid?'Choose stitch slots or dots; a rim cannot retain islands inside closed loops.':'Reduce opening width or enlarge the tile.'}`);return base;}
  progress('Extruding and validating the STL...');
  return {...base,...extrude(surface,W,H,input.thickness),outlineRings:surface.outlineRings,area:surface.area,cells:surface.cells};
 }
-root.StencilEngine=Object.freeze({generate,roundedSlot,clipRing,spacingCheck,triangulatePlate,extrude,GRID,TOL});
+root.StencilEngine=Object.freeze({generate,roundedSlot,circleRing,roundedRectangle,prepareSlots,clipRing,spacingCheck,triangulatePlate,extrude,GRID,TOL});
 })(typeof globalThis==='undefined'?self:globalThis);

@@ -50,7 +50,7 @@ with sync_playwright() as p:
         checked=page.evaluate('''preset=>{
             const m=SashikoStudio.buildModel(preset.settings);
             if(m.skipped||m.omitted)throw new Error('Verified preset drops an interval: '+preset.settings.pattern);
-            return {input:SashikoStencil.makeInput(m,preset.stencil),settings:m.s,skipped:m.skipped,omitted:m.omitted,warnings:m.warnings};
+            return {input:SashikoStencil.makeInput(m,{...preset.stencil,rimEnabled:false}),settings:m.s,skipped:m.skipped,omitted:m.omitted,warnings:m.warnings};
         }''',preset)
         (OUT/f'{name}-verified-input.json').write_text(json.dumps(checked.pop('input')))
         result['meshExample']=checked

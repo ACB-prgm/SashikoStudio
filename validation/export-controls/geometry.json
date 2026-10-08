@@ -1,0 +1,141 @@
+{
+  "tests": 13,
+  "results": [
+    {
+      "name": "rounded-slots",
+      "triangles": 436,
+      "volume": 126.31766114275673,
+      "W": 12,
+      "H": 12,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          1,
+          1
+        ],
+        "rim": 1,
+        "cornerRadius": 0.6
+      }
+    },
+    {
+      "name": "round-dots",
+      "triangles": 692,
+      "volume": 127.03502788242615,
+      "W": 12,
+      "H": 12,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          1,
+          1
+        ],
+        "rim": 1,
+        "cornerRadius": 0.6
+      }
+    },
+    {
+      "name": "solid-cross",
+      "triangles": 320,
+      "volume": 99.83136355940317,
+      "W": 12,
+      "H": 12,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          1,
+          1
+        ],
+        "rim": 1,
+        "cornerRadius": 0.6
+      }
+    },
+    {
+      "name": "solid-diagonals",
+      "triangles": 968,
+      "volume": 107.91668749197532,
+      "W": 12,
+      "H": 12,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          1,
+          1
+        ],
+        "rim": 1,
+        "cornerRadius": 0.6
+      }
+    },
+    {
+      "name": "solid-zigzag",
+      "triangles": 896,
+      "volume": 118.98982258586624,
+      "W": 12,
+      "H": 12,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          1,
+          1
+        ],
+        "rim": 1,
+        "cornerRadius": 0.6
+      }
+    },
+    {
+      "name": "no-rim",
+      "triangles": 204,
+      "volume": 87.81229280020001,
+      "W": 10,
+      "H": 10,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          0,
+          0
+        ],
+        "rim": 0,
+        "cornerRadius": 0
+      }
+    },
+    {
+      "name": "fixed-canvas",
+      "triangles": 1288,
+      "volume": 8984.484281446084,
+      "W": 100,
+      "H": 100,
+      "layout": {
+        "contentW": 20,
+        "contentH": 20,
+        "offset": [
+          40,
+          40
+        ],
+        "rim": 1,
+        "cornerRadius": 0.6
+      }
+    },
+    {
+      "name": "clamped-radius",
+      "triangles": 544,
+      "volume": 101.04091906500183,
+      "W": 10.8,
+      "H": 10.8,
+      "layout": {
+        "contentW": 10,
+        "contentH": 10,
+        "offset": [
+          0.4,
+          0.4
+        ],
+        "rim": 0.4,
+        "cornerRadius": 0.4
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "newBrowserChecks": 9,
+  "newGeometryChecks": 13,
+  "newIndependentMeshes": 8,
+  "referenceMeshesRechecked": 32,
+  "originalMeshesRechecked": 12,
+  "all22PatternsRender": true,
+  "typedDecimalFieldsChecked": 6,
+  "sourceRuntimeRebuilt": true,
+  "physicalPrintsTested": false,
+  "notes": [
+    "Fresh interlaced defaults may reject 1.8 mm slots at 2 mm target stitches; no automatic alteration.",
+    "Solid internal webs are not measured; detached islands block export."
+  ]
+}

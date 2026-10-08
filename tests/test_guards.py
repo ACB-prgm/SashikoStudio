@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'test-results'
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH') or shutil.which('chromium'),headless=True,args=['--no-sandbox','--enable-unsafe-swiftshader'])
  page=b.new_page(viewport={'width':1440,'height':1050},accept_downloads=True);page.context.set_offline(True);errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.set_content((ROOT/'index.html').read_text())
+ page.evaluate('SashikoStudio.setState({weight:.35,columns:4,rows:6});SashikoStencil.setSettings({scope:"repeat",thickness:1.4,slotWidth:.9,rimEnabled:false})')
  page.click('#export-stencil');page.wait_for_function('!SashikoStencil.isBusy()')
  assert page.locator('#stencil-download').is_disabled()
  page.check('#stencil-ack');assert page.locator('#stencil-download').is_enabled()
@@ -14,6 +15,7 @@ with sync_playwright() as p:
  page.fill('#stencil-opening','2');page.press('#stencil-opening','Tab');page.wait_for_function('!SashikoStencil.isBusy()')
  assert page.evaluate('SashikoStudio.getState().opening')==2
  assert page.evaluate('SashikoStencil.getResult().spacing.minWeb')>.95
+ page.evaluate('SashikoStudio.setState({columns:4,rows:6})')
  page.select_option('#stencil-scope','panel');page.wait_for_function('!SashikoStencil.isBusy()',timeout=30000)
  r=page.evaluate('SashikoStencil.getReport()');assert r['watertight'] and r['W']==192
  page.click('#stencil-close')

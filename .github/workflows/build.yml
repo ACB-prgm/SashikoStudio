@@ -1,0 +1,64 @@
+name: Build standalone application
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'build.py'
+      - '.github/workflows/build.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: standalone-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build and run dependency-free checks
+        run: |
+          python build.py
+          python tests/test_build.py
+          node tests/test_pattern_helpers.js
+          node tests/test_layout_stencil.js
+      - name: Check committed runtime on pull requests
+        if: github.event_name == 'pull_request'
+        run: git diff --exit-code -- index.html
+
+  update-runtime:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild the standalone runtime on dev
+        run: |
+          python build.py
+          if git diff --quiet -- index.html; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Rebuild standalone application'
+          git push origin HEAD:dev
