@@ -1,0 +1,24 @@
+'use strict';
+// Test continuous authoring helpers without a DOM or a browser.
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
+const root=path.resolve(__dirname,'..'),ctx={};vm.createContext(ctx);
+let source=fs.readFileSync(path.join(root,'src/pattern-app.js'),'utf8').split('/* PATTERN_MODULES */')[0];
+source=source.replace('/* PATTERN_HELPERS */',fs.readFileSync(path.join(root,'src/pattern-helpers.js'),'utf8'));
+vm.runInContext(source+'\nglobalThis.helperTest={patternGraph,patternLines,line,arc,edge,cubic};})();',ctx);
+const {patternGraph:G,line:L,arc:A,edge:E,cubic:C,patternLines:P}=ctx.helperTest;
+let g=G(20,20,[E(L([1,5],[9,5])),E(L([5,1],[5,9]))]);
+assert.equal(g.edges.length,4,'line crossing must split both paths');
+assert(g.edges.every(e=>e.p0.every(Number.isFinite)&&e.L>0));
+g=G(20,20,[E(L([1,5],[9,5])),E(L([29,5],[21,5]))]);
+assert.equal(g.edges.length,1,'reversed periodic duplicate must be removed');
+g=G(20,20,[E(L([1,5],[9,5])),E(L([3,5],[7,5]))]);
+assert.equal(g.edges.length,3,'partial overlaps must be split and emitted once');
+g=G(20,20,[E(A([10,10],3,0,Math.PI)),E(L([10,9],[10,15]))]);
+assert.equal(g.edges.length,4,'line/circular arc crossing must be split');
+g=G(20,20,[E(A([8,10],3,0,Math.PI)),E(A([12,10],3,0,Math.PI))]);
+assert.equal(g.edges.length,4,'circular arc crossing must be split');
+g=G(10,10,[E(L([8,2],[12,2])),E(L([1,1],[1,4]))]);
+assert.equal(g.edges.length,4,'crossings with translated neighbors must be split');
+assert.equal(P([[0,0],[1,0],[1,1]],'steps').length,2);
+assert.throws(()=>G(20,20,[E(C([[0,0],[1,0],[2,1],[3,1]]))]),/supports lines and circular arcs only/);
+console.log('PASS: intersections, periodic neighbors, duplicate removal, overlaps, polylines and unsupported-curve guard');

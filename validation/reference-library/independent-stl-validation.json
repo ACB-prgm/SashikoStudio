@@ -1,0 +1,514 @@
+[
+  {
+    "file": "asanoha-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 1637.3430580996246,
+    "dimensions_mm": [
+      48.0,
+      27.712799072265625,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "asanoha-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 6549.372558279192,
+    "dimensions_mm": [
+      96.0,
+      55.42559814453125,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "chidori-tsunagi-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3122.6576153573747,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "chidori-tsunagi-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12490.630405773889,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "fundou-tsunagi-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3121.469781115184,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "fundou-tsunagi-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12485.879074521305,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "hanaguruma-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 5261.289634136608,
+    "dimensions_mm": [
+      48.0,
+      83.13839721679688,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "hanaguruma-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 21045.15839261262,
+    "dimensions_mm": [
+      96.0,
+      166.27679443359375,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "hishi-seigaiha-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 1446.7984696914082,
+    "dimensions_mm": [
+      48.0,
+      24.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "hishi-seigaiha-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 5787.193995194517,
+    "dimensions_mm": [
+      96.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "juuji-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3023.124548120845,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "juuji-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12092.498126198077,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "kaki-no-hana-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 2216.486428952203,
+    "dimensions_mm": [
+      48.0,
+      36.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "kaki-no-hana-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 8865.946371347914,
+    "dimensions_mm": [
+      96.0,
+      72.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "kamon-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3069.3196740050084,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "kamon-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12277.278615901334,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "kasane-rindou-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 11728.099103084593,
+    "dimensions_mm": [
+      72.0,
+      124.70770263671875,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "kasane-rindou-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 46912.39734310959,
+    "dimensions_mm": [
+      144.0,
+      249.4154052734375,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "nowaki-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3065.975042036454,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "nowaki-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12263.900278325718,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "sayagata-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 2975.6085695284705,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "sayagata-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 11902.43405506672,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "seigaiha-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3060.1161286760603,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "seigaiha-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12240.464492882498,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "shippo-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3054.238673681684,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "shippo-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 12216.954456116517,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "tsubomi-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 2990.1383828539324,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "tsubomi-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 11960.553219544561,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "yabane-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 2839.304472034855,
+    "dimensions_mm": [
+      48.0,
+      48.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "yabane-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 11357.219695976324,
+    "dimensions_mm": [
+      96.0,
+      96.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "yoshiwara-tsunagi-verified-1x1",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 989.4096539069933,
+    "dimensions_mm": [
+      48.0,
+      16.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  },
+  {
+    "file": "yoshiwara-tsunagi-verified-2x2",
+    "watertight": true,
+    "connectedComponents": 1,
+    "volume_mm3": 3957.6388387516004,
+    "dimensions_mm": [
+      96.0,
+      32.0,
+      1.399999976158142
+    ],
+    "noSlotRoofs": true,
+    "seamTraceDifference_mm": {
+      "x": 0.0,
+      "y": 0.0
+    }
+  }
+]

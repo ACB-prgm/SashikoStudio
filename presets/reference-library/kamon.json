@@ -1,0 +1,23 @@
+{
+  "app": "Sashiko Pattern Studio",
+  "version": 2,
+  "settings": {
+    "pattern": "kamon",
+    "tileWidth": 48,
+    "stitch": 3,
+    "opening": 1,
+    "weight": 0.9,
+    "ratioA": 3,
+    "ratioB": 2,
+    "columns": 2,
+    "rows": 2,
+    "view": "tile"
+  },
+  "stencil": {
+    "scope": "repeat",
+    "slotWidth": 0.9,
+    "thickness": 1.4,
+    "minWeb": 0.9
+  },
+  "note": "Mesh-checked example settings, not a physical-print certification. Review all thin-web and thin-rim warnings in the app and slicer."
+}

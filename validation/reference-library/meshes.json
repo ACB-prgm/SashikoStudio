@@ -1,0 +1,934 @@
+[
+  {
+    "pattern": "shippo",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "12 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "12 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.60 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 32
+  },
+  {
+    "pattern": "shippo",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "40 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.60 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 45
+  },
+  {
+    "pattern": "shippo",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 17056,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 115
+  },
+  {
+    "pattern": "shippo",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 59248,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 235
+  },
+  {
+    "pattern": "asanoha",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "24 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "54 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 15
+  },
+  {
+    "pattern": "asanoha",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "96 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "228 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 33
+  },
+  {
+    "pattern": "asanoha",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 31596,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.11 mm.",
+      "A positive rim near an outer edge is only 0.53 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 133
+  },
+  {
+    "pattern": "asanoha",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 121812,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "96 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.11 mm.",
+      "A positive rim near an outer edge is only 0.53 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 569
+  },
+  {
+    "pattern": "hanaguruma",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "14 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.32 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 22
+  },
+  {
+    "pattern": "hanaguruma",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "52 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "96 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.32 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 28
+  },
+  {
+    "pattern": "hanaguruma",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 36184,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "10 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 135
+  },
+  {
+    "pattern": "hanaguruma",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 131008,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "44 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 465
+  },
+  {
+    "pattern": "yoshiwara-tsunagi",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 15456,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "8 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 55
+  },
+  {
+    "pattern": "yoshiwara-tsunagi",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 60848,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 207
+  },
+  {
+    "pattern": "yoshiwara-tsunagi",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 15456,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "8 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 54
+  },
+  {
+    "pattern": "yoshiwara-tsunagi",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 60848,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 223
+  },
+  {
+    "pattern": "kasane-rindou",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "24 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "166 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.03 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 43
+  },
+  {
+    "pattern": "kasane-rindou",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "96 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "692 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.03 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 70
+  },
+  {
+    "pattern": "kasane-rindou",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 141952,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "48 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.31 mm.",
+      "A positive rim near an outer edge is only 0.74 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 555
+  },
+  {
+    "pattern": "kasane-rindou",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 550600,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "192 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.31 mm.",
+      "A positive rim near an outer edge is only 0.74 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 2402
+  },
+  {
+    "pattern": "kamon",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "12 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "16 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 12
+  },
+  {
+    "pattern": "kamon",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "40 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "64 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 17
+  },
+  {
+    "pattern": "kamon",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 16512,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 53
+  },
+  {
+    "pattern": "kamon",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 57072,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "24 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 175
+  },
+  {
+    "pattern": "tsubomi",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 26104,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 104
+  },
+  {
+    "pattern": "tsubomi",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 97408,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "176 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 383
+  },
+  {
+    "pattern": "tsubomi",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 26104,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 73
+  },
+  {
+    "pattern": "tsubomi",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 97408,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "176 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 276
+  },
+  {
+    "pattern": "nowaki",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "3 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "7 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.49 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 11
+  },
+  {
+    "pattern": "nowaki",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "10 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "26 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 16
+  },
+  {
+    "pattern": "nowaki",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 18980,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "1 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 54
+  },
+  {
+    "pattern": "nowaki",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 71528,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "6 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 197
+  },
+  {
+    "pattern": "sayagata",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 32800,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "28 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 95
+  },
+  {
+    "pattern": "sayagata",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 127312,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "120 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 376
+  },
+  {
+    "pattern": "sayagata",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 32800,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "28 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 118
+  },
+  {
+    "pattern": "sayagata",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 127312,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "120 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 497
+  },
+  {
+    "pattern": "seigaiha",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "3 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "11 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.70 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 16
+  },
+  {
+    "pattern": "seigaiha",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "10 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "42 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.70 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 18
+  },
+  {
+    "pattern": "seigaiha",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 20236,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "9 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 81
+  },
+  {
+    "pattern": "seigaiha",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 72536,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "38 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.20 mm.",
+      "A positive rim near an outer edge is only 0.10 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 276
+  },
+  {
+    "pattern": "juuji",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 18544,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 87
+  },
+  {
+    "pattern": "juuji",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 69844,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "160 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 258
+  },
+  {
+    "pattern": "juuji",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 18544,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "40 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 68
+  },
+  {
+    "pattern": "juuji",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 69844,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "160 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 204
+  },
+  {
+    "pattern": "fundou-tsunagi",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 19936,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "8 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 77
+  },
+  {
+    "pattern": "fundou-tsunagi",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 78896,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "32 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 245
+  },
+  {
+    "pattern": "fundou-tsunagi",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 19936,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "8 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 50
+  },
+  {
+    "pattern": "fundou-tsunagi",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 78896,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "32 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.50 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 219
+  },
+  {
+    "pattern": "yabane",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "48 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "72 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 30
+  },
+  {
+    "pattern": "yabane",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "192 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "288 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.22 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 41
+  },
+  {
+    "pattern": "yabane",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 53944,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "48 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.21 mm.",
+      "A positive rim near an outer edge is only 0.58 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 218
+  },
+  {
+    "pattern": "yabane",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 212836,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "192 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.21 mm.",
+      "A positive rim near an outer edge is only 0.58 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 790
+  },
+  {
+    "pattern": "chidori-tsunagi",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 20736,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.29 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 51
+  },
+  {
+    "pattern": "chidori-tsunagi",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 82192,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "16 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.29 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 238
+  },
+  {
+    "pattern": "chidori-tsunagi",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 20736,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "4 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.29 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 49
+  },
+  {
+    "pattern": "chidori-tsunagi",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 82192,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "16 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.29 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 219
+  },
+  {
+    "pattern": "hishi-seigaiha",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "18 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "35 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.03 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 11
+  },
+  {
+    "pattern": "hishi-seigaiha",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 0,
+    "watertight": false,
+    "components": null,
+    "errors": [
+      "68 slot pair(s) touch or overlap. Reduce slot width, increase junction opening, or enlarge the repeat. Distinct stitches must remain separate holes."
+    ],
+    "warnings": [
+      "146 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.00 mm.",
+      "A positive rim near an outer edge is only 0.03 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 14
+  },
+  {
+    "pattern": "hishi-seigaiha",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 23792,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "14 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.40 mm.",
+      "A positive rim near an outer edge is only 0.09 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 103
+  },
+  {
+    "pattern": "hishi-seigaiha",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 88048,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "60 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.40 mm.",
+      "A positive rim near an outer edge is only 0.09 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 367
+  },
+  {
+    "pattern": "kaki-no-hana",
+    "settings": "defaults",
+    "layout": "1x1",
+    "triangles": 20872,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "48 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.63 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 72
+  },
+  {
+    "pattern": "kaki-no-hana",
+    "settings": "defaults",
+    "layout": "2x2",
+    "triangles": 76672,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "192 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.63 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 269
+  },
+  {
+    "pattern": "kaki-no-hana",
+    "settings": "verified",
+    "layout": "1x1",
+    "triangles": 20872,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "48 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.63 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 72
+  },
+  {
+    "pattern": "kaki-no-hana",
+    "settings": "verified",
+    "layout": "2x2",
+    "triangles": 76672,
+    "watertight": true,
+    "components": 1,
+    "errors": [],
+    "warnings": [
+      "192 slot pair(s) leave less than 0.90 mm of plastic. Smallest measured slot web: 0.45 mm.",
+      "A positive rim near an outer edge is only 0.63 mm thick. This is separate from intentional slots crossing the tile boundary."
+    ],
+    "ms": 224
+  }
+]
